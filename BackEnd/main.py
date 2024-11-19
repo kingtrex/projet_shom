@@ -1,9 +1,22 @@
 from fastapi import FastAPI
 from databaseConnect import databaseConnect
 from psycopg2.extras import RealDictCursor
+
+from fastapi.middleware.cors import CORSMiddleware
+
 import uvicorn
 app = FastAPI()
+origine = [
+    "http://localhost:8000",
+]
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origine,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 @app.get("/maregraphe")
 async def getMaregraphe():
     db = databaseConnect()
