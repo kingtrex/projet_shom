@@ -1,0 +1,11 @@
+<!-- src/app/body/body.component.html -->
+<div *ngIf="data; else loading">
+    <p>Voici les données : {{ data | json }}</p>
+  </div>
+  <ng-template #loading>
+    <p>Chargement des données...</p>
+  </ng-template>
+  <div *ngIf="errorMessage">
+    <p style="color: red">{{ errorMessage }}</p>
+  </div>
+  
