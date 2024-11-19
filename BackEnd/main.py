@@ -3,10 +3,16 @@ from databaseConnect import databaseConnect
 import uvicorn
 app = FastAPI()
 
-@app.get("/")
-async def root():
+@app.get("/maregraphe")
+async def getMaregraphe():
     cur = databaseConnect()
-    cur.execute("SELECT * FROM obsmar.maregraphe_meta")
+    cur.execute("SELECT * FROM obsmar.maregraphe")
+    return cur.fetchall()
+
+@app.get("/metadonnee/{id}")
+async def root(id: int):
+    cur = databaseConnect()
+    cur.execute(f"SELECT * FROM obsmar.maregraphe_meta WHERE id_maregraphe = {id}")
     return cur.fetchall()
 
 
