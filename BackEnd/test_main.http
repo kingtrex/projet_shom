@@ -1,11 +1,16 @@
 # Test your FastAPI endpoints
 
-GET http://127.0.0.1:8000/
+###
+
+GET http://127.0.0.1:8000/maregraphe
 Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/hello/User
+GET http://127.0.0.1:8000/metadonnee/3
 Accept: application/json
 
 ###
+
+POST http://127.0.0.1:8000/addMeta/3&ville&coin
+Accept: application/json
