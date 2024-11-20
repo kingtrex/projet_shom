@@ -7,16 +7,17 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 app = FastAPI()
 origine = [
-    "http://localhost:8000",
+    "http://localhost:4200",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origine,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins = origine,
+    allow_credentials = True,
+    allow_methods = ["*"],
+    allow_headers = ["*"],
 )
+
 @app.get("/maregraphe")
 async def getMaregraphe():
     db = databaseConnect()
