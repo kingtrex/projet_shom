@@ -1,10 +1,13 @@
 from fastapi import FastAPI
-from databaseConnect import databaseConnect
-from psycopg2.extras import RealDictCursor
 
 from fastapi.middleware.cors import CORSMiddleware
-
 import uvicorn
+
+from api import(
+    Maregraphe,
+    MaregrapheMeta,
+    Meta
+)
 app = FastAPI()
 origine = [
     "http://localhost:4200",
@@ -18,50 +21,9 @@ app.add_middleware(
     allow_headers = ["*"],
 )
 
-@app.get("/maregraphe")
-async def getMaregraphe():
-    db = databaseConnect()
-    cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute("SELECT * FROM obsmar.maregraphe")
-    return cur.fetchall()
-
-@app.get("/maregrapheMeta/{id}")
-async def root(id: int):
-    db = databaseConnect()
-    cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"SELECT * FROM obsmar.maregraphe_meta WHERE id_maregraphe = {id}")
-    return cur.fetchall()
-
-@app.post("/addMaregrapheMeta/{id}&{meta}&{data}")
-async def addMeta(id: int, meta: str, data: str):
-    db = databaseConnect()
-    cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"INSERT INTO obsmar.maregraphe_meta (id_maregraphe, id_meta, donnee) VALUES ({id}, '{meta}', '{data}')")
-    db.commit()
-    return cur.lastrowid
-
-@app.put("/updateMaregrapheMeta/{id}&{meta}&{data}")
-async def updateMeta(id: int, meta: str, data: str):
-    db = databaseConnect()
-    cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"UPDATE obsmar.maregraphe_meta SET donnee = '{data}' WHERE id_maregraphe = {id} AND id_meta = '{meta}'")
-    db.commit()
-    return cur.lastrowid
-
-@app.delete("/deleteMaregrapheMeta/{id}&{meta}")
-async def deleteMeta(id: int, meta: str):
-    db = databaseConnect()
-    cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe = {id} AND id_meta = '{meta}'")
-    db.commit()
-    return cur.lastrowid
-
-@app.get("/getMetaId/")
-async def getMetaId():
-    db = databaseConnect()
-    cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"SELECT * FROM obsmar.meta")
-    return cur.fetchall()
+app.include_router(Maregraphe.router, prefix="/maregraphe", tags=["maregraphe"])
+app.include_router(MaregrapheMeta.router, prefix="/maregrapheMeta", tags=["maregrapheMeta"])
+app.include_router(Meta.router, prefix="/meta", tags=["meta"])
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

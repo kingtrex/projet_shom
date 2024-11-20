@@ -2,30 +2,30 @@
 
 ###
 
-GET http://127.0.0.1:8000/maregraphe
+GET http://127.0.0.1:8000/maregraphe/getMaregraphe
 Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/metadonnee/3
+GET http://127.0.0.1:8000/maregrapheMeta/getMeta/3
 Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/getMetaId/
+GET http://127.0.0.1:8000/meta/getMetaId
 Accept: application/json
 
 ###
 
-POST http://127.0.0.1:8000/addMeta/3&ville&coin
+POST http://127.0.0.1:8000/maregrapheMeta/addMeta/3&ville&coin
 Accept: application/json
 
 ###
 
-PUT http://127.0.0.1:8000/updateMeta/3&ville&Brest
+PUT http://127.0.0.1:8000/maregrapheMeta/updateMeta/3&ville&Brest
 Accept: application/json
 
 ###
 
-DELETE http://127.0.0.1:8000/deleteMeta/3&ville
+DELETE http://127.0.0.1:8000/maregrapheMeta/deleteMeta/3&ville
 Accept: application/json
