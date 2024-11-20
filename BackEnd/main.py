@@ -48,6 +48,14 @@ async def updateMeta(id: int, meta: str, data: str):
     db.commit()
     return cur.lastrowid
 
+@app.delete("/deleteMeta/{id}&{meta}")
+async def deleteMeta(id: int, meta: str):
+    db = databaseConnect()
+    cur = db.cursor(cursor_factory=RealDictCursor)
+    cur.execute(f"DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe = {id} AND id_meta = '{meta}'")
+    db.commit()
+    return cur.lastrowid
+
 @app.get("/hello/{name}&{test}")
 async def say_hello(name: str, test: str):
     return {"message": f"Hello {name} {test}"}
