@@ -16,7 +16,7 @@ export interface DataResponse {
 })
 
 export class ApiService {
-  private baseUrl = 'http://localhost:8000/metadonnee/3';  // Remplace par l'URL de ton API FastAPI
+  private baseUrl = 'http://localhost:8000/maregrapheMeta/3';  // Remplace par l'URL de ton API FastAPI
 //url d'origine : http://localhost:8000
 
   constructor(private http: HttpClient) {}

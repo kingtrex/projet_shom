@@ -12,6 +12,11 @@ Accept: application/json
 
 ###
 
+GET http://127.0.0.1:8000/getMetaId/
+Accept: application/json
+
+###
+
 POST http://127.0.0.1:8000/addMeta/3&ville&coin
 Accept: application/json
 

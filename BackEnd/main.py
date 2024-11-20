@@ -25,14 +25,14 @@ async def getMaregraphe():
     cur.execute("SELECT * FROM obsmar.maregraphe")
     return cur.fetchall()
 
-@app.get("/metadonnee/{id}")
+@app.get("/maregrapheMeta/{id}")
 async def root(id: int):
     db = databaseConnect()
     cur = db.cursor(cursor_factory=RealDictCursor)
     cur.execute(f"SELECT * FROM obsmar.maregraphe_meta WHERE id_maregraphe = {id}")
     return cur.fetchall()
 
-@app.post("/addMeta/{id}&{meta}&{data}")
+@app.post("/addMaregrapheMeta/{id}&{meta}&{data}")
 async def addMeta(id: int, meta: str, data: str):
     db = databaseConnect()
     cur = db.cursor(cursor_factory=RealDictCursor)
@@ -40,7 +40,7 @@ async def addMeta(id: int, meta: str, data: str):
     db.commit()
     return cur.lastrowid
 
-@app.put("/updateMeta/{id}&{meta}&{data}")
+@app.put("/updateMaregrapheMeta/{id}&{meta}&{data}")
 async def updateMeta(id: int, meta: str, data: str):
     db = databaseConnect()
     cur = db.cursor(cursor_factory=RealDictCursor)
@@ -48,7 +48,7 @@ async def updateMeta(id: int, meta: str, data: str):
     db.commit()
     return cur.lastrowid
 
-@app.delete("/deleteMeta/{id}&{meta}")
+@app.delete("/deleteMaregrapheMeta/{id}&{meta}")
 async def deleteMeta(id: int, meta: str):
     db = databaseConnect()
     cur = db.cursor(cursor_factory=RealDictCursor)
@@ -56,9 +56,12 @@ async def deleteMeta(id: int, meta: str):
     db.commit()
     return cur.lastrowid
 
-@app.get("/hello/{name}&{test}")
-async def say_hello(name: str, test: str):
-    return {"message": f"Hello {name} {test}"}
+@app.get("/getMetaId/")
+async def getMetaId():
+    db = databaseConnect()
+    cur = db.cursor(cursor_factory=RealDictCursor)
+    cur.execute(f"SELECT * FROM obsmar.meta")
+    return cur.fetchall()
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
