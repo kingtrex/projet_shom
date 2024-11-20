@@ -40,6 +40,22 @@ async def addMeta(id: int, meta: str, data: str):
     db.commit()
     return cur.lastrowid
 
+@app.put("/updateMeta/{id}&{meta}&{data}")
+async def updateMeta(id: int, meta: str, data: str):
+    db = databaseConnect()
+    cur = db.cursor(cursor_factory=RealDictCursor)
+    cur.execute(f"UPDATE obsmar.maregraphe_meta SET donnee = '{data}' WHERE id_maregraphe = {id} AND id_meta = '{meta}'")
+    db.commit()
+    return cur.lastrowid
+
+@app.delete("/deleteMeta/{id}&{meta}")
+async def deleteMeta(id: int, meta: str):
+    db = databaseConnect()
+    cur = db.cursor(cursor_factory=RealDictCursor)
+    cur.execute(f"DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe = {id} AND id_meta = '{meta}'")
+    db.commit()
+    return cur.lastrowid
+
 @app.get("/hello/{name}&{test}")
 async def say_hello(name: str, test: str):
     return {"message": f"Hello {name} {test}"}

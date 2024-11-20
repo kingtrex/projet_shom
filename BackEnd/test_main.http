@@ -14,3 +14,13 @@ Accept: application/json
 
 POST http://127.0.0.1:8000/addMeta/3&ville&coin
 Accept: application/json
+
+###
+
+PUT http://127.0.0.1:8000/updateMeta/3&ville&Brest
+Accept: application/json
+
+###
+
+DELETE http://127.0.0.1:8000/deleteMeta/3&ville
+Accept: application/json
