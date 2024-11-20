@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService, DataResponse } from '../services/api.service';
 import { Data } from '@angular/router';
+import { Metadonnee } from '../class/metadonnee';
 
 @Component({
   selector: 'app-body',
@@ -11,20 +12,12 @@ import { Data } from '@angular/router';
 export class BodyComponent implements OnInit {
   data: DataResponse | null = null;
   errorMessage: string = '';
+  isDataLoaded : boolean = false;
+  donnees: any;
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    // Récupérer les données lors de l'initialisation du composant
-    // this.apiService.getData().subscribe({
-    //   next: (result : DataResponse) => {
-    //     this.data = result;
-    //   },
-    //   error: (error: any) => {
-    //     this.errorMessage = 'Erreur lors de la récupération des données';
-    //     console.error('Erreur:', error);
-    //   },
-    // });
     this.getData();
   }
 
@@ -32,9 +25,13 @@ export class BodyComponent implements OnInit {
     console.log(this.apiService.getData())
     const data : any = await this.apiService.getData()
     console.log(data)
+    const meta: Metadonnee[] = [];
     console.log(typeof(data))
     data.forEach((element : any) => {
-      console.log(element)
+      meta.push(new Metadonnee(element.id_maregraphe, element.id_meta, element.donnee, element.date_donnee));
     })
+    this.donnees = meta;
+    console.log(this.donnees);
+    this.isDataLoaded = true;
   }
 }

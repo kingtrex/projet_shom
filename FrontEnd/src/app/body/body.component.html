@@ -1,11 +1,16 @@
 <!-- src/app/body/body.component.html -->
-<div *ngIf="data; else loading">
-    <p>Voici les données : {{ data | json }}</p>
-  </div>
-  <ng-template #loading>
-    <p>Chargement des données...</p>
-  </ng-template>
-  <div *ngIf="errorMessage">
-    <p style="color: red">{{ errorMessage }}</p>
-  </div>
-  
+ <div [class.affiche]="!isDataLoaded" [class.invisible]="isDataLoaded" >
+  Chargement des données ...
+ </div>
+ <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
+  Les données sont chargées
+  <table>
+    <caption>Données des marégraphes</caption>
+    <tr>
+      <td>id_maregraphe</td><td>id_meta</td><td>donnee</td><td>date_donnees</td>
+    </tr>
+    <tr *ngFor="let i of donnees">
+      <td>{{i.id_maregraphe}}</td><td>{{i.id_meta}}</td><td>{{i.donnee}}</td><td>{{i.date_donnees}}</td>
+    </tr>
+  </table>
+ </div>
