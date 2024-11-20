@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 
 
 
@@ -22,8 +22,8 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 // Fonction pour récupérer les données de l'API
 
-  getData(): Observable<DataResponse> {
-    return this.http.get<DataResponse>(this.baseUrl);
+  public async getData(): Promise<any> {
+    return await lastValueFrom(this.http.get(this.baseUrl))
   }
 
   /*

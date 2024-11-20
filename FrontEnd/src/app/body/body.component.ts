@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService, DataResponse } from '../services/api.service';
+import { Data } from '@angular/router';
 
 @Component({
   selector: 'app-body',
@@ -15,14 +16,25 @@ export class BodyComponent implements OnInit {
 
   ngOnInit(): void {
     // Récupérer les données lors de l'initialisation du composant
-    this.apiService.getData().subscribe({
-      next: (result) => {
-        this.data = result;
-      },
-      error: (error) => {
-        this.errorMessage = 'Erreur lors de la récupération des données';
-        console.error('Erreur:', error);
-      },
-    });
+    // this.apiService.getData().subscribe({
+    //   next: (result : DataResponse) => {
+    //     this.data = result;
+    //   },
+    //   error: (error: any) => {
+    //     this.errorMessage = 'Erreur lors de la récupération des données';
+    //     console.error('Erreur:', error);
+    //   },
+    // });
+    this.getData();
+  }
+
+  public async getData(){
+    console.log(this.apiService.getData())
+    const data : any = await this.apiService.getData()
+    console.log(data)
+    console.log(typeof(data))
+    data.forEach((element : any) => {
+      console.log(element)
+    })
   }
 }
