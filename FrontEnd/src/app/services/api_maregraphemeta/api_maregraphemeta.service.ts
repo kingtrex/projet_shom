@@ -16,7 +16,7 @@ export interface DataResponse {
 })
 
 export class ApiMaregraphemeta {
-  private baseUrl = 'http://localhost:8000/maregrapheMeta'; 
+  private baseUrl = 'http://localhost:8000/maregrapheMeta/'; 
 
   constructor(private http: HttpClient) {}
 // Fonction pour récupérer les données de l'API
