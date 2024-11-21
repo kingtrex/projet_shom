@@ -1,3 +1,10 @@
-.liens_gestion{
+.liens{
+    text-align: center;
+}
+
+a{
+    background-color: #E2DDDD;
+    padding: 0.5%;
+    border-radius: 3px;
     text-align: center;
 }

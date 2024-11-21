@@ -80,3 +80,10 @@ caption{
     padding: 0.5%;
     border-radius: 3px;
 }
+
+.Ajouter{
+    border-radius: 3px;
+    background-color: #5ec9f6;
+    color: white;
+    padding: 1%;
+}
