@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-
 from fastapi.middleware.cors import CORSMiddleware
+
 import uvicorn
 
 from api import(
@@ -8,7 +8,11 @@ from api import(
     MaregrapheMeta,
     Meta
 )
+
+from connexion import connexion
+
 app = FastAPI()
+
 origine = [
     "http://localhost:4200",
 ]
@@ -24,6 +28,7 @@ app.add_middleware(
 app.include_router(Maregraphe.router, prefix="/maregraphe", tags=["maregraphe"])
 app.include_router(MaregrapheMeta.router, prefix="/maregrapheMeta", tags=["maregrapheMeta"])
 app.include_router(Meta.router, prefix="/meta", tags=["meta"])
+app.include_router(connexion.router, prefix="/connexion", tags=["connexion"])
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
