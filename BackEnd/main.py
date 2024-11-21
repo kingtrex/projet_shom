@@ -4,9 +4,9 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from api import(
-    Maregraphe,
-    MaregrapheMeta,
-    Meta
+    maregraphe,
+    maregrapheMeta,
+    meta
 )
 
 from connexion import connexion
@@ -25,9 +25,9 @@ app.add_middleware(
     allow_headers = ["*"],
 )
 
-app.include_router(Maregraphe.router, prefix="/maregraphe", tags=["maregraphe"])
-app.include_router(MaregrapheMeta.router, prefix="/maregrapheMeta", tags=["maregrapheMeta"])
-app.include_router(Meta.router, prefix="/meta", tags=["meta"])
+app.include_router(maregraphe.router, prefix="/maregraphe", tags=["maregraphe"])
+app.include_router(maregrapheMeta.router, prefix="/maregrapheMeta", tags=["maregrapheMeta"])
+app.include_router(meta.router, prefix="/meta", tags=["meta"])
 app.include_router(connexion.router, prefix="/connexion", tags=["connexion"])
 
 if __name__ == "__main__":
