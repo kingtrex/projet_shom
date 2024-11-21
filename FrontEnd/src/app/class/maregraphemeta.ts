@@ -1,4 +1,4 @@
-export class Metadonnee{
+export class maregrapheMeta{
     id_maregraphe:number;
     id_meta:string;
     donnee:string;

@@ -43,7 +43,6 @@ table, td, th {
 
 .lignes_a_colorer:hover{
     background-color: grey;
-    color:white;
 }
 
 caption{
@@ -70,6 +69,7 @@ caption{
     width: 100px;
     cursor: pointer;
     margin: 2.5px;
+    border: 2px solid #C4C3C3;
 }
 
 

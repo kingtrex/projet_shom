@@ -1,0 +1,35 @@
+<!-- src/app/body/body.component.html -->
+
+<div class="rectangle">
+    Liste des Métadonnées
+  </div>
+  <br>
+  <div [class.affiche]="!isDataLoaded" [class.invisible]="isDataLoaded" >
+    Chargement des données ...
+   </div>
+   <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
+  
+    <br>
+    <button class="Ajouter"  type="button">Ajouter une métadonnée</button>
+    <br><br>
+    <table>    
+      <thead>
+        <tr>
+          <th>ID Métadonnées</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="lignes_a_colorer" *ngFor="let i of donnees">
+          <td>{{i.id}}</td>
+          <td>{{i.description}}</td>
+          <td>
+            <div class="bouton">
+              <button class="Editer"  type="button">Editer</button>
+              <button class="Supprimer" type="button">Supprimer</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+   </div>

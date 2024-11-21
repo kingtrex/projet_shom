@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, DataResponse } from '../services/api.service';
+import { ApiMaregraphemeta, DataResponse } from '../../services/api_maregraphemeta/api_maregraphemeta.service';
 import { Data } from '@angular/router';
-import { Metadonnee } from '../class/metadonnee';
+import { maregrapheMeta } from '../../class/maregraphemeta';
 
 @Component({
   selector: 'app-body',
@@ -15,20 +15,21 @@ export class BodyComponent implements OnInit {
   isDataLoaded : boolean = false;
   donnees: any;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiMaregrapheMeta: ApiMaregraphemeta) {}
 
   ngOnInit(): void {
     this.getData();
   }
 
   public async getData(){
-    console.log(this.apiService.getData())
-    const data : any = await this.apiService.getData()
+    console.log(this.apiMaregrapheMeta.getData())
+
+    const data : any = await this.apiMaregrapheMeta.getData()
     console.log(data)
-    const meta: Metadonnee[] = [];
+    const meta: maregrapheMeta[] = [];
     console.log(typeof(data))
     data.forEach((element : any) => {
-      meta.push(new Metadonnee(element.id_maregraphe, element.id_meta, element.donnee, element.date_donnee));
+      meta.push(new maregrapheMeta(element.id_maregraphe, element.id_meta, element.donnee, element.date_donnee));
     })
     this.donnees = meta;
     console.log(this.donnees);

@@ -15,14 +15,14 @@ export interface DataResponse {
   providedIn: 'root'
 })
 
-export class ApiService {
-  private baseUrl = 'http://localhost:8000/maregrapheMeta/getMeta/3'; 
+export class ApiMaregraphemeta {
+  private baseUrl = 'http://localhost:8000/maregrapheMeta'; 
 
   constructor(private http: HttpClient) {}
 // Fonction pour récupérer les données de l'API
 
   public async getData(): Promise<any> {
-    return await lastValueFrom(this.http.get(this.baseUrl))
+    return await lastValueFrom(this.http.get(this.baseUrl + "getMeta/3"))
   }
 
 }

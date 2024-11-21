@@ -1,0 +1,82 @@
+.rectangle{
+    background-color: #E2DDDD;
+    padding-left: 1%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    border-radius: 3px;
+}
+
+.affiche{
+    display: block;
+}
+
+.invisible{
+    display:none;
+}
+
+
+thead{
+    text-align: left;
+}
+
+table{
+    border-collapse: collapse;
+    margin: auto;
+}
+
+table, td, th {
+    border: 1px solid;
+    border: none; /* Supprime les bordures */
+    border-bottom: 1px solid #C4C3C3; /* Ajoute uniquement des lignes horizontales */
+    padding: 8px; /* Optionnel, pour espacer le contenu */
+    padding: 0px 20px;
+}
+
+.lignes_a_colorer:nth-child(odd) {
+    background-color: #F0F0F0; /* Gris clair */
+}
+
+  /* Colorie les lignes impaires en blanc */
+.lignes_a_colorer:nth-child(even) {
+    background-color: white; /* Blanc */
+}
+
+.lignes_a_colorer:hover{
+    background-color: grey;
+}
+
+caption{
+    margin-bottom: 30px;
+}
+
+.Editer{
+    background-color: white;
+    color: black;
+}
+.Supprimer{
+    background-color: red;
+    color: white;
+}
+
+.Editer, .Supprimer{
+    
+    display: inline-block;
+    border-radius: 6px;
+    border-color: #C4C3C3;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    width: 100px;
+    cursor: pointer;
+    margin: 2.5px;
+    border: 2px solid #C4C3C3;
+}
+
+
+.bouton{
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+    padding: 0.5%;
+    border-radius: 3px;
+}
