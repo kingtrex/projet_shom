@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BodyComponent } from './component/body/body.component';
 import { TabMetaComponent } from './component/tab_meta/tab_meta.component';
 import { TabMaregraphemetaComponent } from './component/tab_maregraphemeta/tab_maregraphemeta.component';
+import { TabPartenaireComponent } from './tab-partenaire/tab-partenaire.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TabMaregraphemetaComponent } from './component/tab_maregraphemeta/tab_m
     BodyComponent,
     TabMetaComponent,
     TabMaregraphemetaComponent,
+    TabPartenaireComponent,
   ],
   imports: [
     BrowserModule,

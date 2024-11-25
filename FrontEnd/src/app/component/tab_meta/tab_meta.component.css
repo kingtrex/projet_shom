@@ -72,6 +72,10 @@ caption{
     border: 2px solid #C4C3C3;
 }
 
+.Actions{
+    text-align: center;
+}
+
 
 .bouton{
     display: flex;
@@ -82,8 +86,74 @@ caption{
 }
 
 .Ajouter{
+    display: flex;
     border-radius: 3px;
-    background-color: #5ec9f6;
+    border: 2px solid #04acc6;
+    background-color: #09c5e1;
+    padding: 10px;
     color: white;
-    padding: 1%;
+    gap: 10px;
+    position: relative;
+    left: 65%;
+}
+
+
+/* Styles pour le modal (fenêtre superposée) */
+.modal {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Positionné par rapport à la fenêtre */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenu du modal */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+    position: relative;
+}
+
+/* Bouton pour fermer le modal */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.ajout_meta{
+    background-color: white;
+    color: black;
+}
+
+
+.supp_meta{
+    display: flex;
+    background-color: red;
+    color: white;
+
+    gap: 10px;
+
+}
+
+  
+
+.ajout_meta, .supp_meta{
+    border-radius: 6px;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+    margin: 2.5px;
+    border: 2px solid #C4C3C3;
 }

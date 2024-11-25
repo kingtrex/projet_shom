@@ -10,13 +10,34 @@
    <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
   
     <br>
-    <button class="Ajouter"  type="button"> <img src="assets\fleche.png" height="20" width="20"> Ajouter une métadonnée</button>
+
+
+    <button class="Ajouter"  type="button"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
+
+    <div id="formModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Nouvelle métadonnée</h2>
+        <form>
+          <label for="id_meta">Identifiant de la métadonnée : </label>
+          <input type="text" id="id_meta" name="id_meta"><br><br>
+          <label for="description">Description de la métadonnée : </label>
+          <input type="description" id="description" name="description"><br><br>
+          <div class="bouton">
+            <button class="ajout_meta" type="submit">Créer</button>
+            <button class="supp_meta" type="delete"> <img src="assets\poubelle.png" height="20" width="17"> Supprimer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <br><br>
     <table>    
       <thead>
         <tr>
           <th>ID Métadonnées</th>
           <th>Description</th>
+          <th class="Actions">Actions</th>
         </tr>
       </thead>
       <tbody>
