@@ -8,5 +8,5 @@ router = APIRouter()
 async def getMaregraphe():
     db = databaseConnect()
     cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute("SELECT * FROM obsmar.maregraphe")
+    cur.execute("SELECT * FROM obsmar.maregraphe ORDER BY id_tdb")
     return cur.fetchall()
