@@ -1,3 +1,4 @@
 databaseConnect.py
 .idea/*
 __pycache__/*
+*readConfig.py
