@@ -5,6 +5,13 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 from starlette import status
 
+import configparser
+
+import os
+
+
+import ast
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="connexion/token")
 router = APIRouter()
 
@@ -63,11 +70,18 @@ async def get_current_active_user(
 
 @router.post("/token")
 async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
-    user_dict = fake_users_db.get(form_data.username)
-    if not user_dict:
+    fichierConf = configparser.ConfigParser()
+    fichierConf.sections()
+    fichierConf.read("connexion/exemple.ini")
+
+    #vérifier si le login est dans le fichier
+    if not fichierConf.has_option("USERS", form_data.username):
+        print("mauvais login")
         raise HTTPException(status_code=400, detail="Incorrect username or password")
+    user_dict = ast.literal_eval(fichierConf.get("USERS", form_data.username))
     user = UserInDB(**user_dict)
     hashed_password = fake_hash_password(form_data.password)
+    #Vérifier si le password est bon
     if not hashed_password == user.hashed_password:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
     return {"access_token": user.username, "token_type": "bearer"}
