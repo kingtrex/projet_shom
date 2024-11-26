@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiMaregraphemeta, DataResponse } from '../../services/api_maregraphemeta/api_maregraphemeta.service';
+import { ApiMaregraphemeta } from '../../services/api_maregraphemeta/api_maregraphemeta.service';
 import { Data } from '@angular/router';
 import { maregrapheMeta } from '../../class/maregraphemeta';
 @Component({
@@ -9,7 +9,7 @@ import { maregrapheMeta } from '../../class/maregraphemeta';
 })
 
 export class TabMaregraphemetaComponent implements OnInit {
-  data: DataResponse | null = null;
+
   errorMessage: string = '';
   isDataLoaded : boolean = false;
   donnees: any;
@@ -21,9 +21,9 @@ export class TabMaregraphemetaComponent implements OnInit {
   }
 
   public async getData(){
-    console.log(this.apiMaregrapheMeta.getData())
+    console.log(this.apiMaregrapheMeta.getData(3))
 
-    const data : any = await this.apiMaregrapheMeta.getData()
+    const data : any = await this.apiMaregrapheMeta.getData(3)
     console.log(data)
     const meta: maregrapheMeta[] = [];
     console.log(typeof(data))

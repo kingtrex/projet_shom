@@ -1,0 +1,36 @@
+<!-- src/app/body/body.component.html -->
+
+<div class="rectangle">
+    Liste des marégraphes disponibles
+  </div>
+  <br>
+  <div [class.affiche]="!isDataLoaded" [class.invisible]="isDataLoaded" >
+    Chargement des données ...
+   </div>
+   <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
+  
+    <br><br><br>
+    <table>    
+      <thead>
+        <tr>
+          <th>Ville</th>
+          <th>Identifiant</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="lignes_a_colorer" *ngFor="let i of donnees">
+          <td>{{i.libelle}}</td>
+          <td>{{i.id_tdb}}</td>
+          <td>{{i.latitude}}</td>
+          <td>{{i.longitude}}</td>
+          <td>
+            <div class="bouton">
+              <a href="tabChoixMaregraphe"><button class="acceder" type="button">Accéder</button></a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+   </div>

@@ -15,7 +15,7 @@
 }
 
 
-thead{
+.colonne{
     text-align: left;
 }
 
@@ -49,17 +49,9 @@ caption{
     margin-bottom: 30px;
 }
 
-.Editer{
+.acceder{
     background-color: white;
     color: black;
-}
-.Supprimer{
-    background-color: red;
-    color: white;
-}
-
-.Editer, .Supprimer{
-    
     display: inline-block;
     border-radius: 6px;
     border-color: #C4C3C3;
@@ -70,9 +62,12 @@ caption{
     cursor: pointer;
     margin: 2.5px;
     border: 2px solid #C4C3C3;
+    text-decoration: none;
 }
 
-
+.acceder > a{
+    text-decoration: none;
+}
 .bouton{
     display: flex;
     gap: 10px;

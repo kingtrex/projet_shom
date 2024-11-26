@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiMeta, DataResponse } from '../../services/api_meta/api_meta.service';
+import { ApiMeta } from '../../services/api_meta/api_meta.service';
 import { Data } from '@angular/router';
 import { Meta } from '../../class/meta';
 
@@ -11,7 +11,6 @@ import { Meta } from '../../class/meta';
 
 
 export class TabMetaComponent implements OnInit {
-  data: DataResponse | null = null;
   errorMessage: string = '';
   isDataLoaded : boolean = false;
   donnees: any;

@@ -5,19 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BodyComponent } from './component/body/body.component';
 import { TabMetaComponent } from './component/tab_meta/tab_meta.component';
 import { TabMaregraphemetaComponent } from './component/tab_maregraphemeta/tab_maregraphemeta.component';
-import { TabPartenaireComponent } from './tab-partenaire/tab-partenaire.component';
+import { TabPartenaireComponent } from './component/tab-partenaire/tab-partenaire.component';
+import { ChoixMaregrapheComponent } from './component/choix_maregraphe/choix_maregraphe.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    BodyComponent,
     TabMetaComponent,
     TabMaregraphemetaComponent,
     TabPartenaireComponent,
+    ChoixMaregrapheComponent,
   ],
   imports: [
     BrowserModule,

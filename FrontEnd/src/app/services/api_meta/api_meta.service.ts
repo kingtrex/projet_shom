@@ -2,11 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Observable } from 'rxjs';
 
-export interface DataResponse {
-  id:string;
-  description:string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
