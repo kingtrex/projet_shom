@@ -28,9 +28,8 @@
     left: 65%;
 }
 
-/* Styles pour le modal (fenêtre superposée) */
-.modal {
-    /*display: none;  Caché par défaut */
+.fond_form {
+    display: none;
     position: fixed; /* Positionné par rapport à la fenêtre */
     top: 0;
     left: 0;
@@ -41,8 +40,14 @@
     align-items: center;
 }
 
-/* Contenu du modal */
-.modal-content {
+#hide_form{
+    display:none;
+}
+
+#show_form{
+    display: flex;
+}
+.form_add_meta {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -129,4 +134,31 @@ table, td, th {
     margin: 10px;
     padding: 0.5%;
     border-radius: 3px;
+}
+
+.ajout_meta{
+    background-color: white;
+    color: black;
+}
+
+
+.supp_meta{
+    display: flex;
+    background-color: red;
+    color: white;
+
+    gap: 10px;
+
+}
+
+  
+
+.ajout_meta, .supp_meta{
+    border-radius: 6px;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+    margin: 2.5px;
+    border: 2px solid #C4C3C3;
 }

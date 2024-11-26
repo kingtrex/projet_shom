@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { APIChoixMaregrapheService } from '../../services/api_choix_maregraphe/api_choix_maregraphe.service';
 import { Data } from '@angular/router';
 import { maregraphe } from '../../class/maregraphe';
-import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-choix-maregraphe',

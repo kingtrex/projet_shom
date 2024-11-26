@@ -38,4 +38,20 @@ export class TabMaregraphemetaComponent implements OnInit {
     console.log(this.donnees);
     this.isDataLoaded = true;
   }
+
+  public async add_meta(){
+    console.log("coin");
+    let form = document.getElementById("hide_form")?.style;
+    if (form) {
+    form.display = 'block';
+    }
+  }
+
+  public async annuler(){
+    console.log("coin");
+    let form = document.getElementById("hide_form")?.style;
+    if (form) {
+    form.display = 'none';
+    }
+  }
 }
