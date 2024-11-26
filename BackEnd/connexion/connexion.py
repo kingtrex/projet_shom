@@ -1,4 +1,5 @@
 import configparser
+import json
 from datetime import timedelta, timezone, datetime
 
 import jwt
@@ -134,6 +135,23 @@ async def login_for_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")
+
+@router.post("/newUser/{user}&{password}&{fullName}&{mail}")
+async def addUser(user: str, password: str, fullName: str, mail: str,
+                  token: Annotated[User, Depends(get_current_user)],):
+    config = configparser.ConfigParser()
+    config.read("connexion/exemple.ini")
+    hashed_password = pwd_context.hash(password)
+    newJson = {
+        "username": user,
+        "full_name": fullName,
+        "email": mail,
+        "hashed_password": hashed_password,
+        "disabled": "False",
+    }
+    config.set("USERS", user, json.dumps(newJson))
+    with open("connexion/exemple.ini", "w") as f:
+        config.write(f)
 
 @router.get("/items/")
 async def read_items(token: Annotated[str, Depends(oauth2_scheme)]):
