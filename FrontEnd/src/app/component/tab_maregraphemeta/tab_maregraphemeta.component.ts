@@ -13,17 +13,21 @@ export class TabMaregraphemetaComponent implements OnInit {
   errorMessage: string = '';
   isDataLoaded : boolean = false;
   donnees: any;
-
-  constructor(private apiMaregrapheMeta: ApiMaregraphemeta) {}
+  id_maregraphe: number;
+  constructor(private apiMaregrapheMeta: ApiMaregraphemeta) {
+    let tab = document.location.pathname.split('/');
+    this.id_maregraphe = parseInt(tab[tab.length-1]);
+    console.log(this.id_maregraphe);
+  }
 
   ngOnInit(): void {
     this.getData();
   }
 
   public async getData(){
-    console.log(this.apiMaregrapheMeta.getData(3))
+    console.log(this.apiMaregrapheMeta.getData(this.id_maregraphe))
 
-    const data : any = await this.apiMaregrapheMeta.getData(3)
+    const data : any = await this.apiMaregrapheMeta.getData(this.id_maregraphe)
     console.log(data)
     const meta: maregrapheMeta[] = [];
     console.log(typeof(data))

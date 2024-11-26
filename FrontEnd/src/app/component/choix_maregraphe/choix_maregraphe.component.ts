@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { APIChoixMaregrapheService } from '../../services/api_choix_maregraphe/api_choix_maregraphe.service';
 import { Data } from '@angular/router';
 import { maregraphe } from '../../class/maregraphe';
-
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-choix-maregraphe',
@@ -14,6 +14,7 @@ export class ChoixMaregrapheComponent {
   isDataLoaded : boolean = false;
   donnees: any;
 
+
   constructor(private apiChoixMaregraphe: APIChoixMaregrapheService) {}
 
   ngOnInit(): void {
@@ -21,9 +22,9 @@ export class ChoixMaregrapheComponent {
   }
 
   public async getData(){
-    console.log(this.apiChoixMaregraphe.getData(3))
+    console.log(this.apiChoixMaregraphe.getData())
 
-    const data : any = await this.apiChoixMaregraphe.getData(3)
+    const data : any = await this.apiChoixMaregraphe.getData()
     console.log(data)
     const meta: maregraphe[] = [];
     console.log(typeof(data))

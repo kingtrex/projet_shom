@@ -12,7 +12,7 @@ export class APIChoixMaregrapheService {
   constructor(private http: HttpClient) {}
 // Fonction pour récupérer les données de l'API
 
-  public async getData(id: number): Promise<any> {
+  public async getData(): Promise<any> {
     return await lastValueFrom(this.http.get(this.baseUrl + "getMaregraphe"))
   }
 }
