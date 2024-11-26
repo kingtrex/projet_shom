@@ -4,6 +4,7 @@
     padding-top: 0.5%;
     padding-bottom: 0.5%;
     border-radius: 3px;
+    font-size: 25px;
 }
 
 .affiche{
@@ -97,10 +98,8 @@ caption{
     left: 65%;
 }
 
-
-/* Styles pour le modal (fenêtre superposée) */
-.modal {
-    display: none; /* Caché par défaut */
+.fond_form {
+    display: none;
     position: fixed; /* Positionné par rapport à la fenêtre */
     top: 0;
     left: 0;
@@ -111,8 +110,14 @@ caption{
     align-items: center;
 }
 
-/* Contenu du modal */
-.modal-content {
+#hide_form{
+    display:none;
+}
+
+#show_form{
+    display: flex;
+}
+.form_add_meta {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
