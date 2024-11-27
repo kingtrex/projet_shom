@@ -5,3 +5,40 @@
 .hide{
     display: none;
 }
+.fond_auth{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.form_auth{
+    background-color: lightgray;
+    padding: 20px;
+    border-radius: 5%;
+}
+
+h2{
+    margin: 0;
+    font-size: 70px;
+}
+
+label{
+    font-size: 25px;
+}
+
+form{
+    padding: 20px;
+}
+
+
+.saisie{
+    width: 200px; /* Largeur personnalisée */
+    height: 10px; /* Hauteur personnalisée */
+    font-size: 20px; /* Taille du texte */
+    padding: 10px; /* Espacement interne */
+    border-radius: 5px; /* Coins arrondis pour le style */
+    border: 1px solid #B8B7B7; /* Bordure visible et esthétique */
+}
+.connexion, .annuler{
+    margin: 5px;;
+}

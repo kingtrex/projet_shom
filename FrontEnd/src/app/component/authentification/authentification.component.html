@@ -1,16 +1,18 @@
 <div class="fond_auth">
-    <div class="form_auth">
-      <h2>Connectez vous</h2>
-      <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
-        <label for="id_meta">Identifiant : </label>
-          <input type="text" id="id" name="id" formControlName="login"><br><br>
-          <label for="description">Mot de passe : </label>
-          <input type="text" id="password" name="password" formControlName="password"><br><br>
-          <button class="connexion"  type="submit">Se connecter</button>
-      </form>
+  <div class="form_auth">
+    <h2>Connexion</h2>
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+      
+      <label for="id_meta">Identifiant : </label>
+      <input class="saisie" type="text" id="id" name="id" formControlName="login"><br><br>
+      <label for="description">Mot de passe : </label>
+      <input class="saisie" type="password" id="password" name="password" formControlName="password"><br><br>
       <div class="bouton">
+        <button class="connexion"  type="submit">Se connecter</button>
         <button class="annuler" id="annuler" type="delete">Annuler</button>
       </div>
-    </div>
-    <p id="error" class="hide">Nom d'utilisateur ou mot de passe incorrect</p>
+      <p id="error" class="hide">Nom d'utilisateur ou mot de passe incorrect</p>        
+    </form>
+    
   </div>
+</div>
