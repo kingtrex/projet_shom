@@ -1,14 +1,14 @@
 <div class="fond_auth">
     <div class="form_auth">
       <h2>Connectez vous</h2>
-      <form>
+      <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
         <label for="id_meta">Identifiant : </label>
-          <input type="text" id="id" name="id"><br><br>
+          <input type="text" id="id" name="id" formControlName="login"><br><br>
           <label for="description">Mot de passe : </label>
-          <input type="text" id="password" name="password"><br><br>
+          <input type="text" id="password" name="password" formControlName="password"><br><br>
+          <button class="connexion"  type="submit">Se connecter</button>
       </form>
       <div class="bouton">
-        <button class="connexion"  type="submit">Se connecter</button>
         <button class="annuler" id="annuler" type="delete">Annuler</button>
       </div>
     </div>

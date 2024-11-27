@@ -21,7 +21,7 @@ import ast
 
 SECRET_KEY = "292eceaf7266e55b10d28c87659f6bc16f8366d62cf687bf929d92c1e31c4a4c"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 1
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="connexion/token")
 router = APIRouter()
@@ -75,7 +75,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
     else:
-        expire = datetime.now(timezone.utc) + timedelta(minutes=15)
+        expire = datetime.now(timezone.utc) + timedelta(minutes=1)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
@@ -110,19 +110,19 @@ async def get_current_active_user(
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
 
-@router.post("/token")
+@router.post("/token", response_model=Token)
 async def login_for_access_token(
-    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+    form_data: dict,
 ) -> Token:
-
+    print("aaa")
     fichierConf = configparser.ConfigParser()
     fichierConf.sections()
     fichierConf.read("connexion/exemple.ini")
-    if not fichierConf.has_option("USERS", form_data.username):
+    if not fichierConf.has_option("USERS", form_data["username"]):
         print("mauvais login")
         raise HTTPException(status_code=400, detail="Incorrect username or password")
 
-    user = authenticate_user(fichierConf, form_data.username, form_data.password)
+    user = authenticate_user(fichierConf, form_data["username"], form_data["password"])
     if not user:
         print("mauvais mdp")
         raise HTTPException(
