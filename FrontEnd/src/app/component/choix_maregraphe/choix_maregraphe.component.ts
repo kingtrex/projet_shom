@@ -20,18 +20,16 @@ export class ChoixMaregrapheComponent {
     this.getData();
   }
 
+  /**
+   * @brief Obtenir les différents marégraphes
+   */
   public async getData(){
-    console.log(this.apiChoixMaregraphe.getData())
-
     const data : any = await this.apiChoixMaregraphe.getData()
-    console.log(data)
     const meta: maregraphe[] = [];
-    console.log(typeof(data))
     data.forEach((element : any) => {
       meta.push(new maregraphe(element.id_tdb, element.libelle, element.latitude, element.longitude));
     })
     this.donnees = meta;
-    console.log(this.donnees);
     this.isDataLoaded = true;
   }
 }

@@ -21,32 +21,32 @@ export class TabMetaComponent implements OnInit {
     this.getData();
   }
 
+  /**
+   * @brief Obtenir les différents types de métadonnées éxistants dans la BDD
+   */
   public async getData(){
-    console.log(this.apiMeta.getData())
-
     const data : any = await this.apiMeta.getData()
-    console.log(data)
     const meta: Meta [] = []
     data.forEach((element : any) => {
       meta.push(new Meta(element.id, element.description));
     })
     this.donnees = meta;
-    console.log(this.donnees);
     this.isDataLoaded = true;
   }
+
+  /**
+   * @brief Ajouter un nouveau type de métadonnée
+   */
   public async add_meta(){
-    console.log("coin");
     let form = document.getElementById("hide_form")?.style;
-    if (form) {
-    form.display = 'block';
-    }
+    if (form) form.display = 'block';
   }
 
+  /**
+   * @brief Fermer le formulaire d'ajout d'un type de métadonné
+   */
   public async annuler(){
-    console.log("coin");
     let form = document.getElementById("hide_form")?.style;
-    if (form) {
-    form.display = 'none';
-    }
+    if (form) form.display = 'none';
   }
 }

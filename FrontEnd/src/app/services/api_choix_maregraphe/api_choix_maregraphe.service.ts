@@ -12,6 +12,10 @@ export class APIChoixMaregrapheService {
   constructor(private http: HttpClient) {}
 // Fonction pour récupérer les données de l'API
 
+  /**
+   * Obtenir la liste des marégraphe dans la BDD
+   * @returns JSON contenant la liste des marégraphe 
+   */
   public async getData(): Promise<any> {
     return await lastValueFrom(this.http.get(this.baseUrl + "getMaregraphe"))
   }

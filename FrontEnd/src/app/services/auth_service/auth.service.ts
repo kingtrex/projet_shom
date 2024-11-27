@@ -17,6 +17,11 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  /**
+   * Lancer le Processus d'authentification de l'utilisateur
+   * @param username string : le login de l'utilisateur
+   * @param password string : le mot de passe de l'utilisateur
+   */
   public async login(username: string, password: string){
     try{
       const response = await lastValueFrom(
@@ -30,16 +35,28 @@ export class AuthService {
     }
   }
 
-  logout() {
+  /**
+   * déconnecter l'utilisateur
+   */
+  public logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 
+  /**
+   * Vérifier si l'utilisateur est toujours connecté
+   * @returns bool : si l'utilisateur est toujours connecté 
+   */
   public isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
     return token ? !this.isTokenExpired(token) : false;
   }
 
+  /**
+   * Vérifier si le token a expirer ou non
+   * @param token string : le token de l'utilisateur
+   * @returns bool : si le token a expiré ou non
+   */
   public isTokenExpired(token: string): boolean {
     try {
       const { exp } = jwtDecode<TokenPayload>(token);
@@ -52,7 +69,3 @@ export class AuthService {
   }
   
 }
-function jwt_decode<T>(token: string): { exp: any; } {
-  throw new Error('Function not implemented.');
-}
-

@@ -20,9 +20,12 @@ export class AuthentificationComponent {
       password: "",
     })
   }
+
+  /**
+   * @brief lancer la connexion
+   */
   public async onSubmit(){
     const value = this.formLogin.value;
-    console.log(value);
     await this.authService.login(value.login, value.password);
   }
 }

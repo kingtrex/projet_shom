@@ -14,8 +14,12 @@ export class ApiMaregraphemeta {
   private baseUrl = 'http://localhost:8000/maregrapheMeta/'; 
 
   constructor(private http: HttpClient) {}
-// Fonction pour récupérer les données de l'API
 
+  /**
+   * Obtenir les métadonnées du marégraphe passé en paramètre dans la base de données
+   * @param id number: identifiant du marégraphe
+   * @returns JSON contenant les métadonnées du marégraphe
+   */
   public async getData(id: number): Promise<any> {
     return await lastValueFrom(this.http.get(this.baseUrl + "getMeta/"+ id))
   }
