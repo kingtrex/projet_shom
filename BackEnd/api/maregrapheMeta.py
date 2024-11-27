@@ -14,7 +14,7 @@ async def root(id: int,
                token: Annotated[User, Depends(get_current_user)]):
     db = databaseConnect()
     cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"SELECT * FROM obsmar.maregraphe_meta WHERE id_maregraphe = {id}")
+    cur.execute(f"SELECT * FROM obsmar.maregraphe_meta WHERE id_maregraphe = %d", (id,))
     return cur.fetchall()
 
 @router.post("/addMeta/{id}&{meta}&{data}")
@@ -22,7 +22,7 @@ async def addMeta(id: int, meta: str, data: str,
                   token: Annotated[User, Depends(get_current_user)]):
     db = databaseConnect()
     cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"INSERT INTO obsmar.maregraphe_meta (id_maregraphe, id_meta, donnee) VALUES ({id}, '{meta}', '{data}')")
+    cur.execute(f"INSERT INTO obsmar.maregraphe_meta (id_maregraphe, id_meta, donnee) VALUES (%d, %s, %s)", (id, meta, data))
     db.commit()
     return cur.lastrowid
 
@@ -31,7 +31,7 @@ async def updateMeta(id: int, meta: str, data: str,
                      token: Annotated[User, Depends(get_current_user)]):
     db = databaseConnect()
     cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"UPDATE obsmar.maregraphe_meta SET donnee = '{data}' WHERE id_maregraphe = {id} AND id_meta = '{meta}'")
+    cur.execute(f"UPDATE obsmar.maregraphe_meta SET donnee = %s WHERE id_maregraphe = %d AND id_meta = %s", (data, id, meta))
     db.commit()
     return cur.lastrowid
 
@@ -40,6 +40,6 @@ async def deleteMeta(id: int, meta: str,
                      token: Annotated[User, Depends(get_current_user)]):
     db = databaseConnect()
     cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe = {id} AND id_meta = '{meta}'")
+    cur.execute(f"DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe = %d AND id_meta = %s", (id, meta))
     db.commit()
     return cur.lastrowid
