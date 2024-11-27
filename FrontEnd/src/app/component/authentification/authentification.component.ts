@@ -26,6 +26,9 @@ export class AuthentificationComponent {
    */
   public async onSubmit(){
     const value = this.formLogin.value;
-    await this.authService.login(value.login, value.password);
+    await this.authService.login(value.login, value.password).then(() => {
+      const element = document.getElementById("error")
+      element?.classList.remove("hide")
+    })
   }
 }

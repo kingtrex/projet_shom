@@ -22,7 +22,7 @@ export class AuthService {
    * @param username string : le login de l'utilisateur
    * @param password string : le mot de passe de l'utilisateur
    */
-  public async login(username: string, password: string){
+  public async login(username: string, password: string): Promise<any>{
     try{
       const response = await lastValueFrom(
         this.http.post<{access_token: string}>(this.apiURL + "connexion/token", {username: username, password: password})
@@ -31,7 +31,7 @@ export class AuthService {
       this.router.navigate(["/tabChoixMaregraphe"])
     }catch(error){
       console.log("error login: " + error);
-      throw error
+      return error
     }
   }
 
