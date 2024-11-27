@@ -9,6 +9,7 @@ import { TabMetaComponent } from './component/tab_meta/tab_meta.component';
 import { TabMaregraphemetaComponent } from './component/tab_maregraphemeta/tab_maregraphemeta.component';
 import { TabPartenaireComponent } from './component/tab-partenaire/tab-partenaire.component';
 import { ChoixMaregrapheComponent } from './component/choix_maregraphe/choix_maregraphe.component';
+import { AuthentificationComponent } from './component/authentification/authentification.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ChoixMaregrapheComponent } from './component/choix_maregraphe/choix_mar
     TabMaregraphemetaComponent,
     TabPartenaireComponent,
     ChoixMaregrapheComponent,
+    AuthentificationComponent,
   ],
   imports: [
     BrowserModule,
