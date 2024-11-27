@@ -114,10 +114,10 @@ async def get_current_active_user(
 async def login_for_access_token(
     form_data: dict,
 ) -> Token:
-    print("aaa")
+    print(form_data["username"])
     fichierConf = configparser.ConfigParser()
     fichierConf.sections()
-    fichierConf.read("connexion/exemple.ini")
+    fichierConf.read("./connexion/exemple.ini")
     if not fichierConf.has_option("USERS", form_data["username"]):
         print("mauvais login")
         raise HTTPException(status_code=400, detail="Incorrect username or password")

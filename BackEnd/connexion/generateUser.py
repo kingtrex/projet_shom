@@ -12,7 +12,7 @@ config["USERS"] = {
     }
 }
 
-with open("exemple.ini", "w") as file:
+with open("./exemple.ini", "w") as file:
     config.write(file)
 
     file.close()
