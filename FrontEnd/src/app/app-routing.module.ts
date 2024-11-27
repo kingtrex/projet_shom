@@ -8,8 +8,8 @@ import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {path : "", component: AuthentificationComponent},
-  {path : "tabMeta", component: TabMetaComponent},
-  {path : "tabMaregrapheMeta/:id", component: TabMaregraphemetaComponent},
+  {path : "tabMeta", component: TabMetaComponent, canActivate: [AuthGuard]},
+  {path : "tabMaregrapheMeta/:id", component: TabMaregraphemetaComponent, canActivate: [AuthGuard]},
   {path : "tabChoixMaregraphe", component: ChoixMaregrapheComponent, canActivate: [AuthGuard]}
 ];
 
