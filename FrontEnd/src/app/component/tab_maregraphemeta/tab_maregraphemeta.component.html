@@ -9,20 +9,20 @@
    </div>
    <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
   
-    <button class="Ajouter" id="Ajouter"  type="button" (click)="add_meta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
+    <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_meta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
 
     <div class="fond_form" id="hide_form">
       <div class="form_add_meta">
         <span class="close-button" (click)="annuler()">&times;</span>
         <h2>Ajouter une métadonnée</h2>
-        <form>
+        <form [formGroup]="formAddMeta">
           <label for="id_meta">Identifiant de la métadonnée : </label>
-            <input type="text" id="id_meta" name="id_meta"><br><br>
+            <input type="text" id="id_meta" name="id_meta" formControlName="idMeta"><br><br>
             <label for="description">Description de la métadonnée : </label>
-            <input type="description" id="description" name="description"><br><br>
+            <input type="description" id="description" name="description" formControlName="data"><br><br>
         </form>
         <div class="bouton">
-          <button class="ajout_meta"  type="submit">Créer</button>
+          <button class="ajout_meta"  type="submit" (click)="addMeta()">Créer</button>
           <button class="supp_meta" id="supp_meta" type="delete"  (click)="annuler()">Annuler</button>
         </div>
       </div>

@@ -29,6 +29,22 @@ export class ApiMaregraphemeta {
   }
 
   /**
+   * Ajouter une métadonnée au marégraphe
+   * @param idMare number : id du marégraphe
+   * @param idMeta number : id de la métadonnée
+   * @param meta number | string : data de la métadonnée
+   * @returns 
+   */
+  public async addMeta(idMare: number, idMeta: number, meta: number | string): Promise<any>{
+    try{
+      const param = "addMeta/" + idMare + "&" + idMeta + "&" + meta;
+      return await lastValueFrom(this.http.post(this.baseUrl + param, null))
+    }catch(error: any){
+      throw error.error.detail
+    }
+  }
+
+  /**
    * Supprimer une métadonnée d'un marégraphe
    * @param idMare int : l'identifiant du marégraphe
    * @param idMeta string : l'identifiant de la métadonnée

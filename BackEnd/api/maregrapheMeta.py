@@ -7,6 +7,9 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 
 from connexion.connexion import User, get_current_user
+
+from datetime import datetime
+
 router = APIRouter()
 
 @router.get("/getMeta/{id}")
@@ -20,12 +23,14 @@ async def root(id: int,
 @router.post("/addMeta/{id}&{meta}&{data}")
 async def addMeta(id: int, meta: str, data: str,
                   token: Annotated[User, Depends(get_current_user)]):
-    db = databaseConnect()
-    cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"INSERT INTO obsmar.maregraphe_meta (id_maregraphe, id_meta, donnee) VALUES (%s, %s, %s)", (id, meta, data))
-    db.commit()
-    return cur.lastrowid
-
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"INSERT INTO obsmar.maregraphe_meta VALUES (%s, %s, %s, %s)", (id, meta, data, datetime.now()))
+        db.commit()
+        return cur.lastrowid
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 @router.put("/updateMeta/{id}&{meta}&{data}")
 async def updateMeta(id: int, meta: str, data: str,
                      token: Annotated[User, Depends(get_current_user)]):

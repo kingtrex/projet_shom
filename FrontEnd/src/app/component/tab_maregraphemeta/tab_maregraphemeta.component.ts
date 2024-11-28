@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiMaregraphemeta } from '../../services/api_maregraphemeta/api_maregraphemeta.service';
 import { ActivatedRoute, Data } from '@angular/router';
 import { maregrapheMeta } from '../../class/maregraphemeta';
+import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-tab-maregraphemeta',
   templateUrl: './tab_maregraphemeta.component.html',
@@ -13,11 +14,16 @@ export class TabMaregraphemetaComponent implements OnInit {
   errorMessage: string = '';
   isDataLoaded : boolean = false;
   donnees: any;
-  id_maregraphe: number;
+  id_maregraphe: number = +this.route.snapshot.paramMap.get('id')!;
+  public formAddMeta: any;
   constructor(private apiMaregrapheMeta: ApiMaregraphemeta,
     private route: ActivatedRoute,
+    private formBuilder: FormBuilder
   ) {
-    this.id_maregraphe = +this.route.snapshot.paramMap.get('id')!;
+    this.formAddMeta = this.formBuilder.group({
+      idMeta: "",
+      data: "",
+    })
   }
 
   ngOnInit(): void {
@@ -44,12 +50,24 @@ export class TabMaregraphemetaComponent implements OnInit {
   /**
    * @brief ajouter une métadonnée au marégraphe
    */
-  public async add_meta(){
-    console.log("coin");
+  public async show_add_meta(){
     let form = document.getElementById("hide_form")?.style;
     if (form) form.display = 'block';
   }
 
+  /**
+   * Ajouter une métadonné pour le marégraphe
+   */
+  public async addMeta(){
+    const value = this.formAddMeta.value ;
+    await this.apiMaregrapheMeta.addMeta(this.id_maregraphe, value.idMeta, value.data).then(() => {
+      location.reload()
+    }).catch((error: any) =>{
+      this.formAddMeta.reset()
+      alert(error);
+    })
+  }
+  
   /**
    * @brief fermer le formulaire d'ajout d'une métadonnée
    */
