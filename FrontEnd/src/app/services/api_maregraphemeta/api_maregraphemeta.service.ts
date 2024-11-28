@@ -24,4 +24,13 @@ export class ApiMaregraphemeta {
     return await lastValueFrom(this.http.get(this.baseUrl + "getMeta/"+ id))
   }
 
+  
+  public async deleteMeta(idMare: number, idMeta: string){
+    try{
+      let param = "deleteMeta/" + idMare + "&" + idMeta
+      return await lastValueFrom(this.http.delete(this.baseUrl + param))
+    }catch(error){
+      throw error
+    }
+  }
 }

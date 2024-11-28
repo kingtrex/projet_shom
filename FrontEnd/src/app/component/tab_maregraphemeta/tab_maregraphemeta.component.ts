@@ -53,4 +53,13 @@ export class TabMaregraphemetaComponent implements OnInit {
     let form = document.getElementById("hide_form")?.style;
     if (form) form.display = 'none';
   }
+
+  public async deleteMeta(idMare: number, idMeta: string){
+    if(!confirm("Voulez-vous vraiment supprimer cette métadonnée?")) return
+    await this.apiMaregrapheMeta.deleteMeta(idMare, idMeta).then(() => {
+      location.reload()
+    }).catch(() => {
+      alert("Erreur lors de la suppression des données")
+    })
+  }
 }
