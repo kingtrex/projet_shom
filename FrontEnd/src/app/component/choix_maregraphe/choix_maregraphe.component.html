@@ -6,9 +6,35 @@
   <br>
   <div [class.affiche]="!isDataLoaded" [class.invisible]="isDataLoaded" >
     Chargement des données ...
-   </div>
-   <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
-  
+  </div>
+  <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
+
+    <button class="Ajouter" id="Ajouter"  type="button" (click)="add_meta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
+
+    <div class="fond_form" id="hide_form">
+      <div class="form_add_meta">
+        <span class="close-button" (click)="annuler()">&times;</span>
+        <h2>Ajouter un marégraphe</h2>
+        <form>
+          <label for="ville">Ville : </label>
+          <input type="text" id="ville" name="ville"><br><br>
+
+          <label for="id_maregraphe">Identifiant du marégraphe : </label>
+          <input type="text" id="id_maregraphe" name="id_maregraphe"><br><br>
+
+          <label for="latitude">Latitude : </label>
+          <input type="number" id="latitude" name="latitude"><br><br>
+
+          <label for="longitude">Longitude : </label>
+          <input type="number" id="longitude" name="longitude"><br><br>
+        </form>
+        <div class="bouton">
+          <button class="ajout_meta"  type="submit">Créer</button>
+          <button class="supp_meta" id="supp_meta" type="delete"  (click)="annuler()">Annuler</button>
+        </div>
+      </div>
+    </div>
+
     <br><br><br>
     <table>    
       <thead>
@@ -29,9 +55,10 @@
           <td>
             <div class="bouton">
               <a href="tabMaregrapheMeta/{{i.id_tdb}}"><button class="acceder" type="button">Accéder</button></a>
+              <button class="editer" type="button">Editer</button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
-   </div>
+  </div>

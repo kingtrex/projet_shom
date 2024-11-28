@@ -32,4 +32,18 @@ export class ChoixMaregrapheComponent {
     this.donnees = meta;
     this.isDataLoaded = true;
   }
+
+  public async add_meta(){
+    console.log("coin");
+    let form = document.getElementById("hide_form")?.style;
+    if (form) form.display = 'block';
+  }
+
+  /**
+   * @brief fermer le formulaire d'ajout d'une métadonnée
+   */
+  public async annuler(){
+    let form = document.getElementById("hide_form")?.style;
+    if (form) form.display = 'none';
+  }
 }

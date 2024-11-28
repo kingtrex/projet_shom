@@ -15,14 +15,14 @@
 
 <div class="fond_form" id="hide_form">
   <div class="form_add_meta">
-    <span class="close-button">&times;</span>
+    <span class="close-button" (click)="annuler()">&times;</span>
     <h2>Ajouter une métadonnée</h2>
     <form [formGroup]="formAddMeta">
       <label for="id_meta">Identifiant de la métadonnée : </label>
       <input type="text" id="id_meta" formControlName="id"><br><br>
       <label for="description">Description de la métadonnée : </label>
       <input type="text" id="description" name="description" formControlName="description"><br><br>
-      <label for="ordre">Ordre de la métadonnée</label>
+      <label for="ordre">Ordre de la métadonnée : </label>
       <input type="number" id="ordre" formControlName="ordre"><br><br>
     </form>
     <div class="bouton">
