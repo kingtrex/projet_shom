@@ -22,6 +22,11 @@ Accept: application/json
 
 ###
 
+POST http://127.0.0.1:8000/maregraphe/addMaregraphe/1&Coincoin&0&0
+Accept: application/json
+
+###
+
 PUT http://127.0.0.1:8000/maregrapheMeta/updateMeta/3&ville&Brest
 Accept: application/json
 

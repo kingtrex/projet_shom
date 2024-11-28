@@ -119,12 +119,10 @@ async def login_for_access_token(
     fichierConf.sections()
     fichierConf.read("./connexion/exemple.ini")
     if not fichierConf.has_option("USERS", form_data["username"]):
-        print("mauvais login")
         raise HTTPException(status_code=400, detail="Incorrect username or password")
 
     user = authenticate_user(fichierConf, form_data["username"], form_data["password"])
     if not user:
-        print("mauvais mdp")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",

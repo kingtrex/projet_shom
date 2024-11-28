@@ -14,3 +14,13 @@ async def getMaregraphe(token: Annotated[User, Depends(get_current_user)]):
     cur = db.cursor(cursor_factory=RealDictCursor)
     cur.execute("SELECT * FROM obsmar.maregraphe ORDER BY id_tdb")
     return cur.fetchall()
+
+@router.post("/addMaregraphe/{id}&{libelle}&{lat}&{long}")
+async def addMaregraphe(id: int, libelle: str, lat: float, long: float,
+                        token: Annotated[User, Depends(get_current_user)]):
+    db = databaseConnect()
+    cur = db.cursor(cursor_factory=RealDictCursor)
+    print(f"%d %s", id, libelle)
+    cur.execute(f"INSERT INTO obsmar.maregraphe VALUES (%s, %s, %s, %s)", (id, libelle, lat, long))
+    db.commit()
+    return cur.lastrowid
