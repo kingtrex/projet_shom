@@ -83,13 +83,13 @@ export class TabMetaComponent implements OnInit {
       alert(error)
     })
   }
-  
+
   /**
    * Supprimer le type de métadonnée dans la base de donnée
    * @param meta string : Id du type de la métadonnée
    */
   public async deleteMeta(meta: string){
-    if(!confirm("Voulez-vous supprimer ce type de métadonné?")){
+    if(confirm("Voulez-vous supprimer ce type de métadonné?")){
       await this.apiMeta.deleteMeta(meta).then(() => {
         location.reload();
       }).catch((error: any) => {
