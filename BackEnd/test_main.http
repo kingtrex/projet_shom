@@ -42,5 +42,10 @@ Accept: application/json
 
 ###
 
+DELETE http://127.0.0.1:8000/maregrapheMeta/deleteMeta/2
+Accept: application/json
+
+###
+
 DELETE http://127.0.0.1:8000/meta/deleteMeta/aaa
 Accept: application/json
