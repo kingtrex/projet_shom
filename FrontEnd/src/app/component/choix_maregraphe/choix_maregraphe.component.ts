@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { APIChoixMaregrapheService } from '../../services/api_choix_maregraphe/api_choix_maregraphe.service';
 import { Data } from '@angular/router';
 import { maregraphe } from '../../class/maregraphe';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-choix-maregraphe',
@@ -13,8 +14,18 @@ export class ChoixMaregrapheComponent {
   isDataLoaded : boolean = false;
   donnees: any;
 
+  public formAddMaregraphe: any
 
-  constructor(private apiChoixMaregraphe: APIChoixMaregrapheService) {}
+  constructor(private apiChoixMaregraphe: APIChoixMaregrapheService,
+    private formBuilder: FormBuilder,
+  ) {
+    this.formAddMaregraphe = this.formBuilder.group({
+      id_maregraphe: "",
+      ville: "",
+      latitude: "",
+      longitude: "",
+    })
+  }
 
   ngOnInit(): void {
     this.getData();
@@ -33,17 +44,46 @@ export class ChoixMaregrapheComponent {
     this.isDataLoaded = true;
   }
 
-  public async add_meta(){
-    console.log("coin");
-    let form = document.getElementById("hide_form")?.style;
+  
+  /**
+   * @brief Afficher le formulaire d'ajout d'un marégraphe
+   */
+  public async show_add_maregraphe(){
+    let form = document.getElementById("hide_form_add")?.style;
+    if (form) form.display = 'block';
+  }
+
+  /**
+   * Ajouter un type de métadonné dans la BDD
+   */
+  public async addMaregraphe(){
+    const value = this.formAddMaregraphe.value
+    await this.apiChoixMaregraphe.addMaregraphe(value.id_maregraphe, value.ville, value.latitude, value.longitude).then(() => {
+      location.reload()
+    })
+  }
+
+  /**
+   * @brief fermer le formulaire d'ajout d'une métadonnée
+   */
+  public async annuler_add(){
+    let form = document.getElementById("hide_form_add")?.style;
+    if (form) form.display = 'none';
+  }
+
+  /**
+   * @brief ajouter une métadonnée au marégraphe
+   */
+  public async show_modif_maregraphe(){
+    let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'block';
   }
 
   /**
    * @brief fermer le formulaire d'ajout d'une métadonnée
    */
-  public async annuler(){
-    let form = document.getElementById("hide_form")?.style;
+  public async annuler_modif(){
+    let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'none';
   }
 }
