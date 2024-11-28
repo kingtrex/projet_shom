@@ -114,6 +114,10 @@ caption{
     display:none;
 }
 
+#hide_form_modif{
+    display:none;
+}
+
 #show_form{
     display: flex;
 }

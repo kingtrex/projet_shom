@@ -51,10 +51,34 @@
       <td>{{i.ordre}}</td>
       <td>
         <div class="bouton">
-          <button class="Editer"  type="button">Editer</button>
+          <button class="Editer"  type="button" (click)="show_modif_form(i.id, i.description, i.ordre)">Editer</button>
           <button class="Supprimer" type="button" (click)="deleteMeta(i.id)">Supprimer</button>
         </div>
       </td>
     </tr>
   </tbody>
 </table>
+<div class="fond_form" id="hide_form_modif">
+              
+  <div class="form_add_meta">
+    
+    <span class="close-button">&times;</span>
+    <h2>Modifier les informations du marégraphe</h2>
+
+    <form [formGroup]="formModifMeta">
+      <label for="idMeta">ID métadonnée : </label>
+      <input type="text" id="idMeta" readonly="True" formControlName="id"><br><br>
+
+      <label for="description">Description : </label>
+      <input type="text" id="description" formControlName="description"><br><br>
+
+      <label for="ordre">Ordre : </label>
+      <input type="number" id="ordre" formControlName="ordre"><br><br>
+    </form>
+    <div class="bouton">
+      <button class="ajout_meta"  type="submit" (click)="updateMeta()">Modifier</button>
+      <button class="supp_meta" id="supp_meta" type="delete" (click)="hideForm()">Annuler</button>
+    </div>
+<!---------------------------------------------------------------------------->     
+  </div>              
+</div>

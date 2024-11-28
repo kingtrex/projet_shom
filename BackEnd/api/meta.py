@@ -30,6 +30,19 @@ async def addMeta(id: str, desc: str, ordre: int,
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@router.put("/updateMeta/{id}&{desc}&{ordre}")
+async def updateMeta(id: str, desc: str, ordre: int,
+                     ):
+    print("oui")
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"UPDATE obsmar.meta SET description=%s, ordre=%s WHERE id=%s", (desc, ordre, id))
+        db.commit()
+        return cur.lastrowid
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @router.delete("/deleteMeta/{id}")
 async def deleteMeta(id: str):
     try:

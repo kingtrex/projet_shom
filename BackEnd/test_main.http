@@ -37,6 +37,11 @@ Accept: application/json
 
 ###
 
+PUT http://127.0.0.1:8000/meta/updateMeta/ville&Nom%20de%20la%20ville&50
+Accept: application/json
+
+###
+
 DELETE http://127.0.0.1:8000/maregrapheMeta/deleteMeta/3&ville
 Accept: application/json
 

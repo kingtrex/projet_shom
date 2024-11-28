@@ -42,6 +42,25 @@ export class ApiMeta {
   }
 
   /**
+   * Modifier les informations d'une métadonnée dans la BDD
+   * @param idMeta string : id de la métadonnée
+   * @param description string : description de la métadonnée
+   * @param ordre number : ordre de la métadonnée
+   * @returns état de la requête
+   */
+  public async updateMeta(idMeta: string,
+    description: string,
+    ordre: number
+  ){
+    try{
+      const param = "updateMeta/" + idMeta + "&" + description + "&" + ordre
+      return await lastValueFrom(this.http.put(this.baseUrl + param, null))
+    }catch(error: any){
+      throw error.error.detail
+    }
+  }
+
+  /**
    * Supprimer le type de métadonnée de la BDD
    * @param id string : l'identifiant du type de la métadonnée
    * @returns le status de la requête

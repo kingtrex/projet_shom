@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiMeta } from '../../services/api_meta/api_meta.service';
 import { Data } from '@angular/router';
 import { Meta } from '../../class/meta';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-tab-meta',
@@ -16,11 +16,18 @@ export class TabMetaComponent implements OnInit {
   isDataLoaded : boolean = false;
   donnees: any;
 
-  public formAddMeta: any
+  public formAddMeta: FormGroup;
+  public formModifMeta: FormGroup;
+
   constructor(private apiMeta: ApiMeta,
     private formBuilder: FormBuilder,
   ) {
     this.formAddMeta = this.formBuilder.group({
+      id: "",
+      description: "",
+      ordre: "",
+    })
+    this.formModifMeta = this.formBuilder.group({
       id: "",
       description: "",
       ordre: "",
@@ -65,21 +72,62 @@ export class TabMetaComponent implements OnInit {
   }
 
   /**
+   * Modifier les informations d'une métadonnée
+   */
+  public async updateMeta(){
+    const value = this.formModifMeta.value;
+    console.log(value)
+    await this.apiMeta.updateMeta(value.id, value.description, value.ordre).then(() => {
+      location.reload()
+    }).catch((error: any) => {
+      alert(error)
+    })
+  }
+  
+  /**
    * Supprimer le type de métadonnée dans la base de donnée
    * @param meta string : Id du type de la métadonnée
    */
   public async deleteMeta(meta: string){
-    await this.apiMeta.deleteMeta(meta).then(() => {
-      location.reload();
-    }).catch((error: any) => {
-      alert(error);
-    })
+    if(!confirm("Voulez-vous supprimer ce type de métadonné?")){
+      await this.apiMeta.deleteMeta(meta).then(() => {
+        location.reload();
+      }).catch((error: any) => {
+        alert(error);
+      })      
+    }
   }
+
   /**
    * @brief Fermer le formulaire d'ajout d'un type de métadonné
    */
   public async annuler(){
     let form = document.getElementById("hide_form")?.style;
+    if (form) form.display = 'none';
+  }
+
+    /**
+   * @brief ajouter une métadonnée au marégraphe
+   */
+    public async show_modif_form(
+      idMeta: string,
+      description: string,
+      ordre: number,
+    ){
+      this.formModifMeta.setValue({
+        "id": idMeta,
+        "description": description,
+        "ordre": ordre
+      })
+      let form = document.getElementById("hide_form_modif")?.style;
+      if (form) form.display = 'block';
+    }
+
+  /**
+   * @brief fermer le formulaire d'ajout d'une métadonnée
+   */
+  public async hideForm(){
+    let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'none';
   }
 }
