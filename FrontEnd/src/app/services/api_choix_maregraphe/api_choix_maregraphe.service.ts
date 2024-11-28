@@ -17,6 +17,6 @@ export class APIChoixMaregrapheService {
    * @returns JSON contenant la liste des marégraphe 
    */
   public async getData(): Promise<any> {
-    return await lastValueFrom(this.http.get(this.baseUrl + "getMaregraphe"))
+    return await lastValueFrom(this.http.get(this.baseUrl + "getMaregraphe"));
   }
 }

@@ -35,8 +35,8 @@ export class TabMetaComponent implements OnInit {
    * @brief Obtenir les différents types de métadonnées éxistants dans la BDD
    */
   public async getData(){
-    const data : any = await this.apiMeta.getData()
-    const meta: Meta [] = []
+    const data : any = await this.apiMeta.getData();
+    const meta: Meta [] = [];
     data.forEach((element : any) => {
       meta.push(new Meta(element.id, element.description, element.ordre));
     })
@@ -58,7 +58,9 @@ export class TabMetaComponent implements OnInit {
   public async addMeta(){
     const value = this.formAddMeta.value
     await this.apiMeta.addMeta(value.id, value.description, value.ordre).then(() => {
-      location.reload()
+      location.reload();
+    }).catch((error: any) => {
+      alert(error);
     })
   }
 
@@ -68,9 +70,9 @@ export class TabMetaComponent implements OnInit {
    */
   public async deleteMeta(meta: string){
     await this.apiMeta.deleteMeta(meta).then(() => {
-      location.reload()
+      location.reload();
     }).catch((error: any) => {
-      alert(error)
+      alert(error);
     })
   }
   /**

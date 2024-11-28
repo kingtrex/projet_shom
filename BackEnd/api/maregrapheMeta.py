@@ -1,5 +1,5 @@
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from databaseConnect import databaseConnect
 from psycopg2.extras import RealDictCursor
 from typing import Annotated
@@ -29,17 +29,23 @@ async def addMeta(id: int, meta: str, data: str,
 @router.put("/updateMeta/{id}&{meta}&{data}")
 async def updateMeta(id: int, meta: str, data: str,
                      token: Annotated[User, Depends(get_current_user)]):
-    db = databaseConnect()
-    cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"UPDATE obsmar.maregraphe_meta SET donnee = %s WHERE id_maregraphe = %s AND id_meta = %s", (data, id, meta))
-    db.commit()
-    return cur.lastrowid
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"UPDATE obsmar.maregraphe_meta SET donnee = %s WHERE id_maregraphe = %s AND id_meta = %s", (data, id, meta))
+        db.commit()
+        return cur.lastrowid
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/deleteMeta/{id}&{meta}")
 async def deleteMeta(id: int, meta: str,
                      token: Annotated[User, Depends(get_current_user)]):
-    db = databaseConnect()
-    cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe = %s AND id_meta = %s", (id, meta))
-    db.commit()
-    return cur.lastrowid
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe = %s AND id_meta = %s", (id, meta))
+        db.commit()
+        return cur.lastrowid
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

@@ -28,13 +28,17 @@ export class TabMaregraphemetaComponent implements OnInit {
    * @biref Obtenir les métadonnées du marégraphe
    */
   public async getData(){
-    const data : any = await this.apiMaregrapheMeta.getData(this.id_maregraphe)
-    const meta: maregrapheMeta[] = [];
-    data.forEach((element : any) => {
-      meta.push(new maregrapheMeta(element.id_maregraphe, element.id_meta, element.donnee, element.date_donnee));
+    await this.apiMaregrapheMeta.getData(this.id_maregraphe).then((data: any) => {
+      const meta: maregrapheMeta[] = [];
+      data.forEach((element : any) => {
+        meta.push(new maregrapheMeta(element.id_maregraphe, element.id_meta, element.donnee, element.date_donnee));
+      })
+      this.donnees = meta;
+      this.isDataLoaded = true;      
+    }).catch((error: any) => {
+      alert(error)
     })
-    this.donnees = meta;
-    this.isDataLoaded = true;
+
   }
 
   /**
@@ -58,8 +62,8 @@ export class TabMaregraphemetaComponent implements OnInit {
     if(!confirm("Voulez-vous vraiment supprimer cette métadonnée?")) return
     await this.apiMaregrapheMeta.deleteMeta(idMare, idMeta).then(() => {
       location.reload()
-    }).catch(() => {
-      alert("Erreur lors de la suppression des données")
+    }).catch((error: any) => {
+      alert(error)
     })
   }
 }

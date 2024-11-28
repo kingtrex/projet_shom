@@ -21,7 +21,11 @@ export class ApiMaregraphemeta {
    * @returns JSON contenant les métadonnées du marégraphe
    */
   public async getData(id: number): Promise<any> {
-    return await lastValueFrom(this.http.get(this.baseUrl + "getMeta/"+ id))
+    try{
+      return await lastValueFrom(this.http.get(this.baseUrl + "getMeta/"+ id));
+    }catch(error: any){
+      throw error.error.detail;
+    }
   }
 
   /**
@@ -32,10 +36,10 @@ export class ApiMaregraphemeta {
    */
   public async deleteMeta(idMare: number, idMeta: string): Promise<any>{
     try{
-      let param = "deleteMeta/" + idMare + "&" + idMeta
-      return await lastValueFrom(this.http.delete(this.baseUrl + param))
-    }catch(error){
-      throw error
+      let param = "deleteMeta/" + idMare + "&" + idMeta;
+      return await lastValueFrom(this.http.delete(this.baseUrl + param));
+    }catch(error: any){
+      throw error.error.detail;
     }
   }
 }

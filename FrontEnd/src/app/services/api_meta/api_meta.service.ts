@@ -14,7 +14,12 @@ export class ApiMeta {
    * @returns JSON contenant la liste des types de métadonnées
    */
   public async getData(): Promise<any> {
-    return await lastValueFrom(this.http.get(this.baseUrl + "getMetaId"))
+    try{
+      return await lastValueFrom(this.http.get(this.baseUrl + "getMetaId"));
+    }catch(error: any){
+      throw error.error.detail;
+    }
+    
   }
 
   /**
@@ -29,11 +34,10 @@ export class ApiMeta {
     ordre: number
   ): Promise<any>{
     try{
-      let param = "addMeta/" + id + "&" + description + "&" + ordre
-      return await lastValueFrom(this.http.post(this.baseUrl + param, null))
-    }catch(error){
-      console.warn("Erreur lors de l'ajout du type de métadonnée")
-      throw error
+      let param = "addMeta/" + id + "&" + description + "&" + ordre;
+      return await lastValueFrom(this.http.post(this.baseUrl + param, null));
+    }catch(error: any){
+      throw error.error.detail;
     }
   }
 
@@ -44,10 +48,10 @@ export class ApiMeta {
    */
   public async deleteMeta(id: string): Promise<any>{
     try{
-      let param = "deleteMeta/" + id
-      return await lastValueFrom(this.http.delete(this.baseUrl + param))
+      let param = "deleteMeta/" + id;
+      return await lastValueFrom(this.http.delete(this.baseUrl + param));
     }catch(error: any){
-      throw error.error.detail
+      throw error.error.detail;
     }
   }
 }
