@@ -1,4 +1,3 @@
-from fastapi import APIRouter
 from psycopg2.extras import RealDictCursor
 from databaseConnect import databaseConnect
 from typing import Annotated
@@ -14,3 +13,11 @@ async def getMetaId(token: Annotated[User, Depends(get_current_user)]):
     cur = db.cursor(cursor_factory=RealDictCursor)
     cur.execute(f"SELECT * FROM obsmar.meta")
     return cur.fetchall()
+
+@router.post("/addMeta/{id}&{desc}&{ordre}")
+async def addMeta(id: str, desc: str, ordre: int):
+    db = databaseConnect()
+    cur = db.cursor(cursor_factory=RealDictCursor)
+    cur.execute(f"INSERT INTO obsmar.meta VALUES (%s, %s, %s)", (id, desc, ordre))
+    db.commit()
+    return cur.lastrowid

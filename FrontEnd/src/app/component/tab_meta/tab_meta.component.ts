@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiMeta } from '../../services/api_meta/api_meta.service';
 import { Data } from '@angular/router';
 import { Meta } from '../../class/meta';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-tab-meta',
@@ -15,7 +16,16 @@ export class TabMetaComponent implements OnInit {
   isDataLoaded : boolean = false;
   donnees: any;
 
-  constructor(private apiMeta: ApiMeta) {}
+  public formAddMeta: any
+  constructor(private apiMeta: ApiMeta,
+    private formBuilder: FormBuilder,
+  ) {
+    this.formAddMeta = this.formBuilder.group({
+      id: "",
+      description: "",
+      ordre: "",
+    })
+  }
 
   ngOnInit(): void {
     this.getData();
@@ -28,18 +38,28 @@ export class TabMetaComponent implements OnInit {
     const data : any = await this.apiMeta.getData()
     const meta: Meta [] = []
     data.forEach((element : any) => {
-      meta.push(new Meta(element.id, element.description));
+      meta.push(new Meta(element.id, element.description, element.ordre));
     })
     this.donnees = meta;
     this.isDataLoaded = true;
   }
 
   /**
-   * @brief Ajouter un nouveau type de métadonnée
+   * @brief Afficher le formulaire d'ajout d'une metadonnée
    */
-  public async add_meta(){
+  public async show_add_meta(){
     let form = document.getElementById("hide_form")?.style;
     if (form) form.display = 'block';
+  }
+
+  /**
+   * Ajouter un type de métadonné dans la BDD
+   */
+  public async addMeta(){
+    const value = this.formAddMeta.value
+    await this.apiMeta.addMeta(value.id, value.description, value.ordre).then(() => {
+      location.reload()
+    })
   }
 
   /**
