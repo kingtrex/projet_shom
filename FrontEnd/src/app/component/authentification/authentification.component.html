@@ -8,11 +8,11 @@
       <label for="description">Mot de passe : </label>
       <input class="saisie" type="password" id="password" name="password" formControlName="password"><br><br>
       <div class="bouton">
-        <button class="connexion"  type="submit">Se connecter</button>
-        <button class="annuler" id="annuler" type="delete">Annuler</button>
+      
       </div>
       <p id="error" class="hide">Nom d'utilisateur ou mot de passe incorrect</p>        
     </form>
-    
+    <button class="connexion"  (click)="onSubmit()">Se connecter</button>
+    <button class="annuler" id="annuler" (click)="this.formLogin.reset()">Annuler</button>
   </div>
 </div>
