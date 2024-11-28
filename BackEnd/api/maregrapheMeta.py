@@ -45,7 +45,7 @@ async def updateMeta(id: int, meta: str, data: str,
 
 @router.delete("/deleteMeta/{id}")
 async def deleteMeta(id: int,
-                     ):
+                     token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
