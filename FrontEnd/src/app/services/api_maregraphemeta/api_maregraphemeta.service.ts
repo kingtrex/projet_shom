@@ -24,8 +24,13 @@ export class ApiMaregraphemeta {
     return await lastValueFrom(this.http.get(this.baseUrl + "getMeta/"+ id))
   }
 
-  
-  public async deleteMeta(idMare: number, idMeta: string){
+  /**
+   * Supprimer une métadonnée d'un marégraphe
+   * @param idMare int : l'identifiant du marégraphe
+   * @param idMeta string : l'identifiant de la métadonnée
+   * @returns la réponse de l'API
+   */
+  public async deleteMeta(idMare: number, idMeta: string): Promise<any>{
     try{
       let param = "deleteMeta/" + idMare + "&" + idMeta
       return await lastValueFrom(this.http.delete(this.baseUrl + param))
