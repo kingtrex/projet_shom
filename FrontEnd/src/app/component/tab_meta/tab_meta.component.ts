@@ -63,6 +63,17 @@ export class TabMetaComponent implements OnInit {
   }
 
   /**
+   * Supprimer le type de métadonnée dans la base de donnée
+   * @param meta string : Id du type de la métadonnée
+   */
+  public async deleteMeta(meta: string){
+    await this.apiMeta.deleteMeta(meta).then(() => {
+      location.reload()
+    }).catch((error: any) => {
+      alert(error)
+    })
+  }
+  /**
    * @brief Fermer le formulaire d'ajout d'un type de métadonné
    */
   public async annuler(){

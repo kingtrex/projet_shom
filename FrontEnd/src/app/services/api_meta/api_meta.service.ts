@@ -32,8 +32,22 @@ export class ApiMeta {
       let param = "addMeta/" + id + "&" + description + "&" + ordre
       return await lastValueFrom(this.http.post(this.baseUrl + param, null))
     }catch(error){
-      console.log("Erreur lors de l'ajout du type de métadonnée")
+      console.warn("Erreur lors de l'ajout du type de métadonnée")
       throw error
+    }
+  }
+
+  /**
+   * Supprimer le type de métadonnée de la BDD
+   * @param id string : l'identifiant du type de la métadonnée
+   * @returns le status de la requête
+   */
+  public async deleteMeta(id: string): Promise<any>{
+    try{
+      let param = "deleteMeta/" + id
+      return await lastValueFrom(this.http.delete(this.baseUrl + param))
+    }catch(error: any){
+      throw error.error.detail
     }
   }
 }
