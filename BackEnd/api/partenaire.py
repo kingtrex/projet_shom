@@ -6,7 +6,7 @@ from typing import Annotated
 
 router = APIRouter()
 
-@router.get("/getPartenanire")
+@router.get("/getPartenaire")
 async def getPartenanire(token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
