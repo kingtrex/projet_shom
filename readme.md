@@ -2,6 +2,7 @@ GET /maregraphe/getMaregraphe => obtenir la liste des maregraphe
 GET /maregrapheMeta/getMeta/3 => obtenir les métadonnées du marégraphe ayant l'id passé en paramètre  
 GET /meta/getMetaId => obtenir les id des métadonnées  
 GET /partenaire/getPartenaire => obtenir les partenaire  
+GET /partenaire/getPartenaireMaregraphe/{id} => Obtenir les marégraphe du partenaire passé en id
 POST /maregraphe/addMaregraphe/{id}&{libelle}&{lat}&{long} => ajouter un nouveau marégraphe   
 POST /maregrapheMeta/addMeta/{id}&{meta}&{data} => ajouter une/des metadonnées au marégraphe passé en id  
 POST /connexion/addUser/{user}&{password}&{fullName}&{mail} => ajouter un nouvel utilisateur  
