@@ -6,6 +6,6 @@ POST /maregrapheMeta/addMeta/{id}&{meta}&{data} => ajouter une/des metadonnées 
 POST /connexion/addUser/{user}&{password}&{fullName}&{mail} => ajouter un nouvel utilisateur  
 UPDATE /maregrapheMeta/updateMeta/{id}&{meta} => modifier la metadonnées passée en paramètre du marégraphe passé en id  
 UPDATE /meta/updateMeta/{id}&{description}&{ordre} => Modifier les types de métadonnées  
-DELETE /maregrapheMeta/deleteMeta/{id} => supprimer TOUTE les metadonnées du marégrapehe passé en paramètre  
+DELETE /maregrapheMeta/deleteAllMeta/{id} => supprimer TOUTE les metadonnées du marégraphe passé en paramètre  
 DELETE /maregrapheMeta/deleteMeta/{id}&{meta} => supprimer la metadonnées passée en paramètre du marégraphe passé en id  
 DELETE /meta/deleteMeta/{meta} => supprimer le type de métadonnée de la base de données  

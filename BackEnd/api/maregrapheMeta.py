@@ -43,7 +43,7 @@ async def updateMeta(id: int, meta: str, data: str,
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.delete("/deleteMeta/{id}")
+@router.delete("/deleteAllMeta/{id}")
 async def deleteMeta(id: int,
                      token: Annotated[User, Depends(get_current_user)]):
     try:
@@ -59,6 +59,7 @@ async def deleteMeta(id: int,
 async def deleteMeta(id: int, meta: str,
                      token: Annotated[User, Depends(get_current_user)]):
     try:
+        print(f"{id} - {meta}")
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe = %s AND id_meta = %s", (id, meta))
