@@ -32,7 +32,7 @@ async def addMeta(id: str, desc: str, ordre: int,
 
 @router.put("/updateMeta/{id}&{desc}&{ordre}")
 async def updateMeta(id: str, desc: str, ordre: int,
-                     ):
+                     token: Annotated[User, Depends(get_current_user)]):
     print("oui")
     try:
         db = databaseConnect()
@@ -44,7 +44,8 @@ async def updateMeta(id: str, desc: str, ordre: int,
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/deleteMeta/{id}")
-async def deleteMeta(id: str):
+async def deleteMeta(id: str,
+                     token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)

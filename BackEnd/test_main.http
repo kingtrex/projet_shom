@@ -17,7 +17,12 @@ Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/partenaire/getPartenanire
+GET http://127.0.0.1:8000/partenaire/getPartenaire
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/partenaire/getPartenaireMaregraphe/50
 Accept: application/json
 
 ###
