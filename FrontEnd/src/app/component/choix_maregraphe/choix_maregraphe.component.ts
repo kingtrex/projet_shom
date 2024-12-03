@@ -9,6 +9,7 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './choix_maregraphe.component.html',
   styleUrls: ['./choix_maregraphe.component.css']
 })
+
 export class ChoixMaregrapheComponent {
   errorMessage: string = '';
   isDataLoaded : boolean = false;
@@ -54,7 +55,7 @@ export class ChoixMaregrapheComponent {
   }
 
   /**
-   * Ajouter un type de métadonné dans la BDD
+   * Ajouter un nouveau marégraphe dans la BDD
    */
   public async addMaregraphe(){
     const value = this.formAddMaregraphe.value
@@ -64,7 +65,7 @@ export class ChoixMaregrapheComponent {
   }
 
   /**
-   * @brief fermer le formulaire d'ajout d'une métadonnée
+   * @brief fermer le formulaire d'ajout d'un marégraphe
    */
   public async annuler_add(){
     let form = document.getElementById("hide_form_add")?.style;
@@ -72,7 +73,7 @@ export class ChoixMaregrapheComponent {
   }
 
   /**
-   * @brief ajouter une métadonnée au marégraphe
+   * @brief Afficher le formulaire de modification d'un marégraphe
    */
   public async show_modif_maregraphe(){
     let form = document.getElementById("hide_form_modif")?.style;
@@ -80,7 +81,7 @@ export class ChoixMaregrapheComponent {
   }
 
   /**
-   * @brief fermer le formulaire d'ajout d'une métadonnée
+   * @brief fermer le formulaire de modification d'un marégraphe
    */
   public async annuler_modif(){
     let form = document.getElementById("hide_form_modif")?.style;

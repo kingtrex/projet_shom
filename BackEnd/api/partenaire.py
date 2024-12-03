@@ -24,7 +24,7 @@ async def getPartenaireMaregraphe(id: int,
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"SELECT p.id_partenaire, p.id_maregraphe, m.libelle, m.latitude, m.longitude FROM obsmar.partenaire_maregraphe p\
                     JOIN obsmar.maregraphe m ON m.id_tdb=p.id_maregraphe\
-                    WHERE p.id_partenaire=50", (id,))
+                    WHERE p.id_partenaire=%s", (id,))
         return cur.fetchall()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

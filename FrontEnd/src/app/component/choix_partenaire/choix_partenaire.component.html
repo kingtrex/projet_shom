@@ -1,14 +1,14 @@
 <!-- src/app/body/body.component.html -->
 <app-header></app-header>
 <div class="rectangle">
-  Liste des marégraphes disponibles
+  Liste des Partenaires
 </div>
 <br>
 <div [class.affiche]="!isDataLoaded" [class.invisible]="isDataLoaded" >
   Chargement des données ...
 </div>
 <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
-<!-------------------- Formulaire d'aout d'un marégraphe -------------------->
+<!-------------------- Formulaire d'aout d'un marégraphe ------------------
   <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_maregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
 
   <div class="fond_form" id="hide_form_add">
@@ -34,31 +34,31 @@
       </div>
     </div>
   </div>
-<!---------------------------------------------------------------------------->
+---------------------------------------------------------------------->
   <br><br><br>
   <table>    
     <thead>
       <tr>
         <th>Identifiant</th>
-        <th>Ville</th>   
-        <th>Latitude</th>
-        <th>Longitude</th>
+        <th>Nom du partenaire</th>
+        <th>Logo du partenaire</th>
+        <th>Url du site internet</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr class="lignes_a_colorer" *ngFor="let i of donnees">
-        <td>{{i.id_tdb}}</td>
-        <td>{{i.libelle}}</td>
-        <td>{{i.latitude}}</td>
-        <td>{{i.longitude}}</td>
+        <td>{{i.id}}</td>
+        <td>{{i.nom}}</td>
+        <td>{{i.logo}}</td>
+        <td>{{i.url}}</td>
         <td>
           <div class="bouton">
-            <a href="tabMaregrapheMeta/{{i.id_tdb}}"><button class="acceder" type="button">Accéder</button></a>
+            <a href="tabPartenaireMaregraphe/{{i.id}}"><button class="acceder" type="button">Accéder</button></a>
 
-<!-------------------- Formulaire de modification d'un marégraphe -------------------->
+<!-------------------- Formulaire de modification d'un marégraphe -------------------
 
-            <button class="editer" type="button" (click)="show_modif_maregraphe()">Editer</button>
+            <button class="editer" type="button">Editer</button>
           </div>
 
           
@@ -69,12 +69,12 @@
               <span class="close-button" (click)="annuler_modif()">&times;</span>
               <h2>Modifier les informations du marégraphe</h2>
         
-              <form>    
-                <label for="id_maregraphe">Identifiant du marégraphe : </label>
-                <input type="text" id="id_maregraphe" name="id_maregraphe" placeholder="Identifiant du marégraphe"><br><br>
-
+              <form>
                 <label for="ville">Ville : </label>
                 <input type="text" id="ville" name="ville" placeholder="Nom de la ville"><br><br>
+      
+                <label for="id_maregraphe">Identifiant du marégraphe : </label>
+                <input type="text" id="id_maregraphe" name="id_maregraphe" placeholder="Identifiant du marégraphe"><br><br>
       
                 <label for="latitude">Latitude : </label>
                 <input type="number" id="latitude" name="latitude" placeholder="Latitude du marégraphe"><br><br>
@@ -86,9 +86,8 @@
                 <button class="ajout_meta"  type="submit">Mettre à jour</button>
                 <button class="supp_meta" id="supp_meta" type="delete"  (click)="annuler_modif()">Annuler</button>
               </div>
-<!---------------------------------------------------------------------------->     
-            </div>              
-          </div>
+-------------------------------------------------------------------------->     
+            </div>             
           
         </td>
       </tr>

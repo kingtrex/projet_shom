@@ -1,0 +1,74 @@
+.rectangle{
+    background-color: #E2DDDD;
+    padding-left: 1%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    border-radius: 3px;
+    font-size: 25px;
+}
+
+.affiche{
+    display: block;
+}
+
+.invisible{
+    display:none;
+}
+
+
+table{
+    border-collapse: collapse;
+    margin: auto;
+}
+
+table, td, th {
+    border: 1px solid;
+    border: none; /* Supprime les bordures */
+    border-bottom: 1px solid #C4C3C3; /* Ajoute uniquement des lignes horizontales */
+    padding: 8px; /* Optionnel, pour espacer le contenu */
+    padding: 0px 20px;
+    text-align: left;
+    
+}
+
+.lignes_a_colorer:nth-child(odd) {
+    background-color: #F0F0F0; /* Gris clair */
+}
+
+  /* Colorie les lignes impaires en blanc */
+.lignes_a_colorer:nth-child(even) {
+    background-color: white; /* Blanc */
+}
+
+.lignes_a_colorer:hover{
+    background-color: lightgray;
+}
+
+
+.acceder, .editer{
+    background-color: white;
+    color: black;
+    display: inline-block;
+    border-radius: 6px;
+    border-color: #C4C3C3;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    width: 100px;
+    cursor: pointer;
+    margin: 2.5px;
+    border: 2px solid #C4C3C3;
+    text-decoration: none;
+}
+
+.acceder > a{
+    text-decoration: none;
+}
+
+.bouton{
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+    padding: 0.5%;
+    border-radius: 3px;
+}

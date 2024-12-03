@@ -1,16 +1,17 @@
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TabPartenaireComponent } from './tab-partenaire.component';
+import { ChoixPartenaireComponent } from './choix_partenaire.component';
 
 describe('TabPartenaireComponent', () => {
-  let component: TabPartenaireComponent;
-  let fixture: ComponentFixture<TabPartenaireComponent>;
+  let component: ChoixPartenaireComponent;
+  let fixture: ComponentFixture<ChoixPartenaireComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TabPartenaireComponent]
+      declarations: [ChoixPartenaireComponent]
     });
-    fixture = TestBed.createComponent(TabPartenaireComponent);
+    fixture = TestBed.createComponent(ChoixPartenaireComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
