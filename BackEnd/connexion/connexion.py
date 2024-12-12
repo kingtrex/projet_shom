@@ -14,16 +14,13 @@ from jwt.exceptions import InvalidTokenError
 
 from passlib.context import CryptContext
 
-
-import os
-
 import ast
 
 SECRET_KEY = "292eceaf7266e55b10d28c87659f6bc16f8366d62cf687bf929d92c1e31c4a4c"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="connexion/token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="connexion/debug")
 router = APIRouter()
 
 class Token(BaseModel):
@@ -159,3 +156,25 @@ async def read_items(token: Annotated[str, Depends(oauth2_scheme)]):
 async def read_users_me(current_user: Annotated[User, Depends(get_current_user)]):
     return current_user
 
+@router.post("/debug")
+async def login_for_debug(
+    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+) -> Token:
+    fichierConf = configparser.ConfigParser()
+    fichierConf.sections()
+    fichierConf.read("./connexion/exemple.ini")
+    if not fichierConf.has_option("USERS", form_data.username):
+        raise HTTPException(status_code=400, detail="Incorrect username or password")
+
+    user = authenticate_user(fichierConf, form_data.username, form_data.password)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        data={"sub": user.username}, expires_delta=access_token_expires
+    )
+    return Token(access_token=access_token, token_type="bearer")
