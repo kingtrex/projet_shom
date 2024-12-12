@@ -17,7 +17,8 @@ async def root(id: int,
                token: Annotated[User, Depends(get_current_user)]):
     db = databaseConnect()
     cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"SELECT * FROM obsmar.maregraphe_meta WHERE id_maregraphe = %s", (id,))
+    cur.execute(f"SELECT * FROM obsmar.maregraphe_meta \
+                WHERE id_maregraphe = %s", (id,))
     return cur.fetchall()
 
 @router.post("/addMeta/{id}&{meta}&{data}")
@@ -26,7 +27,8 @@ async def addMeta(id: int, meta: str, data: str,
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
-        cur.execute(f"INSERT INTO obsmar.maregraphe_meta VALUES (%s, %s, %s, %s)", (id, meta, data, datetime.now()))
+        cur.execute(f"INSERT INTO obsmar.maregraphe_meta \
+                    VALUES (%s, %s, %s, %s)", (id, meta, data, datetime.now()))
         db.commit()
         return cur.lastrowid
     except Exception as e:
@@ -37,7 +39,8 @@ async def updateMeta(id: int, meta: str, data: str,
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
-        cur.execute(f"UPDATE obsmar.maregraphe_meta SET donnee = %s WHERE id_maregraphe = %s AND id_meta = %s", (data, id, meta))
+        cur.execute(f"UPDATE obsmar.maregraphe_meta SET donnee = %s \
+                    WHERE id_maregraphe = %s AND id_meta = %s", (data, id, meta))
         db.commit()
         return cur.lastrowid
     except Exception as e:
@@ -49,7 +52,8 @@ async def deleteMeta(id: int,
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
-        cur.execute(f"DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe = %s", (id,))
+        cur.execute(f"DELETE FROM obsmar.maregraphe_meta \
+                    WHERE id_maregraphe = %s", (id,))
         db.commit()
         return cur.lastrowid
     except Exception as e:
@@ -62,7 +66,8 @@ async def deleteMeta(id: int, meta: str,
         print(f"{id} - {meta}")
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
-        cur.execute(f"DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe = %s AND id_meta = %s", (id, meta))
+        cur.execute(f"DELETE FROM obsmar.maregraphe_meta \
+                    WHERE id_maregraphe = %s AND id_meta = %s", (id, meta))
         db.commit()
         return cur.lastrowid
     except Exception as e:

@@ -22,7 +22,8 @@ async def getPartenaireMaregraphe(id: int,
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
-        cur.execute(f"SELECT p.id_partenaire, p.id_maregraphe, m.libelle, m.latitude, m.longitude FROM obsmar.partenaire_maregraphe p\
+        cur.execute(f"SELECT p.id_partenaire, p.id_maregraphe, m.libelle, m.latitude, m.longitude \
+                    FROM obsmar.partenaire_maregraphe p\
                     JOIN obsmar.maregraphe m ON m.id_tdb=p.id_maregraphe\
                     WHERE p.id_partenaire=%s", (id,))
         return cur.fetchall()

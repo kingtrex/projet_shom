@@ -37,7 +37,9 @@ async def updateMeta(id: str, desc: str, ordre: int,
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
-        cur.execute(f"UPDATE obsmar.meta SET description=%s, ordre=%s WHERE id=%s", (desc, ordre, id))
+        cur.execute(f"UPDATE obsmar.meta \
+                    SET description=%s, ordre=%s \
+                    WHERE id=%s", (desc, ordre, id))
         db.commit()
         return cur.lastrowid
     except Exception as e:
@@ -49,7 +51,8 @@ async def deleteMeta(id: str,
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
-        cur.execute(f"DELETE FROM obsmar.meta WHERE id=%s", (id,))
+        cur.execute(f"DELETE FROM obsmar.meta \
+                    WHERE id=%s", (id,))
         db.commit()
         return cur.lastrowid
     except Exception as e:
