@@ -9,7 +9,7 @@ from psycopg2.extras import RealDictCursor
 router = APIRouter()
 
 @router.get("/getMaregraphe")
-async def getMaregraphe(token: Annotated[User, Depends(get_current_user)]):
+async def get_maregraphe(token: Annotated[User, Depends(get_current_user)]):
     db = databaseConnect()
     cur = db.cursor(cursor_factory=RealDictCursor)
     cur.execute("SELECT * FROM obsmar.maregraphe \
@@ -17,8 +17,8 @@ async def getMaregraphe(token: Annotated[User, Depends(get_current_user)]):
     return cur.fetchall()
 
 @router.post("/addMaregraphe/{id}&{libelle}&{lat}&{long}")
-async def addMaregraphe(id: int, libelle: str, lat: float, long: float,
-                        token: Annotated[User, Depends(get_current_user)]):
+async def add_maregraphe(id: int, libelle: str, lat: float, long: float,
+                         token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)

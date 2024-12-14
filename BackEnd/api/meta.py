@@ -9,7 +9,7 @@ from connexion.connexion import User, get_current_user
 router = APIRouter()
 
 @router.get("/getMetaId/")
-async def getMetaId(token: Annotated[User, Depends(get_current_user)]):
+async def get_meta_id(token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
@@ -19,8 +19,8 @@ async def getMetaId(token: Annotated[User, Depends(get_current_user)]):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/addMeta/{id}&{desc}&{ordre}")
-async def addMeta(id: str, desc: str, ordre: int,
-                  token: Annotated[User, Depends(get_current_user)]):
+async def add_meta(id: str, desc: str, ordre: int,
+                   token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
@@ -31,8 +31,8 @@ async def addMeta(id: str, desc: str, ordre: int,
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.put("/updateMeta/{id}&{desc}&{ordre}")
-async def updateMeta(id: str, desc: str, ordre: int,
-                     token: Annotated[User, Depends(get_current_user)]):
+async def update_meta(id: str, desc: str, ordre: int,
+                      token: Annotated[User, Depends(get_current_user)]):
     print("oui")
     try:
         db = databaseConnect()
@@ -46,8 +46,8 @@ async def updateMeta(id: str, desc: str, ordre: int,
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/deleteMeta/{id}")
-async def deleteMeta(id: str,
-                     token: Annotated[User, Depends(get_current_user)]):
+async def delete_meta(id: str,
+                      token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)

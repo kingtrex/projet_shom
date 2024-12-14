@@ -7,7 +7,7 @@ from typing import Annotated
 router = APIRouter()
 
 @router.get("/getPartenaire")
-async def getPartenaire(token: Annotated[User, Depends(get_current_user)]):
+async def get_partenaire(token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
@@ -17,8 +17,8 @@ async def getPartenaire(token: Annotated[User, Depends(get_current_user)]):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/getPartenaireMaregraphe/{id}")
-async def getPartenaireMaregraphe(id: int,
-                                  token: Annotated[User, Depends(get_current_user)]):
+async def get_partenaire_maregraphe(id: int,
+                                    token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)

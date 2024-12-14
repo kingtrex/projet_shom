@@ -1,5 +1,5 @@
 
-from fastapi import APIRouter, HTTPException
+from fastapi import HTTPException
 from databaseConnect import databaseConnect
 from psycopg2.extras import RealDictCursor
 from typing import Annotated
@@ -22,8 +22,8 @@ async def root(id: int,
     return cur.fetchall()
 
 @router.post("/addMeta/{id}&{meta}&{data}")
-async def addMeta(id: int, meta: str, data: str,
-                  token: Annotated[User, Depends(get_current_user)]):
+async def add_meta(id: int, meta: str, data: str,
+                   token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
@@ -34,8 +34,8 @@ async def addMeta(id: int, meta: str, data: str,
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 @router.put("/updateMeta/{id}&{meta}&{data}")
-async def updateMeta(id: int, meta: str, data: str,
-                     token: Annotated[User, Depends(get_current_user)]):
+async def update_meta(id: int, meta: str, data: str,
+                      token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
@@ -47,7 +47,7 @@ async def updateMeta(id: int, meta: str, data: str,
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/deleteAllMeta/{id}")
-async def deleteMeta(id: int,
+async def delete_meta(id: int,
                      token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
@@ -60,8 +60,8 @@ async def deleteMeta(id: int,
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/deleteMeta/{id}&{meta}")
-async def deleteMeta(id: int, meta: str,
-                     token: Annotated[User, Depends(get_current_user)]):
+async def delete_meta(id: int, meta: str,
+                      token: Annotated[User, Depends(get_current_user)]):
     try:
         print(f"{id} - {meta}")
         db = databaseConnect()
