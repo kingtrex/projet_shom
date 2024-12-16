@@ -1,6 +1,4 @@
-
-from fastapi import HTTPException
-from databaseConnect import databaseConnect
+from databaseConnect import databaseConnect, check_error
 from psycopg2.extras import RealDictCursor
 from typing import Annotated
 
@@ -15,12 +13,18 @@ router = APIRouter()
 @router.get("/getMeta/{id}")
 async def get_maregraphe_meta(id: int,
                token: Annotated[User, Depends(get_current_user)]):
-    db = databaseConnect()
-    cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"SELECT * FROM obsmar.maregraphe_meta \
-                WHERE id_maregraphe = %s \
-                ORDER BY id_meta", (id,))
-    return cur.fetchall()
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"SELECT * FROM obsmar.maregraphe_meta \
+                    WHERE id_maregraphe = %s \
+                    ORDER BY id_meta", (id,))
+        return cur.fetchall()
+    except Exception as e:
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
 
 @router.post("/addMeta/{id}&{meta}&{data}")
 async def add_meta(id: int, meta: str, data: str,
@@ -33,7 +37,10 @@ async def add_meta(id: int, meta: str, data: str,
         db.commit()
         return cur.lastrowid
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
 @router.put("/updateMeta/{id}&{meta}&{data}")
 async def update_meta(id: int, meta: str, data: str,
                       token: Annotated[User, Depends(get_current_user)]):
@@ -45,7 +52,10 @@ async def update_meta(id: int, meta: str, data: str,
         db.commit()
         return cur.lastrowid
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
 
 @router.delete("/deleteAllMeta/{id}")
 async def delete_meta(id: int,
@@ -58,7 +68,10 @@ async def delete_meta(id: int,
         db.commit()
         return cur.lastrowid
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
 
 @router.delete("/deleteMeta/{id}&{meta}")
 async def delete_meta(id: int, meta: str,
@@ -72,4 +85,7 @@ async def delete_meta(id: int, meta: str,
         db.commit()
         return cur.lastrowid
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()

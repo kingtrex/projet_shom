@@ -1,9 +1,7 @@
-
 from psycopg2.extras import RealDictCursor
-from databaseConnect import databaseConnect
+from databaseConnect import databaseConnect, check_error
 from typing import Annotated
-
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 
 from connexion.connexion import User, get_current_user
 router = APIRouter()
@@ -17,7 +15,10 @@ async def get_meta_id(token: Annotated[User, Depends(get_current_user)]):
                     ORDER BY id")
         return cur.fetchall()
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
 
 @router.post("/addMeta/{id}&{desc}&{ordre}")
 async def add_meta(id: str, desc: str, ordre: int,
@@ -29,7 +30,10 @@ async def add_meta(id: str, desc: str, ordre: int,
         db.commit()
         return cur.lastrowid
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
 
 @router.put("/updateMeta/{id}&{desc}&{ordre}")
 async def update_meta(id: str, desc: str, ordre: int,
@@ -44,7 +48,10 @@ async def update_meta(id: str, desc: str, ordre: int,
         db.commit()
         return cur.lastrowid
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
 
 @router.delete("/deleteMeta/{id}")
 async def delete_meta(id: str,
@@ -57,4 +64,7 @@ async def delete_meta(id: str,
         db.commit()
         return cur.lastrowid
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
