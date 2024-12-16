@@ -30,7 +30,7 @@ async def get_partenaire_maregraphe(id: int,
                     FROM obsmar.partenaire_maregraphe p\
                     JOIN obsmar.maregraphe m ON m.id_tdb=p.id_maregraphe\
                     WHERE p.id_partenaire=%s \
-                    ORDER BY m.libelle", (id,))
+                    ORDER BY p.id_maregraphe", (id,))
         return cur.fetchall()
     except Exception as e:
         check_error(e)
