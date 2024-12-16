@@ -83,9 +83,9 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
-    fichierConf = configparser.ConfigParser()
-    fichierConf.sections()
-    fichierConf.read("connexion/exemple.ini")
+    file_conf = configparser.ConfigParser()
+    file_conf.sections()
+    file_conf.read("connexion/exemple.ini")
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
@@ -94,7 +94,7 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
         token_data = TokenData(username=username)
     except InvalidTokenError:
         raise credentials_exception
-    user = get_user(fichierConf, username=token_data.username)
+    user = get_user(file_conf, username=token_data.username)
     if user is None:
         raise credentials_exception
     return user
@@ -112,13 +112,13 @@ async def login_for_access_token(
     form_data: dict,
 ) -> Token:
     print(form_data["username"])
-    fichierConf = configparser.ConfigParser()
-    fichierConf.sections()
-    fichierConf.read("./connexion/exemple.ini")
-    if not fichierConf.has_option("USERS", form_data["username"]):
+    file_conf = configparser.ConfigParser()
+    file_conf.sections()
+    file_conf.read("./connexion/exemple.ini")
+    if not file_conf.has_option("USERS", form_data["username"]):
         raise HTTPException(status_code=400, detail="Incorrect username or password")
 
-    user = authenticate_user(fichierConf, form_data["username"], form_data["password"])
+    user = authenticate_user(file_conf, form_data["username"], form_data["password"])
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -132,14 +132,14 @@ async def login_for_access_token(
     return Token(access_token=access_token, token_type="bearer")
 
 @router.post("/newUser/{user}&{password}&{fullName}&{mail}")
-async def addUser(user: str, password: str, fullName: str, mail: str,
-                  token: Annotated[User, Depends(get_current_user)],):
+async def add_user(user: str, password: str, full_name: str, mail: str,
+                   token: Annotated[User, Depends(get_current_user)], ):
     config = configparser.ConfigParser()
     config.read("connexion/exemple.ini")
     hashed_password = pwd_context.hash(password)
     newJson = {
         "username": user,
-        "full_name": fullName,
+        "full_name": full_name,
         "email": mail,
         "hashed_password": hashed_password,
         "disabled": "False",
@@ -160,13 +160,13 @@ async def read_users_me(current_user: Annotated[User, Depends(get_current_user)]
 async def login_for_debug(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 ) -> Token:
-    fichierConf = configparser.ConfigParser()
-    fichierConf.sections()
-    fichierConf.read("./connexion/exemple.ini")
-    if not fichierConf.has_option("USERS", form_data.username):
+    file_conf = configparser.ConfigParser()
+    file_conf.sections()
+    file_conf.read("./connexion/exemple.ini")
+    if not file_conf.has_option("USERS", form_data.username):
         raise HTTPException(status_code=400, detail="Incorrect username or password")
 
-    user = authenticate_user(fichierConf, form_data.username, form_data.password)
+    user = authenticate_user(file_conf, form_data.username, form_data.password)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
