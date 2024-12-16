@@ -13,7 +13,8 @@ async def get_meta_id(token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
-        cur.execute(f"SELECT * FROM obsmar.meta")
+        cur.execute(f"SELECT * FROM obsmar.meta \
+                    ORDER BY id")
         return cur.fetchall()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

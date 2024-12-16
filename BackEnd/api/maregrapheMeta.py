@@ -13,12 +13,13 @@ from datetime import datetime
 router = APIRouter()
 
 @router.get("/getMeta/{id}")
-async def root(id: int,
+async def get_maregraphe_meta(id: int,
                token: Annotated[User, Depends(get_current_user)]):
     db = databaseConnect()
     cur = db.cursor(cursor_factory=RealDictCursor)
     cur.execute(f"SELECT * FROM obsmar.maregraphe_meta \
-                WHERE id_maregraphe = %s", (id,))
+                WHERE id_maregraphe = %s \
+                ORDER BY id_meta", (id,))
     return cur.fetchall()
 
 @router.post("/addMeta/{id}&{meta}&{data}")

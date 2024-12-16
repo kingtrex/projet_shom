@@ -11,7 +11,8 @@ async def get_partenaire(token: Annotated[User, Depends(get_current_user)]):
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
-        cur.execute(f"SELECT * FROM obsmar.partenaire")
+        cur.execute(f"SELECT * FROM obsmar.partenaire \
+                    ORDER BY id")
         return cur.fetchall()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -25,7 +26,8 @@ async def get_partenaire_maregraphe(id: int,
         cur.execute(f"SELECT p.id_partenaire, p.id_maregraphe, m.libelle, m.latitude, m.longitude \
                     FROM obsmar.partenaire_maregraphe p\
                     JOIN obsmar.maregraphe m ON m.id_tdb=p.id_maregraphe\
-                    WHERE p.id_partenaire=%s", (id,))
+                    WHERE p.id_partenaire=%s \
+                    ORDER BY m.libelle", (id,))
         return cur.fetchall()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
