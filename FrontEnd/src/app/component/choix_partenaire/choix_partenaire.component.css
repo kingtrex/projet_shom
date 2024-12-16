@@ -72,3 +72,8 @@ table, td, th {
     padding: 0.5%;
     border-radius: 3px;
 }
+
+.logos{
+    width: 250px;
+    height: 200px;
+}
