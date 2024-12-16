@@ -33,18 +33,7 @@ table, td, th {
     padding: 0px 20px;
 }
 
-.lignes_a_colorer:nth-child(odd) {
-    background-color: #F0F0F0; /* Gris clair */
-}
 
-  /* Colorie les lignes impaires en blanc */
-.lignes_a_colorer:nth-child(even) {
-    background-color: white; /* Blanc */
-}
-
-.lignes_a_colorer:hover{
-    background-color: grey;
-}
 
 caption{
     margin-bottom: 30px;

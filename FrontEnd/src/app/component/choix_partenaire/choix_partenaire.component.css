@@ -30,20 +30,20 @@ table, td, th {
     text-align: left;
     
 }
-
+/*
 .lignes_a_colorer:nth-child(odd) {
-    background-color: #F0F0F0; /* Gris clair */
+    background-color: #F0F0F0; /* Gris clair *
 }
 
-  /* Colorie les lignes impaires en blanc */
+  /* Colorie les lignes impaires en blanc 
 .lignes_a_colorer:nth-child(even) {
-    background-color: white; /* Blanc */
+    background-color: white; /* Blanc 
 }
 
 .lignes_a_colorer:hover{
     background-color: lightgray;
 }
-
+*/
 
 .acceder, .editer{
     background-color: white;
@@ -74,6 +74,6 @@ table, td, th {
 }
 
 .logos{
-    width: 250px;
-    height: 200px;
+    width: 125px;
+    height: 100px;
 }

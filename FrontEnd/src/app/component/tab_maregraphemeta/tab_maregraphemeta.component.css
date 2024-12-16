@@ -16,6 +16,11 @@
     display:none;
 }
 
+.infos_maregraphe{
+    text-align: center;
+    font-size: 30px;
+}
+
 .Ajouter{
     display: flex;
     border-radius: 3px;

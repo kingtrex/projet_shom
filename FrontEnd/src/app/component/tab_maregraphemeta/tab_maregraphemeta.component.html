@@ -8,7 +8,8 @@
     Chargement des données ...
    </div>
    <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
-  
+    
+    <p class="infos_maregraphe">Identifiant du marégraphe : {{id_maregraphe}}</p>
     <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_meta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
 
     <div class="fond_form" id="hide_form">
@@ -32,7 +33,7 @@
     <table>    
       <thead>
         <tr>
-          <th>ID Marégraphe</th>
+          <!--<th>ID Marégraphe</th>-->
           <th>ID Métadonnées</th>
           <th>Données</th>
           <th>Date de création/update données</th>
@@ -41,7 +42,7 @@
       </thead>
       <tbody>
         <tr class="lignes_a_colorer" *ngFor="let i of donnees">
-          <td>{{i.id_maregraphe}}</td>
+          <!--<td>{{i.id_maregraphe}}</td>-->
           <td>{{i.id_meta}}</td>
           <td>{{i.donnee}}</td>
           <td>{{i.date_donnee}}</td>

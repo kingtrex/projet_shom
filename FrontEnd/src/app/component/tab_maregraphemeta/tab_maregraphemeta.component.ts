@@ -28,6 +28,7 @@ export class TabMaregraphemetaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+
   }
 
   /**

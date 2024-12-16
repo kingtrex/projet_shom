@@ -40,7 +40,6 @@
     <tr>
       <th>ID Métadonnées</th>
       <th>Description</th>
-      <th>Ordre</th>
       <th class="Actions">Actions</th>
     </tr>
   </thead>
@@ -48,7 +47,6 @@
     <tr class="lignes_a_colorer" *ngFor="let i of donnees">
       <td>{{i.id}}</td>
       <td>{{i.description}}</td>
-      <td>{{i.ordre}}</td>
       <td>
         <div class="bouton">
           <button class="Editer"  type="button" (click)="show_modif_form(i.id, i.description, i.ordre)">Editer</button>
