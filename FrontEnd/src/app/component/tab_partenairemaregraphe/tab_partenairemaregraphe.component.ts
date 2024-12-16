@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiPartenaireMaregrapheService } from '../../services/api_partenaire_maregraphe/api_partenaire_maregraphe.service';
 import { ActivatedRoute, Data } from '@angular/router';
-import { maregraphe } from '../../class/maregraphe';
+import { Maregraphe } from '../../class/Maregraphe';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -34,9 +34,9 @@ export class TabPartenaireMaregrapheComponent {
    */
   public async getData(){
     await this.ApiPartenaireMaregrapheService.getData(this.id).then((data: any) => {
-      const mare: maregraphe[] = [];
+      const mare: Maregraphe[] = [];
       data.forEach((element : any) => {
-        mare.push(new maregraphe(element.id_maregraphe, element.libelle, element.latitude, element.longitude));
+        mare.push(new Maregraphe(element.id_maregraphe, element.libelle, element.latitude, element.longitude));
       })
       this.donnees = mare;
       this.isDataLoaded = true;      

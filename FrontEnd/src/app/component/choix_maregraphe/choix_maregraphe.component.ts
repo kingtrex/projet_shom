@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { APIChoixMaregrapheService } from '../../services/api_choix_maregraphe/api_choix_maregraphe.service';
 import { Data } from '@angular/router';
-import { maregraphe } from '../../class/maregraphe';
+import { Maregraphe } from '../../class/Maregraphe';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -37,9 +37,9 @@ export class ChoixMaregrapheComponent {
    */
   public async getData(){
     const data : any = await this.apiChoixMaregraphe.getData()
-    const meta: maregraphe[] = [];
+    const meta: Maregraphe[] = [];
     data.forEach((element : any) => {
-      meta.push(new maregraphe(element.id_tdb, element.libelle, element.latitude, element.longitude));
+      meta.push(new Maregraphe(element.id_tdb, element.libelle, element.latitude, element.longitude));
     })
     this.donnees = meta;
     this.isDataLoaded = true;

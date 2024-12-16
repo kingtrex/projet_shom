@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiChoixPartenaireService } from '../../services/api_choix_partenaire/api_choix_partenaire.service';
 import { Data } from '@angular/router';
-import { partenaire } from '../../class/partenaire';
+import { Partenaire } from '../../class/Partenaire';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -37,9 +37,9 @@ export class ChoixPartenaireComponent {
    */
   public async getData(){
     const data : any = await this.apiChoixPartenaire.getData()
-    const meta: partenaire[] = [];
+    const meta: Partenaire[] = [];
     data.forEach((element : any) => {
-      meta.push(new partenaire(element.id, element.nom, element.logo, element.url));
+      meta.push(new Partenaire(element.id, element.nom, element.logo, element.url));
     })
     this.donnees = meta;
     this.isDataLoaded = true;

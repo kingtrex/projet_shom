@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiMaregraphemeta } from '../../services/api_maregraphemeta/api_maregraphemeta.service';
 import { ActivatedRoute, Data } from '@angular/router';
-import { maregrapheMeta } from '../../class/maregraphemeta';
+import { MaregrapheMeta } from '../../class/Maregraphemeta';
 import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-tab-maregraphemeta',
@@ -37,9 +37,9 @@ export class TabMaregraphemetaComponent implements OnInit {
    */
   public async getData(){
     await this.apiMaregrapheMeta.getData(this.id_maregraphe).then((data: any) => {
-      const meta: maregrapheMeta[] = [];
+      const meta: MaregrapheMeta[] = [];
       data.forEach((element : any) => {
-        meta.push(new maregrapheMeta(element.id_maregraphe, element.id_meta, element.donnee, element.date_donnee));
+        meta.push(new MaregrapheMeta(element.id_maregraphe, element.id_meta, element.donnee, element.date_donnee));
       })
       this.donnees = meta;
       this.isDataLoaded = true;      

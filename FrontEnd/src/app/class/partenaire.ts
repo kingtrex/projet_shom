@@ -1,4 +1,4 @@
-export class partenaire{
+export class Partenaire{
     id:number;
     nom:string;
     logo: string;

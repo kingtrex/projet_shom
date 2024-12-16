@@ -1,4 +1,4 @@
-export class maregraphe{
+export class Maregraphe{
     id_tdb:number;
     libelle:string;
     latitude:number;
