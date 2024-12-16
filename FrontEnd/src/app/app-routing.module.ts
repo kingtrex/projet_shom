@@ -20,7 +20,7 @@ const routes: Routes = [
   {path : "tabPartenaireMaregraphe/:id", component: TabPartenaireMaregrapheComponent, canActivate: [AuthGuard]},
 
   {path : "tabChoixMaregraphe", component: ChoixMaregrapheComponent, canActivate: [AuthGuard]},
-  {path : "tabMaregrapheMeta/:id", component: TabMaregraphemetaComponent, canActivate: [AuthGuard]},
+  {path : "tabMaregrapheMeta/:id/:ville", component: TabMaregraphemetaComponent, canActivate: [AuthGuard]},
   
   {path : "tabMeta", component: TabMetaComponent, canActivate: [AuthGuard]},
   
