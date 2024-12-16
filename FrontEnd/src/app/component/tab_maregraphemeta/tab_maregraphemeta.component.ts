@@ -15,6 +15,7 @@ export class TabMaregraphemetaComponent implements OnInit {
   isDataLoaded : boolean = false;
   donnees: any;
   id_maregraphe: number = +this.route.snapshot.paramMap.get('id')!;
+  ville_maregraphe: string = this.route.snapshot.paramMap.get('ville')!;
   public formAddMeta: any;
   constructor(private apiMaregrapheMeta: ApiMaregraphemeta,
     private route: ActivatedRoute,

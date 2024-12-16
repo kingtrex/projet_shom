@@ -8,6 +8,8 @@
     Chargement des données ...
    </div>
    <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
+
+    <a href="tabChoixPartenaire"><button class="bouton_retour">Retourner aux partenaires</button></a>
   <!--
     <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_meta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
 
@@ -40,18 +42,18 @@
       </thead>
       <tbody>
         <tr class="lignes_a_colorer" *ngFor="let i of donnees">
-            <td>{{i.id}}</td>
+            <td>{{i.id_tdb}}</td>
             <td>{{i.libelle}}</td>
             <td>{{i.latitude}}</td>
             <td>{{i.longitude}}</td>
-          <td>
-            <!--
+          <!--
+            <td>
             <div class="bouton">
               <button class="Editer"  type="button">Editer</button>
               <button class="Supprimer" type="button" (click)="deleteMeta(i.id_maregraphe, i.id_meta)">Supprimer</button>
             </div>
-            -->
           </td>
+          -->
         </tr>
       </tbody>
     </table>

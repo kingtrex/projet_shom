@@ -36,7 +36,7 @@ export class TabPartenaireMaregrapheComponent {
     await this.ApiPartenaireMaregrapheService.getData(this.id).then((data: any) => {
       const mare: maregraphe[] = [];
       data.forEach((element : any) => {
-        mare.push(new maregraphe(element.id, element.libelle, element.latitude, element.longitude));
+        mare.push(new maregraphe(element.id_maregraphe, element.libelle, element.latitude, element.longitude));
       })
       this.donnees = mare;
       this.isDataLoaded = true;      
