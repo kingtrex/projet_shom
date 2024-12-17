@@ -7,7 +7,6 @@
     font-size: 25px;
 }
 
-
 .affiche{
     display: block;
 }
@@ -148,4 +147,9 @@ table, td, th {
     cursor: pointer;
     margin: 2.5px;
     border: 2px solid #C4C3C3;
+}
+
+.button_header{
+    display: flex;
+    justify-content: space-around;
 }
