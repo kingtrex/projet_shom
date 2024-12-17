@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiMaregraphemeta } from '../../services/api_maregraphemeta/api_maregraphemeta.service';
 import { ActivatedRoute, Data } from '@angular/router';
-import { MaregrapheMeta } from '../../class/Maregraphemeta';
+import { MaregrapheMeta } from '../../class/MaregrapheMeta';
 import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-tab-maregraphemeta',
@@ -10,7 +10,6 @@ import { FormBuilder } from '@angular/forms';
 })
 
 export class TabMaregraphemetaComponent implements OnInit {
-
   errorMessage: string = '';
   isDataLoaded : boolean = false;
   donnees: any;

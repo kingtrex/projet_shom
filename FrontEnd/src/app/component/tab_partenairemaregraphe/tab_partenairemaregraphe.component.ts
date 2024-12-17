@@ -9,11 +9,12 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './tab_partenairemaregraphe.component.html',
   styleUrls: ['./tab_partenairemaregraphe.component.css']
 })
-export class TabPartenaireMaregrapheComponent {
+export class TabPartenaireMaregrapheComponent implements OnInit{
   errorMessage: string = '';
   isDataLoaded : boolean = false;
   donnees: any;
   id: number = +this.route.snapshot.paramMap.get('id')!;
+  partenaire: string = this.route.snapshot.paramMap.get('partenaire')!;
   public formAddMaregraphe: any;
   constructor(private ApiPartenaireMaregrapheService: ApiPartenaireMaregrapheService,
     private route: ActivatedRoute,

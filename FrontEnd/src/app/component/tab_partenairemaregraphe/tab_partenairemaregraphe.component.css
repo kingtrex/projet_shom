@@ -16,6 +16,17 @@
     display:none;
 }
 
+.infos_partenaire{
+    text-align: center;
+    font-size: 30px;
+
+}
+
+.section_trois_cases{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
 .Ajouter{
     display: flex;
     border-radius: 3px;

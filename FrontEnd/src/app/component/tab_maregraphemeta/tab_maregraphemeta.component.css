@@ -17,9 +17,9 @@
 }
 
 .infos_maregraphe{
-    text-align: center;
-    font-size: 30px;
+    font-size: 25px;
 }
+
 
 .Ajouter{
     display: flex;
@@ -29,8 +29,6 @@
     padding: 10px;
     color: white;
     gap: 10px;
-    position: relative;
-    left: 65%;
 }
 
 .fond_form {
