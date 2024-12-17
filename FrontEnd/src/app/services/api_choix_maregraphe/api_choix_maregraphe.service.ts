@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Maregraphe } from 'src/app/class/Maregraphe';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class APIChoixMaregrapheService {
    * Obtenir la liste des marégraphe dans la BDD
    * @returns JSON contenant la liste des marégraphe 
    */
-  public async getData(): Promise<any> {
+  public async getData(): Promise<Object> {
     try{
       return await lastValueFrom(this.http.get(this.baseUrl + "getMaregraphe"));
     }catch(error: any){
@@ -22,6 +23,19 @@ export class APIChoixMaregrapheService {
     }
   }
 
+  /**
+   * Appeler l'API pour réorganiser les données 
+   * @param col string : le nom de la colonne qui sera utilisée
+   * @param order bool : si ce sera trié par ordre croissant ou décroissant
+   * @returns 
+   */
+  public async sortData(col: string, order: boolean): Promise<Object>{
+    try{
+      return await lastValueFrom(this.http.get(this.baseUrl + "sort/" + col + "&" + order))
+    }catch(error: any){
+      throw error.error.details;
+    }
+  }
 
   /**
    * Appeler l'API pour ajouter la métadonnée dans la BDD

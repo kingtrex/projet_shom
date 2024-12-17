@@ -11,12 +11,20 @@ import { FormBuilder } from '@angular/forms';
 })
 
 export class ChoixMaregrapheComponent {
-  errorMessage: string = '';
-  isDataLoaded : boolean = false;
-  donnees: any;
+  public errorMessage: string = '';
+  public isDataLoaded : boolean = false;
+  public donnees: Maregraphe[] = [];
 
-  public formAddMaregraphe: any
+  public formAddMaregraphe: any;
 
+  public sortData: {[key: string] : boolean} = {
+    "id_tdb": true,
+    "libelle" : false,
+  };
+  public triangleData: {[key: string] : string} = {
+    "id_tdb": "▼",
+    "libelle" : "▼",
+  }
   constructor(private apiChoixMaregraphe: APIChoixMaregrapheService,
     private formBuilder: FormBuilder,
   ) {
@@ -37,11 +45,9 @@ export class ChoixMaregrapheComponent {
    */
   public async getData(){
     const data : any = await this.apiChoixMaregraphe.getData()
-    const meta: Maregraphe[] = [];
     data.forEach((element : any) => {
-      meta.push(new Maregraphe(element.id_tdb, element.libelle, element.latitude, element.longitude));
+      this.donnees.push(new Maregraphe(element.id_tdb, element.libelle, element.latitude, element.longitude));
     })
-    this.donnees = meta;
     this.isDataLoaded = true;
   }
 
@@ -86,5 +92,15 @@ export class ChoixMaregrapheComponent {
   public async annuler_modif(){
     let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'none';
+  }
+
+  public async sort(col: string){
+    const data : any = await this.apiChoixMaregraphe.sortData(col, this.sortData[col]);
+    data.forEach((element : any) => {
+      this.donnees.push(new Maregraphe(element.id_tdb, element.libelle, element.latitude, element.longitude));
+    })
+    this.sortData[col] = !this.sortData[col];
+    this.triangleData[col] = this.sortData[col] ? "▼" : "▲";
+    this.donnees = data;
   }
 }
