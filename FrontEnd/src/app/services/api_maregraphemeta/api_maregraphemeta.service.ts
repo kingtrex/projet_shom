@@ -62,7 +62,7 @@ export class ApiMaregraphemeta {
    * @param order bool : true => ordre décroissant, false =>  ordre croissant
    * @returns 
    */
-  public async sortData(id: number, col: string, order: boolean){
+  public async sortData(id: number, col: string, order: boolean): Promise<any>{
     try{
       const param = "sort/" + id + "&" + col + "&" + order
       return await lastValueFrom(this.http.get(this.baseUrl + param))

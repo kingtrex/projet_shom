@@ -44,9 +44,10 @@ export class ChoixMaregrapheComponent {
    * @brief Obtenir les différents marégraphes
    */
   public async getData(){
-    const data : any = await this.apiChoixMaregraphe.getData()
-    data.forEach((element : any) => {
-      this.donnees.push(new Maregraphe(element.id_tdb, element.libelle, element.latitude, element.longitude));
+    await this.apiChoixMaregraphe.getData().then((element: any) => {
+      element.forEach((maregraphe: any) => {
+        this.donnees.push(new Maregraphe(maregraphe.id_tdb, maregraphe.libelle, element.latitude, maregraphe.longitude))
+      })
     })
     this.isDataLoaded = true;
   }
@@ -95,12 +96,13 @@ export class ChoixMaregrapheComponent {
   }
 
   public async sort(col: string){
-    const data : any = await this.apiChoixMaregraphe.sortData(col, this.sortData[col]);
-    data.forEach((element : any) => {
-      this.donnees.push(new Maregraphe(element.id_tdb, element.libelle, element.latitude, element.longitude));
+    await this.apiChoixMaregraphe.sortData(col, this.sortData[col]).then((element: any) => {
+      this.donnees = []
+      element.forEach((maregraphe: any) => {
+        this.donnees.push(new Maregraphe(maregraphe.id_tdb, maregraphe.libelle, element.latitude, maregraphe.longitude))
+      })
     })
     this.sortData[col] = !this.sortData[col];
     this.triangleData[col] = this.sortData[col] ? "▼" : "▲";
-    this.donnees = data;
   }
 }

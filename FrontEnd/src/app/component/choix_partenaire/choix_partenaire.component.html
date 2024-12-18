@@ -39,8 +39,8 @@
   <table>    
     <thead>
       <tr>
-        <th>Identifiant</th>
-        <th>Nom du partenaire</th>
+        <th (click)="sort('id')">Identifiant {{triangleData["id"]}}</th>
+        <th (click)="sort('nom')">Nom du partenaire {{triangleData["nom"]}}</th>
         <th>Logo du partenaire</th>
         <th>Url du site internet</th>
         <th></th>

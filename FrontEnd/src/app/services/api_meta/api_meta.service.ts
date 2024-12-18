@@ -80,7 +80,7 @@ export class ApiMeta {
    * @param order bool : true => ordre décroissant, false =>  ordre croissant
    * @returns 
    */
-  public async sortData(col: string, order: boolean){
+  public async sortData(col: string, order: boolean): Promise<Object>{
     try{
       const param = "sort/" + col + "&" + order
       return await lastValueFrom(this.http.get(this.baseUrl + param))
