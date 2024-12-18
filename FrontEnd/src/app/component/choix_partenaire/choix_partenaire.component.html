@@ -56,39 +56,37 @@
           <div class="bouton">
             <a href="tabPartenaireMaregraphe/{{i.id}}/{{i.nom}}"><button class="acceder" type="button">Accéder</button></a>
 
-<!-------------------- Formulaire de modification d'un marégraphe -------------------
+<!-------------------- Formulaire de modification d'un partenaire ------------------->
 
-            <button class="editer" type="button">Editer</button>
+            <button class="editer" type="button" (click)="show_modif_partenaire()">Editer</button>
           </div>
 
           
           <div class="fond_form" id="hide_form_modif">
             
-            <div class="form_add_meta">
+            <div class="form_modif_partenaire">
               
               <span class="close-button" (click)="annuler_modif()">&times;</span>
-              <h2>Modifier les informations du marégraphe</h2>
+              <h2>Modifier les informations du partenaire</h2>
         
               <form>
-                <label for="ville">Ville : </label>
-                <input type="text" id="ville" name="ville" placeholder="Nom de la ville"><br><br>
+                <label for="nom">Nom du partenaire : </label>
+                <input type="text" id="nom" name="nom" placeholder="Nom du partenaire"><br><br>
       
-                <label for="id_maregraphe">Identifiant du marégraphe : </label>
-                <input type="text" id="id_maregraphe" name="id_maregraphe" placeholder="Identifiant du marégraphe"><br><br>
+                <label for="logo">url du logo du partenaire : </label>
+                <input type="text" id="logo" name="logo" placeholder="url du logo"><br><br>
       
-                <label for="latitude">Latitude : </label>
-                <input type="number" id="latitude" name="latitude" placeholder="Latitude du marégraphe"><br><br>
+                <label for="site">url du site internet partenaire : </label>
+                <input type="text" id="site" name="site" placeholder="url du site internet partenaire"><br><br>
       
-                <label for="longitude">Longitude : </label>
-                <input type="number" id="longitude" name="longitude" placeholder="Longitude du marégraphe"><br><br>
               </form>
               <div class="bouton">
-                <button class="ajout_meta"  type="submit">Mettre à jour</button>
-                <button class="supp_meta" id="supp_meta" type="delete"  (click)="annuler_modif()">Annuler</button>
+                <button class="maj_partenaire"  type="submit">Mettre à jour</button>
+                <button class="supp_partenaire" id="supp_partenaire" type="delete"  (click)="annuler_modif()">Annuler</button>
               </div>
--------------------------------------------------------------------------->     
+<!-------------------------------------------------------------------------->     
             </div>             
-          
+          </div>
         </td>
       </tr>
     </tbody>

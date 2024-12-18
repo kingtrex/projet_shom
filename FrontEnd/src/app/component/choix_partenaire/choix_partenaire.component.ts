@@ -72,21 +72,21 @@ export class ChoixPartenaireComponent {
     if (form) form.display = 'none';
   }
 
-  /**
-   * @brief Afficher le formulaire de modification d'un partenaire
-   *
+  
+   /* @brief Afficher le formulaire de modification d'un partenaire*/
+   
   public async show_modif_partenaire(){
     let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'block';
   }
 
-  /**
-   * @brief fermer le formulaire de modification d'un partenaire
+
+   /** @brief fermer le formulaire de modification d'un partenaire  */
    
   public async annuler_modif(){
     let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'none';
   }
-    */
+
 
 }

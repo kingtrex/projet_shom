@@ -15,6 +15,75 @@
     display:none;
 }
 
+.fond_form{
+    display: none;
+    position: fixed; /* Positionné par rapport à la fenêtre */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    justify-content: center;
+    align-items: center;
+}
+
+#hide_form_add{
+    display:none;
+}
+
+.form_add_meta {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin-top: 13%;
+    margin-left: 35%;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.bouton{
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+    padding: 0.5%;
+    border-radius: 3px;
+}
+
+.maj_partenaire{
+    background-color: white;
+    color: black;
+}
+
+
+.supp_partenaire{
+    display: flex;
+    background-color: red;
+    color: white;
+    gap: 10px;
+
+}
+
+  
+
+.maj_partenaire, .supp_partenaire{
+    border-radius: 6px;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+    margin: 2.5px;
+    border: 2px solid #C4C3C3;
+}
+
 
 table{
     border-collapse: collapse;
@@ -25,8 +94,8 @@ table, td, th {
     border: 1px solid;
     border: none; /* Supprime les bordures */
     border-bottom: 1px solid #C4C3C3; /* Ajoute uniquement des lignes horizontales */
-    padding: 8px; /* Optionnel, pour espacer le contenu */
-    padding: 0px 20px;
+    padding: 10px; /* Optionnel, pour espacer le contenu */
+    
     text-align: left;
     
 }
@@ -61,8 +130,38 @@ table, td, th {
     text-decoration: none;
 }
 
+
 .acceder > a{
     text-decoration: none;
+}
+
+/** CSS pour formulaire de modification des infos du marégraphe **/
+
+.fond_form_modif {
+    display: none;
+    position: fixed; /* Positionné par rapport à la fenêtre */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    justify-content: center;
+    align-items: center;
+}
+
+#hide_form_modif{
+    display:none;
+}
+
+.form_modif_partenaire {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin-top: 13%;
+    margin-left: 35%;
+    position: relative;
 }
 
 .bouton{

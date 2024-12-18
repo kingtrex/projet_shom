@@ -18,14 +18,11 @@
 
 .infos_partenaire{
     text-align: center;
-    font-size: 30px;
+    font-size: 25px;
 
 }
 
-.section_trois_cases{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-}
+
 
 .Ajouter{
     display: flex;
@@ -35,8 +32,7 @@
     padding: 10px;
     color: white;
     gap: 10px;
-    position: relative;
-    left: 65%;
+
 }
 
 .fond_form {
@@ -156,4 +152,9 @@ table, td, th {
     cursor: pointer;
     margin: 2.5px;
     border: 2px solid #C4C3C3;
+}
+
+.button_header{
+    display: flex;
+    justify-content: space-around;
 }
