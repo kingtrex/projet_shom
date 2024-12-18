@@ -62,7 +62,7 @@ export class TabMetaComponent implements OnInit {
    * @brief Afficher le formulaire d'ajout d'une metadonnée
    */
   public async show_add_meta(){
-    let form = document.getElementById("hide_form")?.style;
+    let form = document.getElementById("hide_form_add")?.style;
     if (form) form.display = 'block';
   }
 
@@ -109,7 +109,7 @@ export class TabMetaComponent implements OnInit {
    * @brief Fermer le formulaire d'ajout d'un type de métadonné
    */
   public async annuler(){
-    let form = document.getElementById("hide_form")?.style;
+    let form = document.getElementById("hide_form_add")?.style;
     if (form) form.display = 'none';
   }
 

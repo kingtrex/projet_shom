@@ -15,66 +15,6 @@
     display:none;
 }
 
-
-thead{
-    text-align: left;
-}
-
-table{
-    border-collapse: collapse;
-    margin: auto;
-}
-
-table, td, th {
-    border: 1px solid;
-    border: none; /* Supprime les bordures */
-    border-bottom: 1px solid #C4C3C3; /* Ajoute uniquement des lignes horizontales */
-    padding: 8px; /* Optionnel, pour espacer le contenu */
-    padding: 0px 20px;
-}
-
-
-
-caption{
-    margin-bottom: 30px;
-}
-
-.Editer{
-    background-color: white;
-    color: black;
-}
-.Supprimer{
-    background-color: red;
-    color: white;
-}
-
-.Editer, .Supprimer{
-    
-    display: inline-block;
-    border-radius: 6px;
-    border-color: #C4C3C3;
-    text-align: center;
-    font-size: 14px;
-    padding: 10px;
-    width: 100px;
-    cursor: pointer;
-    margin: 2.5px;
-    border: 2px solid #C4C3C3;
-}
-
-.Actions{
-    text-align: center;
-}
-
-
-.bouton{
-    display: flex;
-    gap: 10px;
-    margin: 10px;
-    padding: 0.5%;
-    border-radius: 3px;
-}
-
 .Ajouter{
     display: flex;
     border-radius: 3px;
@@ -87,6 +27,7 @@ caption{
     left: 65%;
 }
 
+/** CSS pour formulaire d'ajout des infos de la métadonnée **/
 .fond_form {
     display: none;
     position: fixed; /* Positionné par rapport à la fenêtre */
@@ -99,27 +40,38 @@ caption{
     align-items: center;
 }
 
-#hide_form{
+#hide_form_add{
     display:none;
 }
 
-#hide_form_modif{
-    display:none;
-}
-
-#show_form{
-    display: flex;
-}
-.form_add_meta {
-    transform: scale(1.5);
+.form_meta {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     width: 400px;
-    margin-top: 13%;
+    margin-top: 7%;
     margin-left: 35%;
     position: relative;
+}
+
+/************************************************************/
+
+
+/* Style ajouté aux zones de saisie des formulaire */
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input:focus {
+    border: 3px solid #555;
 }
 
 /* Bouton pour fermer le modal */
@@ -129,6 +81,14 @@ caption{
     right: 10px;
     font-size: 20px;
     cursor: pointer;
+}
+
+.bouton{
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+    padding: 0.5%;
+    border-radius: 3px;
 }
 
 .ajout_meta{
@@ -157,3 +117,68 @@ caption{
     margin: 2.5px;
     border: 2px solid #C4C3C3;
 }
+
+thead{
+    text-align: left;
+}
+
+table{
+    border-collapse: collapse;
+    margin: auto;
+}
+
+table, td, th {
+    border: 1px solid;
+    border: none; /* Supprime les bordures */
+    border-bottom: 1px solid #C4C3C3; /* Ajoute uniquement des lignes horizontales */
+    padding: 8px; /* Optionnel, pour espacer le contenu */
+    padding: 0px 20px;
+}
+
+
+
+caption{
+    margin-bottom: 30px;
+}
+
+
+/** Boutons Editer et Supprimer **/
+.Actions{
+    text-align: center;
+}
+
+.Editer{
+    background-color: white;
+    color: black;
+}
+.Supprimer{
+    background-color: red;
+    color: white;
+}
+
+.Editer, .Supprimer{
+    
+    display: inline-block;
+    border-radius: 6px;
+    border-color: #C4C3C3;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    width: 100px;
+    cursor: pointer;
+    margin: 2.5px;
+    border: 2px solid #C4C3C3;
+}
+
+/*****************************************/
+
+/**Formulaire de modification de la métadonnée*/
+
+#hide_form_modif{
+    display:none;
+}
+
+
+
+
+

@@ -46,7 +46,7 @@ export class ChoixMaregrapheComponent {
   public async getData(){
     await this.apiChoixMaregraphe.getData().then((element: any) => {
       element.forEach((maregraphe: any) => {
-        this.donnees.push(new Maregraphe(maregraphe.id_tdb, maregraphe.libelle, element.latitude, maregraphe.longitude))
+        this.donnees.push(new Maregraphe(maregraphe.id_tdb, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude))
       })
     })
     this.isDataLoaded = true;
@@ -99,7 +99,7 @@ export class ChoixMaregrapheComponent {
     await this.apiChoixMaregraphe.sortData(col, this.sortData[col]).then((element: any) => {
       this.donnees = []
       element.forEach((maregraphe: any) => {
-        this.donnees.push(new Maregraphe(maregraphe.id_tdb, maregraphe.libelle, element.latitude, maregraphe.longitude))
+        this.donnees.push(new Maregraphe(maregraphe.id_tdb, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude))
       })
     })
     this.sortData[col] = !this.sortData[col];

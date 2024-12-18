@@ -15,6 +15,10 @@
     display:none;
 }
 
+.lien_site{
+    color: black;
+}
+
 .fond_form{
     display: none;
     position: fixed; /* Positionné par rapport à la fenêtre */
