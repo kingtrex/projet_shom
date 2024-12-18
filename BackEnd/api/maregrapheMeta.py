@@ -2,7 +2,7 @@ from databaseConnect import databaseConnect, check_error
 from psycopg2.extras import RealDictCursor
 from typing import Annotated
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from connexion.connexion import User, get_current_user
 
@@ -25,6 +25,28 @@ async def get_maregraphe_meta(id: int,
     finally:
         if 'db' in locals() and db:
             db.close()
+
+@router.get("/sort/{id}&{col}&{order}")
+async def sort_maregraphe_meta(id: int, col: str, order: bool, token: Annotated[User, Depends(get_current_user)]):
+    allowed_col = ["id_meta", "date_donnee"]
+    if col not in allowed_col:
+        raise HTTPException(status_code=500, detail="Nom de colonne invalide")
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        query = f"SELECT * FROM obsmar.maregraphe_meta WHERE id_maregraphe=%s ORDER BY {col} "
+        if order:
+            query += f"DESC"
+        data = cur.execute(query, (id,))
+        print(data)
+        return cur.fetchall()
+    except Exception as e:
+        print(e)
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
+
 
 @router.post("/addMeta/{id}&{meta}&{data}")
 async def add_meta(id: int, meta: str, data: str,
