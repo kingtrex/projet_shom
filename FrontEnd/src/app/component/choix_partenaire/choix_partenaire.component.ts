@@ -105,6 +105,8 @@ export class ChoixPartenaireComponent {
       })
       this.sortData[col] = !this.sortData[col];
       this.triangleData[col] = this.sortData[col] ? "▼" : "▲";
+    }).catch((error: any) => {
+      alert(error)
     })
   }
 }

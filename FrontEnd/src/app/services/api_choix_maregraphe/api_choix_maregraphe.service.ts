@@ -58,6 +58,18 @@ export class APIChoixMaregrapheService {
     }
   }
 
+  public async updateMaregraphe(idMaregraphe : number,
+    ville: string,
+    latitude: number,
+    longitude: number,
+  ){
+    try{
+      const param = "updateMaregraphe/" + idMaregraphe + "&" + ville + "&" + latitude + "&" + longitude
+      return await lastValueFrom(this.http.put(this.baseUrl + param, null))
+    }catch(error: any){
+      throw error.error.detail;
+    }
+  }
 /**
    Supprimer le type de métadonnée de la BDD
    @param id_maregraphe string : l'identifiant du type de la métadonnée

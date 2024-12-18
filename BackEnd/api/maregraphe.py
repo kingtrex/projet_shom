@@ -22,6 +22,24 @@ async def get_maregraphe(token: Annotated[User, Depends(get_current_user)]):
         if 'db' in locals() and db:
             db.close()
 
+@router.put("/updateMaregraphe/{id}&{ville}&{latitude}&{longitude}")
+async def update_maregraphe(id: int, ville: str, latitude: str, longitude: str,
+                            token: Annotated[User, Depends(get_current_user)]):
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"UPDATE obsmar.maregraphe \
+        SET libelle=%s, latitude=%s, longitude=%s \
+        WHERE id_tdb=%s", (ville, latitude, longitude, id))
+        db.commit()
+        return cur.lastrowid
+    except Exception as e:
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
+
+
 @router.get("/sort/{col}&{order}")
 async def sort_maregraphe(col: str, order: bool, token: Annotated[User, Depends(get_current_user)]):
     allowed_col = ["id_tdb", "libelle"]

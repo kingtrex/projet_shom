@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { APIChoixMaregrapheService } from '../../services/api_choix_maregraphe/api_choix_maregraphe.service';
 import { Data } from '@angular/router';
 import { Maregraphe } from '../../class/Maregraphe';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-choix-maregraphe',
@@ -15,7 +15,8 @@ export class ChoixMaregrapheComponent {
   public isDataLoaded : boolean = false;
   public donnees: Maregraphe[] = [];
 
-  public formAddMaregraphe: any;
+  public formAddMaregraphe: FormGroup;
+  public formModifMaregraphe: FormGroup;
 
   public sortData: {[key: string] : boolean} = {
     "id_tdb": true,
@@ -34,6 +35,12 @@ export class ChoixMaregrapheComponent {
       latitude: "",
       longitude: "",
     })
+    this.formModifMaregraphe = this.formBuilder.group({
+      id_maregraphe: "",
+      ville: "",
+      latitude: "",
+      longitude: "",
+    })
   }
 
   ngOnInit(): void {
@@ -46,7 +53,7 @@ export class ChoixMaregrapheComponent {
   public async getData(){
     await this.apiChoixMaregraphe.getData().then((element: any) => {
       element.forEach((maregraphe: any) => {
-        this.donnees.push(new Maregraphe(maregraphe.id_tdb, maregraphe.libelle, element.latitude, maregraphe.longitude))
+        this.donnees.push(new Maregraphe(maregraphe.id_tdb, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude))
       })
     })
     this.isDataLoaded = true;
@@ -82,11 +89,30 @@ export class ChoixMaregrapheComponent {
   /**
    * @brief Afficher le formulaire de modification d'un marégraphe
    */
-  public async show_modif_maregraphe(){
+  public async show_modif_maregraphe(idMaregraphe: number, 
+    ville: string, 
+    latitude: number, 
+    longitude: number
+  ){
     let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'block';
+    this.formModifMaregraphe.setValue({
+      id_maregraphe: idMaregraphe,
+      ville: ville,
+      latitude: latitude,
+      longitude: longitude,
+    })
   }
 
+  public async update_maregraphe(){
+    
+    const value = this.formModifMaregraphe.value;
+    await this.apiChoixMaregraphe.updateMaregraphe(value.id_maregraphe, value.ville, value.latitude, value.longitude).then(() => {
+      location.reload()
+    }).catch((error: any) => {
+      alert(error)
+    })
+  }
   /**
    * @brief fermer le formulaire de modification d'un marégraphe
    */
@@ -99,10 +125,12 @@ export class ChoixMaregrapheComponent {
     await this.apiChoixMaregraphe.sortData(col, this.sortData[col]).then((element: any) => {
       this.donnees = []
       element.forEach((maregraphe: any) => {
-        this.donnees.push(new Maregraphe(maregraphe.id_tdb, maregraphe.libelle, element.latitude, maregraphe.longitude))
+        this.donnees.push(new Maregraphe(maregraphe.id_tdb, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude))
       })
+      this.sortData[col] = !this.sortData[col];
+      this.triangleData[col] = this.sortData[col] ? "▼" : "▲";
+    }).catch((error: any) => {
+      alert(error)
     })
-    this.sortData[col] = !this.sortData[col];
-    this.triangleData[col] = this.sortData[col] ? "▼" : "▲";
   }
 }
