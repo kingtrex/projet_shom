@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiMaregraphemeta } from '../../services/api_maregraphemeta/api_maregraphemeta.service';
 import { ActivatedRoute, Data } from '@angular/router';
-import { MaregrapheMeta } from '../../class/MaregrapheMeta';
+import { MaregrapheMeta } from 'src/app/class/Maregraphemeta';
 import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-tab-maregraphemeta',
@@ -10,12 +10,22 @@ import { FormBuilder } from '@angular/forms';
 })
 
 export class TabMaregraphemetaComponent implements OnInit {
-  errorMessage: string = '';
-  isDataLoaded : boolean = false;
-  donnees: any;
-  id_maregraphe: number = +this.route.snapshot.paramMap.get('id')!;
-  ville_maregraphe: string = this.route.snapshot.paramMap.get('ville')!;
+
+  public isDataLoaded : boolean = false;
+  public donnees: any;
+  public id_maregraphe: number = +this.route.snapshot.paramMap.get('id')!;
+  public ville_maregraphe: string = this.route.snapshot.paramMap.get('ville')!;
   public formAddMeta: any;
+
+  public sortData: {[key: string] : boolean} = {
+    "id_meta" : true,
+    "date_donnee" : false,
+  };
+
+  public triangleData: {[key: string] : string} = {
+    "id_meta" : "▼",
+    "date_donnee" : "▼"
+  } 
   constructor(private apiMaregrapheMeta: ApiMaregraphemeta,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
@@ -77,12 +87,33 @@ export class TabMaregraphemetaComponent implements OnInit {
     if (form) form.display = 'none';
   }
 
+  /**
+   * Supprimer une métadonnée du marégraphe
+   * @param idMare number : identifiant du marégraphe
+   * @param idMeta string : identifiant de la métadonné
+   * @returns 
+   */
   public async deleteMeta(idMare: number, idMeta: string){
     if(!confirm("Voulez-vous vraiment supprimer cette métadonnée?")) return
     await this.apiMaregrapheMeta.deleteMeta(idMare, idMeta).then(() => {
       location.reload()
     }).catch((error: any) => {
       alert(error)
+    })
+  }
+
+  /**
+   * Trier les colonne du tableau
+   * @param col string : nom de la colonne
+   */
+  public async sort(col: string){
+    await this.apiMaregrapheMeta.sortData(this.id_maregraphe, col, this.sortData[col]).then((element: any) => {
+      this.donnees = []
+      element.forEach((meta: any) => {
+        this.donnees.push(new MaregrapheMeta(meta.id_maregraphe, meta.id_meta, meta.donnee, meta.date_donnee))
+      })
+      this.sortData[col] = !this.sortData[col];
+      this.triangleData[col] = this.sortData[col] ? "▼" : "▲";
     })
   }
 }

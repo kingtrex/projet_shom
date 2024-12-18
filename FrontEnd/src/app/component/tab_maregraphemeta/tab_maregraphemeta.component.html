@@ -45,9 +45,9 @@
       <thead>
         <tr>
           <!--<th>ID Marégraphe</th>-->
-          <th>ID Métadonnées</th>
+          <th (click)="sort('id_meta')">ID Métadonnées {{triangleData['id_meta']}}</th>
           <th>Données</th>
-          <th>Date de création/update données</th>
+          <th (click)="sort('date_donnee')">Date de création/update données {{triangleData['date_donnee']}}</th>
           <th class="Actions">Actions</th>
         </tr>
       </thead>

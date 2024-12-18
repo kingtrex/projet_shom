@@ -26,7 +26,7 @@ export class APIChoixMaregrapheService {
   /**
    * Appeler l'API pour réorganiser les données 
    * @param col string : le nom de la colonne qui sera utilisée
-   * @param order bool : si ce sera trié par ordre croissant ou décroissant
+   * @param order bool : true => ordre décroissant, false =>  ordre croissant
    * @returns 
    */
   public async sortData(col: string, order: boolean): Promise<Object>{

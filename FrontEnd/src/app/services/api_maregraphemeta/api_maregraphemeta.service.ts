@@ -54,4 +54,20 @@ export class ApiMaregraphemeta {
       throw error.error.detail;
     }
   }
+
+  /**
+   * Appeler l'API pour réobtenir les données avec un tri
+   * @param id number: id du marégraphe
+   * @param col string : id de la métadonnée
+   * @param order bool : true => ordre décroissant, false =>  ordre croissant
+   * @returns 
+   */
+  public async sortData(id: number, col: string, order: boolean){
+    try{
+      const param = "sort/" + id + "&" + col + "&" + order
+      return await lastValueFrom(this.http.get(this.baseUrl + param))
+    }catch(error: any){
+      throw error.error.detail;
+    }
+  }
 }

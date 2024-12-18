@@ -74,6 +74,12 @@ export class ApiMeta {
     }
   }
 
+  /**
+   * Trier les colonnes
+   * @param col string : nom de la colonne
+   * @param order bool : true => ordre décroissant, false =>  ordre croissant
+   * @returns 
+   */
   public async sortData(col: string, order: boolean){
     try{
       const param = "sort/" + col + "&" + order
