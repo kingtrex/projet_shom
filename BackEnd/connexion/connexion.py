@@ -148,14 +148,6 @@ async def add_user(user: str, password: str, full_name: str, mail: str,
     with open("connexion/exemple.ini", "w") as f:
         config.write(f)
 
-@router.get("/items/")
-async def read_items(token: Annotated[str, Depends(oauth2_scheme)]):
-    return {"token": token}
-
-@router.get("/users/me")
-async def read_users_me(current_user: Annotated[User, Depends(get_current_user)]):
-    return current_user
-
 @router.post("/debug")
 async def login_for_debug(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],

@@ -61,8 +61,10 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
       element.forEach((maregraphe: any) => {
         this.donnees.push(new Maregraphe(maregraphe.id_maregraphe, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude))
       })
+      this.sortData[col] = !this.sortData[col];
+      this.triangleData[col] = this.sortData[col] ? "▼" : "▲";
+    }).catch((error: any) => {
+      alert(error)
     })
-    this.sortData[col] = !this.sortData[col];
-    this.triangleData[col] = this.sortData[col] ? "▼" : "▲";
   }
 }

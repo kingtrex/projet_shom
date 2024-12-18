@@ -74,7 +74,6 @@ async def sort_partenaireMaregraphe(id: int, col: str, order: bool,
                     ORDER BY {col} "
         if order:
             query += f"DESC"
-        print(query)
         cur.execute(query, (id,))
         return cur.fetchall()
     except Exception as e:
