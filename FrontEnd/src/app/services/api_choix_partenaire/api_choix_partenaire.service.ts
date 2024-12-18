@@ -30,8 +30,23 @@ export class ApiChoixPartenaireService {
     url: number
   ): Promise<any>{
     try{
-      let param = "addPartenaire/" + id + "&" + nom + "&" + logo + "&" + url;
+      const param = "addPartenaire/" + id + "&" + nom + "&" + logo + "&" + url;
       return await lastValueFrom(this.http.post(this.baseUrl + param, null));
+    }catch(error: any){
+      throw error.error.detail;
+    }
+  }
+
+  /**
+   * Appeler l'API pour récupérer les données avec un tri
+   * @param col string : nom de la colonne
+   * @param order bool : true => ordre décroissant, false =>  ordre croissant
+   * @returns 
+   */
+  public async sortData(col: string, order : boolean): Promise<any>{
+    try{
+      const param = "sort/" + col + "&" + order
+      return await lastValueFrom(this.http.get(this.baseUrl + param))
     }catch(error: any){
       throw error.error.detail;
     }

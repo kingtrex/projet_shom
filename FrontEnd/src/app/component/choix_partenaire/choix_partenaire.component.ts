@@ -17,6 +17,15 @@ export class ChoixPartenaireComponent {
 
   public formAddPartenaire: any
 
+  public sortData: {[key: string] : boolean} = {
+    "id": true,
+    "nom" : false,
+  };
+  public triangleData: {[key: string] : string} = {
+    "id": "▼",
+    "nom" : "▼",
+  }
+
   constructor(private apiChoixPartenaire: ApiChoixPartenaireService,
     private formBuilder: FormBuilder,
   ) {
@@ -88,5 +97,14 @@ export class ChoixPartenaireComponent {
     if (form) form.display = 'none';
   }
 
-
+  public async sort(col: string){
+    await this.apiChoixPartenaire.sortData(col, this.sortData[col]).then((element: any) => {
+      this.donnees = []
+      element.forEach((partenaire: any) => {
+        this.donnees.push(new Partenaire(partenaire.id, partenaire.nom, partenaire.logo, partenaire.url))
+      })
+      this.sortData[col] = !this.sortData[col];
+      this.triangleData[col] = this.sortData[col] ? "▼" : "▲";
+    })
+  }
 }
