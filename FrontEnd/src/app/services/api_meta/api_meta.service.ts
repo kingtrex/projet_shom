@@ -73,5 +73,14 @@ export class ApiMeta {
       throw error.error.detail;
     }
   }
+
+  public async sortData(col: string, order: boolean){
+    try{
+      const param = "sort/" + col + "&" + order
+      return await lastValueFrom(this.http.get(this.baseUrl + param))
+    }catch(error: any){
+      throw error.error.detail;
+    }
+  }
 }
 

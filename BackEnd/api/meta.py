@@ -1,7 +1,7 @@
 from psycopg2.extras import RealDictCursor
 from databaseConnect import databaseConnect, check_error
 from typing import Annotated
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from connexion.connexion import User, get_current_user
 router = APIRouter()
@@ -19,6 +19,28 @@ async def get_meta_id(token: Annotated[User, Depends(get_current_user)]):
     finally:
         if 'db' in locals() and db:
             db.close()
+
+@router.get("/sort/{col}&{order}")
+async def sort_meta(col: str, order: bool, token: Annotated[User, Depends(get_current_user)]):
+    allow_col = ["id", "ordre"]
+    if col not in allow_col:
+        raise HTTPException(status_code=500, detail="Nom de colonne invalide")
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        query = f"SELECT * FROM obsmar.meta ORDER BY {col} "
+        if order:
+            query += "DESC"
+        cur.execute(query)
+        return cur.fetchall()
+    except Exception as e:
+        print(e)
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
+
+
 
 @router.post("/addMeta/{id}&{desc}&{ordre}")
 async def add_meta(id: str, desc: str, ordre: int,

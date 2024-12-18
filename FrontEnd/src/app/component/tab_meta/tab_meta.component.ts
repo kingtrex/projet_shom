@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiMeta } from '../../services/api_meta/api_meta.service';
-import { Data } from '@angular/router';
 import { Meta } from '../../class/Meta';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -12,12 +11,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 
 export class TabMetaComponent implements OnInit {
-  errorMessage: string = '';
-  isDataLoaded : boolean = false;
-  donnees: any;
+  public isDataLoaded : boolean = false;
+  public donnees: Meta[] = [];
 
   public formAddMeta: FormGroup;
   public formModifMeta: FormGroup;
+
+  public sortData: {[key: string] : boolean} = {
+    "id" : true,
+  }
+
+  public triangleData: {[key: string] : string} = {
+    "id" : "▼",
+  }
 
   constructor(private apiMeta: ApiMeta,
     private formBuilder: FormBuilder,
@@ -42,12 +48,13 @@ export class TabMetaComponent implements OnInit {
    * @brief Obtenir les différents types de métadonnées éxistants dans la BDD
    */
   public async getData(){
-    const data : any = await this.apiMeta.getData();
-    const meta: Meta [] = [];
-    data.forEach((element : any) => {
-      meta.push(new Meta(element.id, element.description, element.ordre));
-    })
-    this.donnees = meta;
+    await this.apiMeta.getData().then((element: any) => {
+      element.forEach((meta: any) => {
+        this.donnees.push(new Meta(meta.id, meta.description, meta.ordre));
+      })
+    }).catch((error: any) => {
+      alert(error)
+    });
     this.isDataLoaded = true;
   }
 
@@ -129,5 +136,16 @@ export class TabMetaComponent implements OnInit {
   public async hideForm(){
     let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'none';
+  }
+
+  public async sort(col: string){
+    await this.apiMeta.sortData(col, this.sortData[col]).then((element: any) => {
+      this.donnees = []
+      element.forEach((meta: any) => {
+        this.donnees.push(new Meta(meta.id, meta.description, meta.ordre))
+      })
+      this.sortData[col] = !this.sortData[col];
+      this.triangleData[col] = this.sortData[col] ? "▼" : "▲";
+    })
   }
 }
