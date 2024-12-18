@@ -22,4 +22,13 @@ export class ApiPartenaireMaregrapheService {
       throw error.error.detail;
     }
   }
+
+  public async sortData(id_partenaire: number, col: string, ordre: boolean): Promise<Object>{
+    try{
+      const param = "partenaireMaregraphe/sort/" + id_partenaire + "&" + col + "&" + ordre
+      return await lastValueFrom(this.http.get(this.baseUrl + param))
+    }catch(error: any){
+      throw error.error.detail;
+    }
+  }
 }

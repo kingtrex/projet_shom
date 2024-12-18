@@ -80,7 +80,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
 async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
+        detail="Le token a expiré, veuillez-vous reconnecter",
         headers={"WWW-Authenticate": "Bearer"},
     )
     file_conf = configparser.ConfigParser()

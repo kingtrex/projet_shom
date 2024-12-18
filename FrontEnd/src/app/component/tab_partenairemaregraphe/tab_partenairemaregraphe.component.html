@@ -41,8 +41,8 @@
     <table>    
       <thead>
         <tr>
-            <th>Identifiant</th>
-            <th>Ville</th>   
+            <th (click)="sort('id_maregraphe')">Identifiant {{triangleData["id_maregraphe"]}}</th>
+            <th (click)="sort('libelle')">Ville {{triangleData["libelle"]}}</th>   
             <th>Latitude</th>
             <th>Longitude</th>
         </tr>
