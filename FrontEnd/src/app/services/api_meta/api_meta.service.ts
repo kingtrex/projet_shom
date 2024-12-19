@@ -88,5 +88,14 @@ export class ApiMeta {
       throw error.error.detail;
     }
   }
+
+  public async getMetaForm(id: number){
+    try{
+      const param = "getMetaForm/" + id
+      return await lastValueFrom(this.http.get(this.baseUrl + param))
+    }catch(error: any){
+      throw error.error.detail;
+    }
+  }
 }
 

@@ -20,6 +20,23 @@ async def get_meta_id(token: Annotated[User, Depends(get_current_user)]):
         if 'db' in locals() and db:
             db.close()
 
+@router.get("/getMetaForm/{id}")
+async def get_meta_form(id: int,token: Annotated[User, Depends(get_current_user)]):
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"SELECT me.id FROM obsmar.meta me \
+                    WHERE NOT EXISTS(\
+                        SELECT * FROM obsmar.maregraphe_meta ma \
+                        WHERE me.id=ma.id_meta AND ma.id_maregraphe=%s\
+                    )", (id,))
+        return cur.fetchall()
+    except Exception as e:
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
+
 @router.get("/sort/{col}&{order}")
 async def sort_meta(col: str, order: bool, token: Annotated[User, Depends(get_current_user)]):
     allow_col = ["id", "ordre"]
