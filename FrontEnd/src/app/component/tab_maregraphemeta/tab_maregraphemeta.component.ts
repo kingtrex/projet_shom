@@ -62,7 +62,7 @@ export class TabMaregraphemetaComponent implements OnInit {
   }
 
   public async getMeta(){
-    await this.apiMeta.getData().then((data: any) => {
+    await this.apiMeta.getMetaForm(this.id_maregraphe).then((data: any) => {
       data.forEach((element : any) => {
         this.metadonnees.push(new Meta(element.id, element.description, element.ordre));
       })

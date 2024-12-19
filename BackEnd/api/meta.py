@@ -29,7 +29,7 @@ async def get_meta_form(id: int,token: Annotated[User, Depends(get_current_user)
                     WHERE NOT EXISTS(\
                         SELECT * FROM obsmar.maregraphe_meta ma \
                         WHERE me.id=ma.id_meta AND ma.id_maregraphe=%s\
-                    )", (id,))
+                    ) ORDER BY me.id", (id,))
         return cur.fetchall()
     except Exception as e:
         check_error(e)
