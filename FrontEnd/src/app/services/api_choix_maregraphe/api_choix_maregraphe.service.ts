@@ -70,12 +70,12 @@ export class APIChoixMaregrapheService {
       throw error.error.detail;
     }
   }
-/**
-   Supprimer le type de métadonnée de la BDD
-   @param id_maregraphe string : l'identifiant du type de la métadonnée
+  /**
+   Supprimer le marégraphe de la BDD
+   @param id_maregraphe string : l'identifiant du marégraphe
    @returns le status de la requête
-  
-  public async deleteMaregraphe(id_maregraphe: string): Promise<any>{
+  */
+  public async deleteMaregraphe(id_maregraphe: number): Promise<any>{
     try{
       let param = "deleteMaregraphe/" + id_maregraphe;
       return await lastValueFrom(this.http.delete(this.baseUrl + param));
@@ -83,5 +83,4 @@ export class APIChoixMaregrapheService {
       throw error.error.detail;
     }
   }
-**/
 }

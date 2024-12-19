@@ -75,13 +75,39 @@ export class ChoixMaregrapheComponent {
     const value = this.formAddMaregraphe.value
     await this.apiChoixMaregraphe.addMaregraphe(value.id_maregraphe, value.ville, value.latitude, value.longitude).then(() => {
       location.reload()
+    }).catch((error: any) => {
+      alert(error);
     })
+  }
+
+  public async update_maregraphe(){
+    
+    const value = this.formModifMaregraphe.value;
+    await this.apiChoixMaregraphe.updateMaregraphe(value.id_maregraphe, value.ville, value.latitude, value.longitude).then(() => {
+      location.reload()
+    }).catch((error: any) => {
+      alert(error)
+    })
+  }
+
+  /**
+   * Supprimer le type du marégraphe dans la base de donnée
+   * @param meta string : Id du type du marégraphe
+  */
+  public async deleteMaregraphe(maregraphe: number){
+    if(confirm("Voulez-vous supprimer ce marégraphe?")){
+      await this.apiChoixMaregraphe.deleteMaregraphe(maregraphe).then(() => {
+        location.reload();
+      }).catch((error: any) => {
+        alert(error);
+      })      
+    }
   }
 
   /**
    * @brief fermer le formulaire d'ajout d'un marégraphe
    */
-  public async annuler_add(){
+  public async annuler(){
     let form = document.getElementById("hide_form_add")?.style;
     if (form) form.display = 'none';
   }
@@ -104,15 +130,7 @@ export class ChoixMaregrapheComponent {
     })
   }
 
-  public async update_maregraphe(){
-    
-    const value = this.formModifMaregraphe.value;
-    await this.apiChoixMaregraphe.updateMaregraphe(value.id_maregraphe, value.ville, value.latitude, value.longitude).then(() => {
-      location.reload()
-    }).catch((error: any) => {
-      alert(error)
-    })
-  }
+  
   /**
    * @brief fermer le formulaire de modification d'un marégraphe
    */

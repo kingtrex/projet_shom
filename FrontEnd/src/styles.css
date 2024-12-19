@@ -1,9 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+/** Lignesgrise avec le nom de la page **/
+.rectangle{
+    background-color: #E2DDDD;
+    padding-left: 1%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    border-radius: 3px;
+    font-size: 25px;
+}
+/**************************************/
+
+/** Gère l'affichage des infos à l'écran si chargées ou non **/
+.affiche{
+    display: block;
+}
+
+.invisible{
+    display:none;
+}
+/************************************/
+
+/** Informations du partenaire/marégraphe choisi d'afficher **/
+.infos_page{
+    text-align: center;
+    font-size: 25px;
+}
+/***************************************/
+
+/** Style des boutons Ajouter**/
+.Ajouter{
+    display: flex;
+    border-radius: 3px;
+    border: 2px solid #04acc6;
+    background-color: #09c5e1;
+    padding: 10px;
+    color: white;
+    gap: 10px;
+}
+/*************************************/
+
+/** Colorie les lignes paires e gris clair et impaires en blanc **/
 .lignes_a_colorer:nth-child(odd) {
     background-color: #F0F0F0; /* Gris clair */
 }
 
-  /* Colorie les lignes impaires en blanc */
 .lignes_a_colorer:nth-child(even) {
     background-color: white; /* Blanc */
 }
@@ -11,6 +50,60 @@
 .lignes_a_colorer:hover{
     background-color: lightgray;
 }
+/***********************************/
+
+/** CSS pour formulaire d'ajout des infos du marégraphe **/
+.fond_form{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+/***************************************/
+/** Cacher les formulaires d'ajout et de modif**/
+#hide_form_add{
+    display:none;
+}
+
+#hide_form_modif{
+    display:none;
+}
+/*****************************************/
+
+/** Encart pour le contenu du formulaire d'ajout/modification **/
+.form{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin-left: 35%;
+    position: relative;
+}
+/*******************************************/
+
+
+.acceder, .editer{
+    background-color: white;
+    color: black;
+    display: inline-block;
+    border-radius: 6px;
+    border-color: #C4C3C3;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    width: 100px;
+    cursor: pointer;
+    margin: 2.5px;
+    border: 2px solid #C4C3C3;
+    text-decoration: none;
+}
+
 
 .bouton_retour{
     background-color: white;
