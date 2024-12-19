@@ -75,3 +75,19 @@ async def add_maregraphe(id: int, libelle: str, lat: float, long: float,
     finally:
         if 'db' in locals() and db:
             db.close()
+@router.delete("/deleteMaregraphe/{id}")
+async def delete_maregraphe(id: int, token: Annotated[User, Depends(get_current_user)]):
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        #supprimer les relations
+        cur.execute(f"DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe=%s",(id,))
+        cur.execute(f"DELETE FROM obsmar.partenaire_maregraphe WHERE id_maregraphe=%s", (id,))
+        cur.execute(f"DELETE FROM obsmar.maregraphe WHERE id_tdb=%s", (id,))
+        db.commit()
+        return cur.lastrowid
+    except Exception as e:
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
