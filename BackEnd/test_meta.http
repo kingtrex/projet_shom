@@ -1,5 +1,39 @@
-### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=PyCharm
+POST http://127.0.0.1:8000/connexion/token
+Content-Type: application/json
+
+{
+  "username":"johndoe",
+  "password":"secret"
+}
+> {% client.global.set("token", response.body.access_token) %}
+
 
 ###
+
+GET http://127.0.0.1:8000/meta/getMetaId
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/meta/sort/id&true
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/meta/addMeta/aaa&aaa&3
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+PUT http://127.0.0.1:8000/meta/updateMeta/aaa&bbb&50
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+DELETE http://127.0.0.1:8000/meta/deleteMeta/aaa
+Authorization: Bearer {{token}}
+Accept: application/json

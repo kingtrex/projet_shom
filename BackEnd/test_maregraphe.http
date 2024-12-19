@@ -1,5 +1,36 @@
-### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=PyCharm
+###
+
+POST http://127.0.0.1:8000/connexion/token
+Content-Type: application/json
+
+{
+  "username":"johndoe",
+  "password":"secret"
+}
+> {% client.global.set("token", response.body.access_token) %}
+
+###
+
+GET http://127.0.0.1:8000/maregraphe/getMaregraphe
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/maregraphe/sort/libelle&true
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/maregraphe/addMaregraphe/-1&Coincoin&0&0
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+PUT http://127.0.0.1:8000/maregraphe/updateMaregraphe/-1&nioc&5&5
+Authorization: Bearer {{token}}
+Accept: application/json
 
 ###
