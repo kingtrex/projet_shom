@@ -29,7 +29,9 @@
         <h2>Ajouter une métadonnée</h2>
         <form [formGroup]="formAddMeta">
           <label for="id_meta">Identifiant de la métadonnée : </label>
-            <input type="text" id="id_meta" name="id_meta" formControlName="idMeta"><br><br>
+            <select id="id_meta" formControlName="idMeta">
+              <option *ngFor="let i of metadonnees">{{i.id}}</option>
+            </select>
             <label for="description">Description de la métadonnée : </label>
             <input type="description" id="description" name="description" formControlName="data"><br><br>
         </form>
@@ -44,7 +46,6 @@
     <table>    
       <thead>
         <tr>
-          <!--<th>ID Marégraphe</th>-->
           <th (click)="sort('id_meta')">ID Métadonnées {{triangleData['id_meta']}}</th>
           <th>Données</th>
           <th (click)="sort('date_donnee')">Date de création/update données {{triangleData['date_donnee']}}</th>
@@ -53,7 +54,6 @@
       </thead>
       <tbody>
         <tr class="lignes_a_colorer" *ngFor="let i of donnees">
-          <!--<td>{{i.id_maregraphe}}</td>-->
           <td>{{i.id_meta}}</td>
           <td>{{i.donnee}}</td>
           <td>{{i.date_donnee}}</td>

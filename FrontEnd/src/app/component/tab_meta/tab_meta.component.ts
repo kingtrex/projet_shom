@@ -45,7 +45,7 @@ export class TabMetaComponent implements OnInit {
   }
 
   /**
-   * @brief Obtenir les différents types de métadonnées éxistants dans la BDD
+   * @brief Obtenir les différents types de métadonnées existants dans la BDD
    */
   public async getData(){
     await this.apiMeta.getData().then((element: any) => {
@@ -149,3 +149,4 @@ export class TabMetaComponent implements OnInit {
     })
   }
 }
+

@@ -12,7 +12,7 @@
   <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_maregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
 
   <div class="fond_form" id="hide_form_add">
-    <div class="form_add_meta">
+    <div class="form_add_mare">
       <span class="close-button" (click)="annuler_add()">&times;</span>
       <h2>Ajouter un marégraphe</h2>
       <form [formGroup]="formAddMaregraphe">
@@ -29,8 +29,8 @@
         <input type="number" id="longitude" formControlName="longitude"><br><br>
       </form>
       <div class="bouton">
-        <button class="ajout_meta"  type="submit" (click)="addMaregraphe()">Créer</button>
-        <button class="supp_meta" id="supp_meta" type="delete"  (click)="annuler_add()">Annuler</button>
+        <button class="ajout_mare"  type="submit" (click)="addMaregraphe()">Créer</button>
+        <button class="supp_mare" id="supp_mare" type="delete"  (click)="annuler_add()">Annuler</button>
       </div>
     </div>
   </div>
@@ -62,36 +62,37 @@
           </div>
 
           
-          <div class="fond_form" id="hide_form_modif">
-            
-            <div class="form_modif_meta">
-              
-              <span class="close-button" (click)="annuler_modif()">&times;</span>
-              <h2>Modifier les informations du marégraphe</h2>
-        
-              <form [formGroup]="formModifMaregraphe">    
-                <label for="id_maregraphe">Identifiant du marégraphe : </label>
-                <input type="number" id="id_maregraphe" readonly="readonly" formControlName="id_maregraphe"><br><br>
-
-                <label for="ville">Ville : </label>
-                <input type="text" id="ville" formControlName="ville"><br><br>
-      
-                <label for="latitude">Latitude : </label>
-                <input type="number" id="latitude" formControlName="latitude"><br><br>
-      
-                <label for="longitude">Longitude : </label>
-                <input type="number" id="longitude" formControlName="longitude"><br><br>
-              </form>
-              <div class="bouton">
-                <button class="ajout_meta"  type="submit" (click)="update_maregraphe()">Mettre à jour</button>
-                <button class="supp_meta" id="supp_meta" type="delete"  (click)="annuler_modif()">Annuler</button>
-              </div>
-<!---------------------------------------------------------------------------->     
-            </div>              
-          </div>
+          
           
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+<div class="fond_form" id="hide_form_modif">
+            
+  <div class="form_modif_mare">
+    
+    <span class="close-button" (click)="annuler_modif()">&times;</span>
+    <h2>Modifier les informations du marégraphe</h2>
+
+    <form [formGroup]="formModifMaregraphe">    
+      <label for="id_maregraphe">Identifiant du marégraphe : </label>
+      <input type="number" id="id_maregraphe" readonly="readonly" formControlName="id_maregraphe"><br><br>
+
+      <label for="ville">Ville : </label>
+      <input type="text" id="ville" formControlName="ville"><br><br>
+
+      <label for="latitude">Latitude : </label>
+      <input type="number" id="latitude" formControlName="latitude"><br><br>
+
+      <label for="longitude">Longitude : </label>
+      <input type="number" id="longitude" formControlName="longitude"><br><br>
+    </form>
+    <div class="bouton">
+      <button class="ajout_mare"  type="submit" (click)="update_maregraphe()">Mettre à jour</button>
+      <button class="supp_mare" id="supp_mare" type="delete"  (click)="annuler_modif()">Annuler</button>
+    </div>
+<!---------------------------------------------------------------------------->     
+  </div>              
 </div>

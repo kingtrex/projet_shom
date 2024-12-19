@@ -45,7 +45,7 @@
     display:none;
 }
 
-.form_add_meta {
+.form_add_mare {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -75,13 +75,13 @@
     border-radius: 3px;
 }
 
-.ajout_meta{
+.ajout_mare{
     background-color: white;
     color: black;
 }
 
 
-.supp_meta{
+.supp_mare{
     display: flex;
     background-color: red;
     color: white;
@@ -91,7 +91,7 @@
 
   
 
-.ajout_meta, .supp_meta{
+.ajout_mare, .supp_mare{
     border-radius: 6px;
     text-align: center;
     font-size: 14px;
@@ -169,7 +169,7 @@ table, td, th {
     display:none;
 }
 
-.form_modif_meta {
+.form_modif_mare {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
