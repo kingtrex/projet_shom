@@ -14,24 +14,24 @@
       <p class="infos_page">Partenaire : {{partenaire}}</p>
       <div class="button_header">
         <a href="tabChoixPartenaire"><button class="bouton_retour">Retour</button></a>
-        <button class="Ajouter" id="Ajouter"  type="button" > <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
+        <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_maregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
       </div>
 
-  <!--
-    <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_meta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
 
     <div class="fond_form" id="hide_form">
       <div class="form_add_meta">
         <span class="close-button" (click)="annuler()">&times;</span>
         <h2>Ajouter une métadonnée</h2>
-        <form [formGroup]="formAddMeta">
-          <label for="id_meta">Identifiant de la métadonnée : </label>
-            <input type="text" id="id_meta" name="id_meta" formControlName="idMeta"><br><br>
-            <label for="description">Description de la métadonnée : </label>
-            <input type="description" id="description" name="description" formControlName="data"><br><br>
+        <form [formGroup]="formAddMaregraphe">
+          <label for="maregraphe">Identifiant de la métadonnée : </label>
+          <select formControlName="maregraphe">
+            <option formGroupName="maregraphe" *ngFor="let i of listMaregraphe">{{i.libelle}}</option>
+          </select><br><br>
+          <label for="ordre">Ordre : </label>
+          <input id="ordre" type="number" formControlName="ordre"><br><br>
         </form>
         <div class="bouton">
-          <button class="ajout_meta"  type="submit" (click)="addMeta()">Créer</button>
+          <button class="ajout_meta"  type="submit" (click)="add_maregraphe()">Créer</button>
           <button class="supp_meta" id="supp_meta" type="delete"  (click)="annuler()">Annuler</button>
         </div>
       </div>

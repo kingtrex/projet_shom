@@ -22,6 +22,11 @@ Authorization: Bearer {{token}}
 Accept: application/json
 
 ###
+GET http://127.0.0.1:8000/maregraphe/getMaregrapheForm/50
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
 
 POST http://127.0.0.1:8000/maregraphe/addMaregraphe/-1&Coincoin&0&0
 Authorization: Bearer {{token}}

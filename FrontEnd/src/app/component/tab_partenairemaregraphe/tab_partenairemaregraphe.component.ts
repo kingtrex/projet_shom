@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiPartenaireMaregrapheService } from '../../services/api_partenaire_maregraphe/api_partenaire_maregraphe.service';
+import { APIChoixMaregrapheService } from '../../services/api_choix_maregraphe/api_choix_maregraphe.service';
 import { ActivatedRoute, Data } from '@angular/router';
 import { Maregraphe } from '../../class/Maregraphe';
-import { FormBuilder } from '@angular/forms';
+import { Form, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-tab-partenairemaregraphe',
@@ -15,7 +16,9 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   public donnees: Maregraphe[] = [];
   public id: number = +this.route.snapshot.paramMap.get('id')!;
   public partenaire: string = this.route.snapshot.paramMap.get('partenaire')!;
-  public formAddMaregraphe: any;
+  public formAddMaregraphe: FormGroup;
+  public dictMaregraphe: {[key: string]: number} = {};
+  public listMaregraphe: Maregraphe[] = [];
 
   public sortData: {[key: string] : boolean} = {
     "id_maregraphe": true,
@@ -27,17 +30,19 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   }
 
   constructor(private ApiPartenaireMaregrapheService: ApiPartenaireMaregrapheService,
+    private ApiMaregrapheService: APIChoixMaregrapheService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
   ) {
     this.formAddMaregraphe = this.formBuilder.group({
-      idMaregraphe: "",
-      data: "",
+      maregraphe : "",
+      ordre : "",
     })
   }
 
   ngOnInit(): void {
     this.getData();
+    this.getPotentialMaregraphe();
   }
 
   /**
@@ -55,6 +60,24 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
 
   }
 
+  /**
+   * Obtenir les marégraphe qui ne sont pas assigné au partenaire
+   */
+  public async getPotentialMaregraphe(){
+    await this.ApiMaregrapheService.getMaregrapheForm(this.id).then((element: any) => {
+      element.forEach((maregraphe: any) => {
+        this.listMaregraphe.push(new Maregraphe(maregraphe.id_maregraphe, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude))
+        this.dictMaregraphe[maregraphe.libelle] = maregraphe.id_tdb;
+      })
+    }).catch((error: any) => {
+      alert(error)
+    })
+  }
+
+  /**
+   * Trier le tableau de données en finction de la colonne
+   * @param col string : colonne à trier
+   */
   public async sort(col: string){
     await this.ApiPartenaireMaregrapheService.sortData(this.id, col, this.sortData[col]).then((element: any) => {
       this.donnees = []
@@ -66,5 +89,21 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
     }).catch((error: any) => {
       alert(error)
     })
+  }
+
+  public async show_add_maregraphe(){
+    document.getElementById("hide_form")!.style.display = "block";
+  }
+
+  public async add_maregraphe(){
+    const value = this.formAddMaregraphe.value;
+    await this.ApiPartenaireMaregrapheService.addMaregraphe(this.id, this.dictMaregraphe[value.maregraphe], value.ordre).then((element: any) => {
+      location.reload();
+    }).catch((error: any) => {
+      alert(error)
+    })
+  }
+  public async annuler(){
+    document.getElementById("hide_form")!.style.display = "none";
   }
 }

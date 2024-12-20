@@ -31,4 +31,13 @@ export class ApiPartenaireMaregrapheService {
       throw error.error.detail;
     }
   }
+
+  public async addMaregraphe(id_partenaire: number, id_maregraphe: number, ordre: number): Promise<any>{
+    try{
+      let param = "addMaregraphePartenaire/" + id_partenaire + "&" + id_maregraphe + "&" + ordre;
+      return await lastValueFrom(this.http.post(this.baseUrl + param, null));
+    }catch(error: any){
+      throw error.error.detail;
+    }
+  }
 }
