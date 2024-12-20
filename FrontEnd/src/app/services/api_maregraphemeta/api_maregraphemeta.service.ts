@@ -41,6 +41,24 @@ export class ApiMaregraphemeta {
   }
 
   /**
+   * Modifier les informations d'une métadonnée de marégraphe
+   * @param idMeta string : id de la métadonnée
+   * @param description string : description de la métadonnée
+   * @returns état de la requête
+   */
+  public async updateMetaMare(idMaregraphe: number,
+    idMeta: string,
+    description: string
+  ){
+    try{
+      const param = "updateMeta/" + idMaregraphe + "&" + idMeta + "&" + description
+      return await lastValueFrom(this.http.put(this.baseUrl + param, null))
+    }catch(error: any){
+      throw error.error.detail
+    }
+  }
+
+  /**
    * Supprimer une métadonnée d'un marégraphe
    * @param idMare int : l'identifiant du marégraphe
    * @param idMeta string : l'identifiant de la métadonnée
@@ -70,4 +88,5 @@ export class ApiMaregraphemeta {
       throw error.error.detail;
     }
   }
+
 }

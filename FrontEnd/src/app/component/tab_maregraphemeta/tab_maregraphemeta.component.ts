@@ -4,7 +4,7 @@ import { ApiMeta } from '../../services/api_meta/api_meta.service';
 import { ActivatedRoute, Data } from '@angular/router';
 import { MaregrapheMeta } from 'src/app/class/Maregraphemeta';
 import { Meta } from 'src/app/class/Meta';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-tab-maregraphemeta',
   templateUrl: './tab_maregraphemeta.component.html',
@@ -17,7 +17,8 @@ export class TabMaregraphemetaComponent implements OnInit {
   public donnees: MaregrapheMeta[] = [];
   public id_maregraphe: number = +this.route.snapshot.paramMap.get('id')!;
   public ville_maregraphe: string = this.route.snapshot.paramMap.get('ville')!;
-  public formAddMeta: any;
+  public formAddMeta: FormGroup;
+  public formModifMeta: FormGroup;
   public metadonnees: Meta[] = [];
 
   public sortData: {[key: string] : boolean} = {
@@ -37,6 +38,10 @@ export class TabMaregraphemetaComponent implements OnInit {
     this.formAddMeta = this.formBuilder.group({
       idMeta: "",
       data: "",
+    })
+    this.formModifMeta = this.formBuilder.group({
+      id_meta: "",
+      donnee: ""
     })
   }
 
@@ -78,7 +83,7 @@ export class TabMaregraphemetaComponent implements OnInit {
    * @brief ajouter une métadonnée au marégraphe
    */
   public async show_add_meta(){
-    let form = document.getElementById("hide_form")?.style;
+    let form = document.getElementById("hide_form_add")?.style;
     if (form) form.display = 'block';
   }
 
@@ -99,8 +104,22 @@ export class TabMaregraphemetaComponent implements OnInit {
    * @brief fermer le formulaire d'ajout d'une métadonnée
    */
   public async annuler(){
-    let form = document.getElementById("hide_form")?.style;
+    let form = document.getElementById("hide_form_add")?.style;
     if (form) form.display = 'none';
+  }
+
+
+  /**
+   * Modifier les informations d'une métadonnée
+   */
+  public async updateMetaMare(){
+    const value = this.formModifMeta.value;
+    console.log(value)
+    await this.apiMaregrapheMeta.updateMetaMare(this.id_maregraphe, value.id_meta, value.donnee).then(() => {
+      location.reload()
+    }).catch((error: any) => {
+      alert(error)
+    })
   }
 
   /**
@@ -117,6 +136,30 @@ export class TabMaregraphemetaComponent implements OnInit {
       alert(error)
     })
   }
+
+  /**
+   * @brief modifie une métadonnée du marégraphe
+   */
+  public async show_modif_form(
+    idMeta: string,
+    description: string,
+  ){
+    console.log(idMeta, description)
+    this.formModifMeta.setValue({
+      "id_meta": idMeta,
+      "donnee": description
+    })
+    let form = document.getElementById("hide_form_modif")?.style;
+    if (form) form.display = 'block';
+  }
+
+/**
+ * @brief fermer le formulaire de modification d'une métadonnée
+ */
+public async hideForm(){
+  let form = document.getElementById("hide_form_modif")?.style;
+  if (form) form.display = 'none';
+}
 
   /**
    * Trier les colonne du tableau

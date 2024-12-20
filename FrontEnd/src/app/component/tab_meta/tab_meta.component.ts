@@ -131,7 +131,7 @@ export class TabMetaComponent implements OnInit {
     }
 
   /**
-   * @brief fermer le formulaire d'ajout d'une métadonnée
+   * @brief fermer le formulaire de modification d'une métadonnée
    */
   public async hideForm(){
     let form = document.getElementById("hide_form_modif")?.style;
