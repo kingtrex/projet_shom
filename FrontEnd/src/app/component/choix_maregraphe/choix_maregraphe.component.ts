@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { APIChoixMaregrapheService } from '../../services/api_choix_maregraphe/api_choix_maregraphe.service';
 import { Data } from '@angular/router';
 import { Maregraphe } from '../../class/Maregraphe';
@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./choix_maregraphe.component.css']
 })
 
-export class ChoixMaregrapheComponent {
+export class ChoixMaregrapheComponent implements OnInit {
   public errorMessage: string = '';
   public isDataLoaded : boolean = false;
   public donnees: Maregraphe[] = [];

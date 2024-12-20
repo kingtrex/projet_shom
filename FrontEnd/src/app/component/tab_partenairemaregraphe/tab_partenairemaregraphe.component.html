@@ -14,29 +14,35 @@
       <p class="infos_page">Partenaire : {{partenaire}}</p>
       <div class="button_header">
         <a href="tabChoixPartenaire"><button class="bouton_retour">Retour</button></a>
-        <button class="Ajouter" id="Ajouter"  type="button" > <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
+        <button class="Ajouter" id="Ajouter"  type="button" > <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
       </div>
 
-  <!--
-    <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_meta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
+<!-------------------- Formulaire d'aout d'un marégraphe -------------------->
 
-    <div class="fond_form" id="hide_form">
-      <div class="form_add_meta">
+    <div class="fond_form" id="hide_form_add">
+      <div class="form">
         <span class="close-button" (click)="annuler()">&times;</span>
-        <h2>Ajouter une métadonnée</h2>
-        <form [formGroup]="formAddMeta">
-          <label for="id_meta">Identifiant de la métadonnée : </label>
-            <input type="text" id="id_meta" name="id_meta" formControlName="idMeta"><br><br>
-            <label for="description">Description de la métadonnée : </label>
-            <input type="description" id="description" name="description" formControlName="data"><br><br>
+        <h2>Ajouter un marégraphe</h2>
+        <form [formGroup]="formAddMaregraphe">
+          <label for="ville">Ville : </label>
+          <input type="text" id="ville" formControlName="ville"><br><br>
+  
+          <label for="id_maregraphe">Identifiant du marégraphe : </label>
+          <input type="text" id="id_maregraphe" formControlName="id_maregraphe"><br><br>
+  
+          <label for="latitude">Latitude : </label>
+          <input type="number" id="latitude" formControlName="latitude"><br><br>
+  
+          <label for="longitude">Longitude : </label>
+          <input type="number" id="longitude" formControlName="longitude"><br><br>
         </form>
         <div class="bouton">
-          <button class="ajout_meta"  type="submit" (click)="addMeta()">Créer</button>
-          <button class="supp_meta" id="supp_meta" type="delete"  (click)="annuler()">Annuler</button>
+          <!--button class="ajout_mare"  type="submit" (click)="addMaregraphe()">Créer</button-->
+          <button class="supp_mare" id="supp_mare" type="delete"  (click)="annuler()">Annuler</button>
         </div>
       </div>
     </div>
-    -->
+
     <br><br><br>
     <table>    
       <thead>
@@ -45,6 +51,7 @@
             <th (click)="sort('libelle')">Ville {{triangleData["libelle"]}}</th>   
             <th>Latitude</th>
             <th>Longitude</th>
+            <th></th>
         </tr>
       </thead>
       <tbody>
@@ -53,6 +60,13 @@
             <td>{{i.libelle}}</td>
             <td>{{i.latitude}}</td>
             <td>{{i.longitude}}</td>
+            <td>
+              <div class="bouton">
+                <a href="tabMaregrapheMeta/{{i.id_tdb}}/{{i.libelle}}"><button class="acceder" type="button">Accéder</button></a>
+                <!--button class="editer" type="button" (click)="show_modif_maregraphe(i.id_tdb, i.libelle, i.latitude, i.longitude)">Editer</button>
+                <button class="Supprimer" type="button" (click)="deleteMaregraphe(i.id_tdb)">Supprimer</button-->
+              </div>
+            </td>
           <!--
             <td>
             <div class="bouton">
