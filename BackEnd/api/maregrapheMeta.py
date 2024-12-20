@@ -47,7 +47,6 @@ async def sort_maregraphe_meta(id: int, col: str, order: bool, token: Annotated[
         if 'db' in locals() and db:
             db.close()
 
-
 @router.post("/addMeta/{id}&{meta}&{data}")
 async def add_meta(id: int, meta: str, data: str,
                    token: Annotated[User, Depends(get_current_user)]):
@@ -63,6 +62,7 @@ async def add_meta(id: int, meta: str, data: str,
     finally:
         if 'db' in locals() and db:
             db.close()
+
 @router.put("/updateMeta/{id}&{meta}&{data}")
 async def update_meta(id: int, meta: str, data: str,
                       token: Annotated[User, Depends(get_current_user)]):

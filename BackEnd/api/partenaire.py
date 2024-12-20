@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from databaseConnect import databaseConnect, check_error
 from connexion.connexion import User, get_current_user
 from psycopg2.extras import RealDictCursor
@@ -82,3 +82,23 @@ async def sort_partenaireMaregraphe(id: int, col: str, order: bool,
         if 'db' in locals() and db:
             db.close()
 
+@router.put("/updatePartenaire/{id}&{nom}&{logo}")
+async def update_partenaire(id: int, nom: str, logo: str,
+                            request: Request,
+                            token: Annotated[User, Depends(get_current_user)]):
+    json = await request.json()
+    url = json["url"]
+    try:
+        print(f"{id} {nom} {logo}")
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"UPDATE obsmar.partenaire \
+                    SET nom=%s, logo=%s, url=%s \
+                    WHERE id=%s", (nom, logo, url, id))
+        db.commit()
+        return cur.rowcount
+    except Exception as e:
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()

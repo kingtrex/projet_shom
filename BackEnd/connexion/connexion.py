@@ -43,7 +43,6 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def verify_password(plain_password, hashed_password):
-    print(f"password: {plain_password}")
     return pwd_context.verify(plain_password, hashed_password)
 
 
@@ -51,7 +50,6 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 def get_user(db, username: str):
-
     if db.has_option("USERS", username):
         user_dict = ast.literal_eval(db["USERS"][username])
         return UserInDB(**user_dict)
@@ -64,8 +62,6 @@ def authenticate_user(fake_db, username: str, password: str):
     if not verify_password(password, user.hashed_password):
         return False
     return user
-
-
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode = data.copy()
@@ -99,7 +95,6 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
         raise credentials_exception
     return user
 
-
 async def get_current_active_user(
     current_user: Annotated[User, Depends(get_current_user)],
 ):
@@ -111,7 +106,6 @@ async def get_current_active_user(
 async def login_for_access_token(
     form_data: dict,
 ) -> Token:
-    print(form_data["username"])
     file_conf = configparser.ConfigParser()
     file_conf.sections()
     file_conf.read("./connexion/exemple.ini")

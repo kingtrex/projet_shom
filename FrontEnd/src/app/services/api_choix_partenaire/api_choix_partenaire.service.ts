@@ -51,4 +51,13 @@ export class ApiChoixPartenaireService {
       throw error.error.detail;
     }
   }
+
+  public async updatePartenaire(id: string, nom: string, logo: string, url: string): Promise<any>{
+    try{
+      const param = "updatePartenaire/" + id + "&" + nom + "&" + logo 
+      return await lastValueFrom(this.http.put(this.baseUrl + param, {"url": url}));
+    }catch(error: any){
+      throw error.error.detail;
+    }
+  }
 }

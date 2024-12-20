@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ApiChoixPartenaireService } from '../../services/api_choix_partenaire/api_choix_partenaire.service';
 import { Data } from '@angular/router';
 import { Partenaire } from '../../class/Partenaire';
-import { FormBuilder } from '@angular/forms';
+import { Form, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-tab-partenaire',
@@ -15,7 +15,8 @@ export class ChoixPartenaireComponent {
   isDataLoaded : boolean = false;
   donnees: any;
 
-  public formAddPartenaire: any
+  public formAddPartenaire: FormGroup;
+  public formModifPartenaire: FormGroup;
 
   public sortData: {[key: string] : boolean} = {
     "id": true,
@@ -30,6 +31,12 @@ export class ChoixPartenaireComponent {
     private formBuilder: FormBuilder,
   ) {
     this.formAddPartenaire = this.formBuilder.group({
+      id: "",
+      nom: "",
+      logo: "",
+      url: "",
+    })
+    this.formModifPartenaire = this.formBuilder.group({
       id: "",
       nom: "",
       logo: "",
@@ -84,11 +91,26 @@ export class ChoixPartenaireComponent {
   
    /* @brief Afficher le formulaire de modification d'un partenaire*/
    
-  public async show_modif_partenaire(){
+  public async show_modif_partenaire(id: number, nom: string, logo: string, url: string){
+    console.log(id, nom, logo, url)
+    this.formModifPartenaire.setValue({
+      id: id,
+      nom: nom,
+      logo: logo,
+      url: url,
+    })
     let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'block';
   }
 
+  public async modifPartenaire(){
+    const value = this.formModifPartenaire.value
+    await this.apiChoixPartenaire.updatePartenaire(value.id, value.nom, value.logo, value.url).then(() => {
+      location.reload()
+    }).catch((error: any) => {
+      alert(error)
+    })
+  }
 
    /** @brief fermer le formulaire de modification d'un partenaire  */
    

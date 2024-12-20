@@ -57,8 +57,6 @@ async def sort_meta(col: str, order: bool, token: Annotated[User, Depends(get_cu
         if 'db' in locals() and db:
             db.close()
 
-
-
 @router.post("/addMeta/{id}&{desc}&{ordre}")
 async def add_meta(id: str, desc: str, ordre: int,
                    token: Annotated[User, Depends(get_current_user)]):
@@ -77,7 +75,6 @@ async def add_meta(id: str, desc: str, ordre: int,
 @router.put("/updateMeta/{id}&{desc}&{ordre}")
 async def update_meta(id: str, desc: str, ordre: int,
                       token: Annotated[User, Depends(get_current_user)]):
-    print("oui")
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)

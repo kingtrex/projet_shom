@@ -39,7 +39,6 @@ async def update_maregraphe(id: int, ville: str, latitude: str, longitude: str,
         if 'db' in locals() and db:
             db.close()
 
-
 @router.get("/sort/{col}&{order}")
 async def sort_maregraphe(col: str, order: bool, token: Annotated[User, Depends(get_current_user)]):
     allowed_col = ["id_tdb", "libelle"]
@@ -65,7 +64,6 @@ async def add_maregraphe(id: int, libelle: str, lat: float, long: float,
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
-        print(f"%d %s", id, libelle)
         cur.execute(f"INSERT INTO obsmar.maregraphe \
                     VALUES (%s, %s, %s, %s)", (id, libelle, lat, long))
         db.commit()
@@ -75,6 +73,7 @@ async def add_maregraphe(id: int, libelle: str, lat: float, long: float,
     finally:
         if 'db' in locals() and db:
             db.close()
+
 @router.delete("/deleteMaregraphe/{id}")
 async def delete_maregraphe(id: int, token: Annotated[User, Depends(get_current_user)]):
     try:

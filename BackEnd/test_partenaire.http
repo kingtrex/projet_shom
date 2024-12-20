@@ -20,3 +20,13 @@ Authorization: Bearer {{token}}
 Accept: application/json
 
 ###
+
+PUT http://127.0.0.1:8000/partenaire/updatePartenaire/50&shom2&logo_SHOM2.png
+Authorization: Bearer {{token}}
+Accept: application/json
+
+{
+"url" : "https://www.shom2.fr/"
+}
+
+###

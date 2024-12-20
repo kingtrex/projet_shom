@@ -56,9 +56,9 @@
           <div class="bouton">
             <a href="tabPartenaireMaregraphe/{{i.id}}/{{i.nom}}"><button class="acceder" type="button">Accéder</button></a>
 
-<!-------------------- Formulaire de modification d'un partenaire ------------------->
+          <!-- Formulaire de modification d'un partenaire -->
 
-            <button class="editer" type="button" (click)="show_modif_partenaire()">Editer</button>
+            <button class="editer" type="button" (click)="show_modif_partenaire(i.id, i.nom, i.logo, i.url)">Editer</button>
           </div>
 
           
@@ -69,22 +69,21 @@
               <span class="close-button" (click)="annuler_modif()">&times;</span>
               <h2>Modifier les informations du partenaire</h2>
         
-              <form>
+              <form [formGroup]="formModifPartenaire">
                 <label for="nom">Nom du partenaire : </label>
-                <input type="text" id="nom" name="nom" placeholder="Nom du partenaire"><br><br>
+                <input type="text" id="nom" name="nom" formControlName="nom"><br><br>
       
                 <label for="logo">url du logo du partenaire : </label>
-                <input type="text" id="logo" name="logo" placeholder="url du logo"><br><br>
+                <input type="text" id="logo" name="logo" formControlName="logo"><br><br>
       
                 <label for="site">url du site internet partenaire : </label>
-                <input type="text" id="site" name="site" placeholder="url du site internet partenaire"><br><br>
+                <input type="text" id="site" name="site" formControlName="url"><br><br>
       
               </form>
               <div class="bouton">
-                <button class="maj_partenaire"  type="submit">Mettre à jour</button>
+                <button class="maj_partenaire"  type="submit" (click)="modifPartenaire()">Mettre à jour</button>
                 <button class="supp_partenaire" id="supp_partenaire" type="delete"  (click)="annuler_modif()">Annuler</button>
               </div>
-<!-------------------------------------------------------------------------->     
             </div>             
           </div>
         </td>
