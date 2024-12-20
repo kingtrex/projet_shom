@@ -14,7 +14,7 @@
       <p class="infos_page">Partenaire : {{partenaire}}</p>
       <div class="button_header">
         <a href="tabChoixPartenaire"><button class="bouton_retour">Retour</button></a>
-        <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_maregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
+        <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_maregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
       </div>
 
 
@@ -23,7 +23,7 @@
         <span class="close-button" (click)="annuler()">&times;</span>
         <h2>Ajouter une métadonnée</h2>
         <form [formGroup]="formAddMaregraphe">
-          <label for="maregraphe">Identifiant de la métadonnée : </label>
+          <label for="maregraphe">Identifiant du marégraphe : </label>
           <select formControlName="maregraphe">
             <option formGroupName="maregraphe" *ngFor="let i of listMaregraphe">{{i.libelle}}</option>
           </select><br><br>
@@ -45,6 +45,7 @@
             <th (click)="sort('libelle')">Ville {{triangleData["libelle"]}}</th>   
             <th>Latitude</th>
             <th>Longitude</th>
+            <th></th>
         </tr>
       </thead>
       <tbody>
@@ -53,6 +54,13 @@
             <td>{{i.libelle}}</td>
             <td>{{i.latitude}}</td>
             <td>{{i.longitude}}</td>
+            <td>
+              <div class="bouton">
+                <a href="tabMaregrapheMeta/{{i.id_tdb}}/{{i.libelle}}"><button class="acceder" type="button">Accéder</button></a>
+                <!--button class="editer" type="button" (click)="show_modif_maregraphe(i.id_tdb, i.libelle, i.latitude, i.longitude)">Editer</button>
+                <button class="Supprimer" type="button" (click)="deleteMaregraphe(i.id_tdb)">Supprimer</button-->
+              </div>
+            </td>
           <!--
             <td>
             <div class="bouton">
@@ -64,4 +72,3 @@
         </tr>
       </tbody>
     </table>
-   </div>
