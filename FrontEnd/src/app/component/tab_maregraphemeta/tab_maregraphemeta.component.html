@@ -13,7 +13,7 @@
       <p class="infos_page">Ville : {{ville_maregraphe}}</p>
       <div class="button_header">
         <a href="tabChoixMaregraphe"><button class="bouton_retour">Retour</button></a>
-        <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_meta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
+        <button class="Ajouter" id="Ajouter"  type="button" (click)="showAddMeta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
       </div>
 
     </div>
@@ -53,7 +53,7 @@
           <td>{{i.date_donnee}}</td>
           <td>
             <div class="bouton">
-              <button class="Editer"  type="button" (click)="show_modif_form(i.id_meta, i.donnee)">Editer</button>
+              <button class="Editer"  type="button" (click)="showModifForm(i.id_meta, i.donnee)">Editer</button>
               <button class="Supprimer" type="button" (click)="deleteMeta(i.id_maregraphe,i.id_meta)">Supprimer</button>
             </div>
           </td>

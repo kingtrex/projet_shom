@@ -10,7 +10,7 @@
 <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
   
 <br>
-<button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_meta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
+<button class="Ajouter" id="Ajouter"  type="button" (click)="showAddMeta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
 
 
 <div class="fond_form" id="hide_form_add">
@@ -51,7 +51,7 @@
       <td>{{i.description}}</td>
       <td>
         <div class="bouton">
-          <button class="Editer"  type="button" (click)="show_modif_form(i.id, i.description, i.ordre)">Editer</button>
+          <button class="Editer"  type="button" (click)="showModifForm(i.id, i.description, i.ordre)">Editer</button>
           <button class="Supprimer" type="button" (click)="deleteMeta(i.id)">Supprimer</button>
         </div>
       </td>

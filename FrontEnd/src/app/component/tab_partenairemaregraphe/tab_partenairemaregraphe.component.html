@@ -14,7 +14,7 @@
       <p class="infos_page">Partenaire : {{partenaire}}</p>
       <div class="button_header">
         <a href="tabChoixPartenaire"><button class="bouton_retour">Retour</button></a>
-        <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_maregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
+        <button class="Ajouter" id="Ajouter"  type="button" (click)="showAddMaregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
       </div>
 
 
@@ -31,7 +31,7 @@
           <input id="ordre" type="number" formControlName="ordre"><br><br>
         </form>
         <div class="bouton">
-          <button class="ajout_meta"  type="submit" (click)="add_maregraphe()">Créer</button>
+          <button class="ajout_meta"  type="submit" (click)="addMaregraphe()">Créer</button>
           <button class="supp_meta" id="supp_meta" type="delete"  (click)="annuler()">Annuler</button>
         </div>
       </div>

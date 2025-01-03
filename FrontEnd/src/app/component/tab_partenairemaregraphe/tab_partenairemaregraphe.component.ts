@@ -91,11 +91,11 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
     })
   }
 
-  public async show_add_maregraphe(){
+  public async showAddMaregraphe(){
     document.getElementById("hide_form")!.style.display = "block";
   }
 
-  public async add_maregraphe(){
+  public async addMaregraphe(){
     const value = this.formAddMaregraphe.value;
     await this.ApiPartenaireMaregrapheService.addMaregraphe(this.id, this.dictMaregraphe[value.maregraphe], value.ordre).then((element: any) => {
       location.reload();

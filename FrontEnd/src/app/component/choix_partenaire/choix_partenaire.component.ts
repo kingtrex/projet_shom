@@ -91,7 +91,7 @@ export class ChoixPartenaireComponent {
   
    /* @brief Afficher le formulaire de modification d'un partenaire*/
    
-  public async show_modif_partenaire(id: number, nom: string, logo: string, url: string){
+  public async showModifPartenaire(id: number, nom: string, logo: string, url: string){
     console.log(id, nom, logo, url)
     this.formModifPartenaire.setValue({
       id: id,
@@ -114,7 +114,7 @@ export class ChoixPartenaireComponent {
 
    /** @brief fermer le formulaire de modification d'un partenaire  */
    
-  public async annuler_modif(){
+  public async annulerModif(){
     let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'none';
   }
