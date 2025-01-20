@@ -25,6 +25,7 @@
         <form [formGroup]="formAddMaregraphe">
           <label for="maregraphe">Identifiant du marégraphe : </label>
           <select formControlName="maregraphe">
+            <option value="" disabled selected>Choisir un marégraphe</option>
             <option formGroupName="maregraphe" *ngFor="let i of listMaregraphe">{{i.libelle}}</option>
           </select><br><br>
           <label for="ordre">Ordre : </label>
