@@ -24,6 +24,7 @@
         <form [formGroup]="formAddMeta">
           <label for="id_meta">Identifiant de la métadonnée : </label>
             <select id="id_meta" formControlName="idMeta">
+              <option value="" disabled selected>Choisir une métadonnée</option>
               <option *ngFor="let i of metadonnees">{{i.id}}</option>
             </select>
             <label for="description">Description de la métadonnée : </label>
