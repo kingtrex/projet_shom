@@ -12,3 +12,7 @@ a{
     color: black;
     font-size: 25px;
 }
+
+a:hover{
+    background-color: lightgray;
+}
