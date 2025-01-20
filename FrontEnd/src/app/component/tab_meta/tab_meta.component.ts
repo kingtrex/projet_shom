@@ -61,7 +61,7 @@ export class TabMetaComponent implements OnInit {
   /**
    * @brief Afficher le formulaire d'ajout d'une metadonnée
    */
-  public async show_add_meta(){
+  public async showAddMeta(){
     let form = document.getElementById("hide_form_add")?.style;
     if (form) form.display = 'block';
   }
@@ -116,7 +116,7 @@ export class TabMetaComponent implements OnInit {
     /**
    * @brief ajouter une métadonnée au marégraphe
    */
-    public async show_modif_form(
+    public async showModifForm(
       idMeta: string,
       description: string,
       ordre: number,

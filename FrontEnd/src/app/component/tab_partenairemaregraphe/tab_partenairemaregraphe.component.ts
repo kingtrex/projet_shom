@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiPartenaireMaregrapheService } from '../../services/api_partenaire_maregraphe/api_partenaire_maregraphe.service';
+import { APIChoixMaregrapheService } from '../../services/api_choix_maregraphe/api_choix_maregraphe.service';
 import { ActivatedRoute, Data } from '@angular/router';
 import { Maregraphe } from '../../class/Maregraphe';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Form, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-tab-partenairemaregraphe',
@@ -16,8 +17,8 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   public id: number = +this.route.snapshot.paramMap.get('id')!;
   public partenaire: string = this.route.snapshot.paramMap.get('partenaire')!;
   public formAddMaregraphe: FormGroup;
-  public formModifMaregraphe: FormGroup;
-  
+  public dictMaregraphe: {[key: string]: number} = {};
+  public listMaregraphe: Maregraphe[] = [];
 
   public sortData: {[key: string] : boolean} = {
     "id_maregraphe": true,
@@ -29,25 +30,19 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   }
 
   constructor(private ApiPartenaireMaregrapheService: ApiPartenaireMaregrapheService,
+    private ApiMaregrapheService: APIChoixMaregrapheService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
   ) {
     this.formAddMaregraphe = this.formBuilder.group({
-      id_maregraphe: "",
-      ville: "",
-      latitude: "",
-      longitude: "",
-    })
-    this.formModifMaregraphe = this.formBuilder.group({
-      id_maregraphe: "",
-      ville: "",
-      latitude: "",
-      longitude: "",
+      maregraphe : "",
+      ordre : "",
     })
   }
 
   ngOnInit(): void {
     this.getData();
+    this.getPotentialMaregraphe();
   }
 
   /**
@@ -62,37 +57,27 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
     }).catch((error: any) => {
       alert(error)
     })
+
   }
 
   /**
-   * @brief Afficher le formulaire d'ajout d'un marégraphe
+   * Obtenir les marégraphe qui ne sont pas assigné au partenaire
    */
-  public async show_add_maregraphe(){
-    let form = document.getElementById("hide_form_add")?.style;
-    if (form) form.display = 'block';
-  }
-
-  /**
-   * Ajouter un nouveau marégraphe dans la BDD
-   */
-  /*
-  public async addMaregraphe(){
-    const value = this.formAddMaregraphe.value
-    await this.apiChoixMaregraphe.addMaregraphe(value.id_maregraphe, value.ville, value.latitude, value.longitude).then(() => {
-      location.reload()
+  public async getPotentialMaregraphe(){
+    await this.ApiMaregrapheService.getMaregrapheForm(this.id).then((element: any) => {
+      element.forEach((maregraphe: any) => {
+        this.listMaregraphe.push(new Maregraphe(maregraphe.id_maregraphe, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude))
+        this.dictMaregraphe[maregraphe.libelle] = maregraphe.id_tdb;
+      })
     }).catch((error: any) => {
-      alert(error);
+      alert(error)
     })
   }
-*/
-  /**
-   * @brief fermer le formulaire d'ajout d'un marégraphe
-   */
-  public async annuler(){
-    let form = document.getElementById("hide_form_add")?.style;
-    if (form) form.display = 'none';
-  }
 
+  /**
+   * Trier le tableau de données en finction de la colonne
+   * @param col string : colonne à trier
+   */
   public async sort(col: string){
     await this.ApiPartenaireMaregrapheService.sortData(this.id, col, this.sortData[col]).then((element: any) => {
       this.donnees = []
@@ -106,5 +91,19 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
     })
   }
 
-  
+  public async showAddMaregraphe(){
+    document.getElementById("hide_form")!.style.display = "block";
+  }
+
+  public async addMaregraphe(){
+    const value = this.formAddMaregraphe.value;
+    await this.ApiPartenaireMaregrapheService.addMaregraphe(this.id, this.dictMaregraphe[value.maregraphe], value.ordre).then((element: any) => {
+      location.reload();
+    }).catch((error: any) => {
+      alert(error)
+    })
+  }
+  public async annuler(){
+    document.getElementById("hide_form")!.style.display = "none";
+  }
 }

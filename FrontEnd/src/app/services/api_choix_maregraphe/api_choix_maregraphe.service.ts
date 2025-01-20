@@ -83,4 +83,17 @@ export class APIChoixMaregrapheService {
       throw error.error.detail;
     }
   }
+
+    /**
+   * Obtenir les marégraphe qui ne sont pas déjà assigné au partenanire
+   * @param id number : id du partenaire
+   * @returns 
+   */
+    public async getMaregrapheForm(id: number){
+      try{
+        return await lastValueFrom(this.http.get(this.baseUrl + "getMaregrapheForm/" + id));
+      }catch(error: any){
+        throw error.error.detail;
+      }
+    }
 }

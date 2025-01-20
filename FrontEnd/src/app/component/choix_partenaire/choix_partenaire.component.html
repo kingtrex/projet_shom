@@ -8,7 +8,7 @@
   Chargement des données ...
 </div>
 <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
-<!-------------------- Formulaire d'aout d'un marégraphe ------------------
+<!-------------------- Formulaire d'aout d'un marégraphe ----------------
   <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_maregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
 
   <div class="fond_form" id="hide_form_add">
@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
----------------------------------------------------------------------->
+<!---------------------------------------------------------------------->
   <br><br><br>
   <table>    
     <thead>
@@ -58,7 +58,7 @@
 
           <!-- Formulaire de modification d'un partenaire -->
 
-            <button class="editer" type="button" (click)="show_modif_partenaire(i.id, i.nom, i.logo, i.url)">Editer</button>
+            <button class="editer" type="button" (click)="showModifPartenaire(i.id, i.nom, i.logo, i.url)">Editer</button>
           </div>
 
           
@@ -66,7 +66,7 @@
             
             <div class="form_modif_partenaire">
               
-              <span class="close-button" (click)="annuler_modif()">&times;</span>
+              <span class="close-button" (click)="annulerModif()">&times;</span>
               <h2>Modifier les informations du partenaire</h2>
         
               <form [formGroup]="formModifPartenaire">
@@ -82,7 +82,7 @@
               </form>
               <div class="bouton">
                 <button class="maj_partenaire"  type="submit" (click)="modifPartenaire()">Mettre à jour</button>
-                <button class="supp_partenaire" id="supp_partenaire" type="delete"  (click)="annuler_modif()">Annuler</button>
+                <button class="supp_partenaire" id="supp_partenaire" type="delete"  (click)="annulerModif()">Annuler</button>
               </div>
             </div>             
           </div>

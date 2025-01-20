@@ -1,3 +1,5 @@
+from os.path import defpath
+
 from fastapi import APIRouter, Depends, HTTPException, Request
 from databaseConnect import databaseConnect, check_error
 from connexion.connexion import User, get_current_user
@@ -76,6 +78,22 @@ async def sort_partenaireMaregraphe(id: int, col: str, order: bool,
             query += f"DESC"
         cur.execute(query, (id,))
         return cur.fetchall()
+    except Exception as e:
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
+
+@router.post("/addMaregraphePartenaire/{id_partenaire}&{id_maregraphe}&{ordre}")
+async def add_maregraphe_partenaire(id_partenaire: int, id_maregraphe: int, ordre:int,
+                                    token: Annotated[User, Depends(get_current_user)]):
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"INSERT INTO obsmar.partenaire_maregraphe \
+                    VALUES (%s, %s, %s)", (id_partenaire, id_maregraphe, ordre))
+        db.commit()
+        return cur.lastrowid
     except Exception as e:
         check_error(e)
     finally:

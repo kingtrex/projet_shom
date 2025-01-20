@@ -9,7 +9,7 @@
 </div>
 <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
 <!-------------------- Formulaire d'aout d'un marégraphe -------------------->
-  <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_maregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
+  <button class="Ajouter" id="Ajouter"  type="button" (click)="showAddMaregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
 
   <div class="fond_form" id="hide_form_add">
     <div class="form">
@@ -55,7 +55,7 @@
         <td>
           <div class="bouton">
             <a href="tabMaregrapheMeta/{{i.id_tdb}}/{{i.libelle}}"><button class="acceder" type="button">Accéder</button></a>
-            <button class="editer" type="button" (click)="show_modif_maregraphe(i.id_tdb, i.libelle, i.latitude, i.longitude)">Editer</button>
+            <button class="editer" type="button" (click)="showModifMaregraphe(i.id_tdb, i.libelle, i.latitude, i.longitude)">Editer</button>
             <button class="Supprimer" type="button" (click)="deleteMaregraphe(i.id_tdb)">Supprimer</button>
           </div>
         </td>
@@ -67,7 +67,7 @@
 <!-------------------- Formulaire de modification d'un marégraphe -------------------->
 <div class="fond_form" id="hide_form_modif">
   <div class="form">
-    <span class="close-button" (click)="annuler_modif()">&times;</span>
+    <span class="close-button" (click)="annulerModif()">&times;</span>
     <h2>Mettre à jour les informations du marégraphe</h2>
     <form [formGroup]="formModifMaregraphe">
       <label for="ville">Ville : </label>
@@ -83,8 +83,8 @@
       <input type="number" id="longitude" formControlName="longitude"><br><br>
     </form>
     <div class="bouton">
-      <button class="ajout_mare"  type="submit" (click)="update_maregraphe()">Modifier</button>
-      <button class="supp_mare" id="supp_mare" type="delete"  (click)="annuler_modif()">Annuler</button>
+      <button class="ajout_mare"  type="submit" (click)="updateMaregraphe()">Modifier</button>
+      <button class="supp_mare" id="supp_mare" type="delete"  (click)="annulerModif()">Annuler</button>
     </div>
   </div>
 </div>

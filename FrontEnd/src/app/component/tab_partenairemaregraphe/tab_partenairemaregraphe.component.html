@@ -14,35 +14,29 @@
       <p class="infos_page">Partenaire : {{partenaire}}</p>
       <div class="button_header">
         <a href="tabChoixPartenaire"><button class="bouton_retour">Retour</button></a>
-        <button class="Ajouter" id="Ajouter"  type="button" > <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
+        <button class="Ajouter" id="Ajouter"  type="button" (click)="showAddMaregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
       </div>
 
-<!-------------------- Formulaire d'aout d'un marégraphe -------------------->
 
-    <div class="fond_form" id="hide_form_add">
-      <div class="form">
+    <div class="fond_form" id="hide_form">
+      <div class="form_add_meta">
         <span class="close-button" (click)="annuler()">&times;</span>
-        <h2>Ajouter un marégraphe</h2>
+        <h2>Ajouter une métadonnée</h2>
         <form [formGroup]="formAddMaregraphe">
-          <label for="ville">Ville : </label>
-          <input type="text" id="ville" formControlName="ville"><br><br>
-  
-          <label for="id_maregraphe">Identifiant du marégraphe : </label>
-          <input type="text" id="id_maregraphe" formControlName="id_maregraphe"><br><br>
-  
-          <label for="latitude">Latitude : </label>
-          <input type="number" id="latitude" formControlName="latitude"><br><br>
-  
-          <label for="longitude">Longitude : </label>
-          <input type="number" id="longitude" formControlName="longitude"><br><br>
+          <label for="maregraphe">Identifiant du marégraphe : </label>
+          <select formControlName="maregraphe">
+            <option formGroupName="maregraphe" *ngFor="let i of listMaregraphe">{{i.libelle}}</option>
+          </select><br><br>
+          <label for="ordre">Ordre : </label>
+          <input id="ordre" type="number" formControlName="ordre"><br><br>
         </form>
         <div class="bouton">
-          <!--button class="ajout_mare"  type="submit" (click)="addMaregraphe()">Créer</button-->
-          <button class="supp_mare" id="supp_mare" type="delete"  (click)="annuler()">Annuler</button>
+          <button class="ajout_meta"  type="submit" (click)="addMaregraphe()">Créer</button>
+          <button class="supp_meta" id="supp_meta" type="delete"  (click)="annuler()">Annuler</button>
         </div>
       </div>
     </div>
-
+    -->
     <br><br><br>
     <table>    
       <thead>
@@ -71,4 +65,3 @@
         </tr>
       </tbody>
     </table>
-   </div>

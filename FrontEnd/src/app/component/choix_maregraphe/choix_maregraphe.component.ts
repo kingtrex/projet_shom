@@ -63,7 +63,7 @@ export class ChoixMaregrapheComponent implements OnInit {
   /**
    * @brief Afficher le formulaire d'ajout d'un marégraphe
    */
-  public async show_add_maregraphe(){
+  public async showAddMaregraphe(){
     let form = document.getElementById("hide_form_add")?.style;
     if (form) form.display = 'block';
   }
@@ -80,7 +80,7 @@ export class ChoixMaregrapheComponent implements OnInit {
     })
   }
 
-  public async update_maregraphe(){
+  public async updateMaregraphe(){
     
     const value = this.formModifMaregraphe.value;
     await this.apiChoixMaregraphe.updateMaregraphe(value.id_maregraphe, value.ville, value.latitude, value.longitude).then(() => {
@@ -115,7 +115,7 @@ export class ChoixMaregrapheComponent implements OnInit {
   /**
    * @brief Afficher le formulaire de modification d'un marégraphe
    */
-  public async show_modif_maregraphe(idMaregraphe: number, 
+  public async showModifMaregraphe(idMaregraphe: number, 
     ville: string, 
     latitude: number, 
     longitude: number
@@ -134,7 +134,7 @@ export class ChoixMaregrapheComponent implements OnInit {
   /**
    * @brief fermer le formulaire de modification d'un marégraphe
    */
-  public async annuler_modif(){
+  public async annulerModif(){
     let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'none';
   }
