@@ -3,6 +3,7 @@ import { APIChoixMaregrapheService } from '../../services/api_choix_maregraphe/a
 import { Data } from '@angular/router';
 import { Maregraphe } from '../../class/Maregraphe';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SharedServiceService } from 'src/app/services/shared_service/shared-service.service';
 
 @Component({
   selector: 'app-choix-maregraphe',
@@ -28,19 +29,22 @@ export class ChoixMaregrapheComponent implements OnInit {
   }
   constructor(private apiChoixMaregraphe: APIChoixMaregrapheService,
     private formBuilder: FormBuilder,
+    private sharedService: SharedServiceService,
   ) {
     this.formAddMaregraphe = this.formBuilder.group({
       id_maregraphe: "",
       ville: "",
       latitude: "",
       longitude: "",
-    })
+    });
     this.formModifMaregraphe = this.formBuilder.group({
       id_maregraphe: "",
       ville: "",
       latitude: "",
       longitude: "",
-    })
+    });
+    this.sharedService.setData("origine", "choix_maregraphe");
+    this.sharedService.showData();
   }
 
   ngOnInit(): void {

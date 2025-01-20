@@ -5,6 +5,8 @@ import { ActivatedRoute, Data } from '@angular/router';
 import { MaregrapheMeta } from 'src/app/class/Maregraphemeta';
 import { Meta } from 'src/app/class/Meta';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SharedServiceService } from 'src/app/services/shared_service/shared-service.service';
+
 @Component({
   selector: 'app-tab-maregraphemeta',
   templateUrl: './tab_maregraphemeta.component.html',
@@ -20,6 +22,7 @@ export class TabMaregraphemetaComponent implements OnInit {
   public formAddMeta: FormGroup;
   public formModifMeta: FormGroup;
   public metadonnees: Meta[] = [];
+  public origine: string;
 
   public sortData: {[key: string] : boolean} = {
     "id_meta" : true,
@@ -33,7 +36,8 @@ export class TabMaregraphemetaComponent implements OnInit {
   constructor(private apiMaregrapheMeta: ApiMaregraphemeta,
     private apiMeta: ApiMeta,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private sharedService: SharedServiceService,
   ) {
     this.formAddMeta = this.formBuilder.group({
       idMeta: "",
@@ -43,6 +47,16 @@ export class TabMaregraphemetaComponent implements OnInit {
       id_meta: "",
       donnee: ""
     })
+    switch(this.sharedService.getData("origine")){
+      case "choix_maregraphe":
+        this.origine = "tabChoixMaregraphe";
+        break;
+      case "partenaire_maregraphe": 
+        this.origine = "tabPartenaireMaregraphe/" + this.sharedService.getData("id") + "/" + this.sharedService.getData("partenaire");
+        break;  
+      default:
+        this.origine = "choix_maregraphe";
+    }
   }
 
   ngOnInit(): void {

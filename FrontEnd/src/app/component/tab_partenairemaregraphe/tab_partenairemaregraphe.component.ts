@@ -4,6 +4,7 @@ import { APIChoixMaregrapheService } from '../../services/api_choix_maregraphe/a
 import { ActivatedRoute, Data } from '@angular/router';
 import { Maregraphe } from '../../class/Maregraphe';
 import { Form, FormBuilder, FormGroup } from '@angular/forms';
+import { SharedServiceService } from 'src/app/services/shared_service/shared-service.service';
 
 @Component({
   selector: 'app-tab-partenairemaregraphe',
@@ -32,12 +33,16 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   constructor(private ApiPartenaireMaregrapheService: ApiPartenaireMaregrapheService,
     private ApiMaregrapheService: APIChoixMaregrapheService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private sharedService: SharedServiceService,
   ) {
     this.formAddMaregraphe = this.formBuilder.group({
       maregraphe : "",
       ordre : "",
     })
+    this.sharedService.setData("origine", "partenaire_maregraphe");
+    this.sharedService.setData("id", String(this.id));
+    this.sharedService.setData("partenaire", this.partenaire);
   }
 
   ngOnInit(): void {
