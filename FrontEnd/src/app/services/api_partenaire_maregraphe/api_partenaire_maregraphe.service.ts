@@ -40,4 +40,19 @@ export class ApiPartenaireMaregrapheService {
       throw error.error.detail;
     }
   }
+
+  /**
+   * Supprimer une métadonnée d'un marégraphe
+   * @param idParte int : l'identifiant du partenaire
+   * @param idMare int : l'identifiant du marégraphe
+   * @returns la réponse de l'API
+   */
+  public async deleteMaregraphe(idParte: number, idMare: number): Promise<any>{
+    try{
+      let param = "deleteMare/" + idParte + "&" + idMare;
+      return await lastValueFrom(this.http.delete(this.baseUrl + param));
+    }catch(error: any){
+      throw error.error.detail;
+    }
+  }
 }

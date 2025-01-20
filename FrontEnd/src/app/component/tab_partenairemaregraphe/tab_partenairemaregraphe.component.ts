@@ -80,7 +80,7 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   }
 
   /**
-   * Trier le tableau de données en finction de la colonne
+   * Trier le tableau de données en fonction de la colonne
    * @param col string : colonne à trier
    */
   public async sort(col: string){
@@ -110,5 +110,20 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   }
   public async annuler(){
     document.getElementById("hide_form")!.style.display = "none";
+  }
+
+  /**
+   * Supprimer une métadonnée du marégraphe
+   * @param idParte number : identifiant du partenaire
+   * @param idMare number : identifiant du marégraphe
+   * @returns 
+   */
+  public async deleteMaregraphe(idParte: number, idMare: number){
+    if(!confirm("Voulez-vous vraiment supprimer cette métadonnée?")) return
+    await this.ApiPartenaireMaregrapheService.deleteMaregraphe(idParte, idMare).then(() => {
+      location.reload()
+    }).catch((error: any) => {
+      alert(error)
+    })
   }
 }

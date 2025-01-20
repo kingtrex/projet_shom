@@ -6,9 +6,8 @@
   <br>
   <div [class.affiche]="!isDataLoaded" [class.invisible]="isDataLoaded" >
     Chargement des données ...
-   </div>
-   <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
-
+  </div>
+  <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
     <div class="entete_page">
       <p class="infos_page">Identifiant du partenaire : {{id}}</p>
       <p class="infos_page">Partenaire : {{partenaire}}</p>
@@ -16,7 +15,8 @@
         <a href="tabChoixPartenaire"><button class="bouton_retour">Retour</button></a>
         <button class="Ajouter" id="Ajouter"  type="button" (click)="showAddMaregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
       </div>
-
+    </div>
+  
 
     <div class="fond_form" id="hide_form">
       <div class="form_add_meta">
@@ -37,7 +37,6 @@
         </div>
       </div>
     </div>
-    -->
     <br><br><br>
     <table>    
       <thead>
@@ -58,11 +57,14 @@
             <td>
               <div class="bouton">
                 <a href="tabMaregrapheMeta/{{i.id_tdb}}/{{i.libelle}}"><button class="acceder" type="button">Accéder</button></a>
-                <button class="editer" type="button" >Editer</button>
-                <button class="Supprimer" type="button">Supprimer</button>
+                <button class="Supprimer" type="button" (click)="deleteMaregraphe(id,i.id_tdb)">Supprimer</button>
               </div>
             </td>
 
         </tr>
       </tbody>
     </table>
+
+  
+
+  </div>

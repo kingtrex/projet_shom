@@ -120,3 +120,20 @@ async def update_partenaire(id: int, nom: str, logo: str,
     finally:
         if 'db' in locals() and db:
             db.close()
+
+@router.delete("/deleteMare/{idParte}&{idMare}")
+async def delete_meta(idParte: int, idMare: int,
+                      token: Annotated[User, Depends(get_current_user)]):
+    try:
+        print(f"{idParte} - {idMare}")
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"DELETE FROM obsmar.partenaire_maregraphe \
+                    WHERE id_partenaire = %s AND id_maregraphe = %s", (idParte, idMare))
+        db.commit()
+        return cur.lastrowid
+    except Exception as e:
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
