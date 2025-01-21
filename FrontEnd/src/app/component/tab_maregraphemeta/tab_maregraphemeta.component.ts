@@ -86,7 +86,6 @@ export class TabMaregraphemetaComponent implements OnInit {
         this.metadonnees.push(new Meta(element.id, element.description, element.ordre));
       })
       this.isDataLoaded = true;  
-      console.log(this.metadonnees);  
     }).catch((error: any) => {
       alert(error)
     })
@@ -97,8 +96,6 @@ export class TabMaregraphemetaComponent implements OnInit {
    * @brief ajouter une métadonnée au marégraphe
    */
   public async showAddMeta(){
-    //this.formAddMeta.value.idMeta = this.metadonnees[0].id;
-    console.log(this.formAddMeta.value)
     let form = document.getElementById("hide_form_add")?.style;
     if (form) form.display = 'block';
   }
@@ -108,7 +105,6 @@ export class TabMaregraphemetaComponent implements OnInit {
    */
   public async addMeta(){
     const value = this.formAddMeta.value ;
-    console.log(value)
     await this.apiMaregrapheMeta.addMeta(this.id_maregraphe, value.idMeta, value.data).then(() => {
       location.reload()
     }).catch((error: any) =>{
@@ -131,7 +127,6 @@ export class TabMaregraphemetaComponent implements OnInit {
    */
   public async updateMetaMare(){
     const value = this.formModifMeta.value;
-    console.log(value)
     await this.apiMaregrapheMeta.updateMetaMare(this.id_maregraphe, value.id_meta, value.donnee).then(() => {
       location.reload()
     }).catch((error: any) => {
@@ -161,7 +156,6 @@ export class TabMaregraphemetaComponent implements OnInit {
     idMeta: string,
     description: string,
   ){
-    console.log(idMeta, description)
     this.formModifMeta.setValue({
       "id_meta": idMeta,
       "donnee": description

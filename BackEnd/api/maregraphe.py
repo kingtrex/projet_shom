@@ -32,7 +32,8 @@ async def get_maregraphe_form(id: int,
                     WHERE NOT EXISTS( \
                         SELECT * FROM obsmar.partenaire_maregraphe pa \
                         WHERE ma.id_tdb=pa.id_maregraphe AND pa.id_partenaire=%s \
-                    )", (id,))
+                    ) \
+                    ORDER BY ma.libelle", (id,))
         return cur.fetchall()
     except Exception as e:
         check_error(e)

@@ -83,7 +83,6 @@ export class TabMetaComponent implements OnInit {
    */
   public async updateMeta(){
     const value = this.formModifMeta.value;
-    console.log(value)
     await this.apiMeta.updateMeta(value.id, value.description, value.ordre).then(() => {
       location.reload()
     }).catch((error: any) => {

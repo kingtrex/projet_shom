@@ -61,38 +61,10 @@ export class ChoixPartenaireComponent {
     this.isDataLoaded = true;
   }
 
-
   /**
-   * @brief Afficher le formulaire d'ajout d'un partenaire
-   
-  public async show_add_partenaire(){
-    let form = document.getElementById("hide_form_add")?.style;
-    if (form) form.display = 'block';
-  }
-
-  /**
-   * Ajouter un nouveau partenaire dans la BDD
-   
-  public async addPartenaire(){
-    const value = this.formAddPartenaire.value
-    await this.apiChoixPartenaire.addPartenaire(value.id, value.nom, value.logo, value.url).then(() => {
-      location.reload()
-    })
-  }
-
-  /**
-   * @brief fermer le formulaire d'ajout d'un partenaire
-   
-  public async annuler_add(){
-    let form = document.getElementById("hide_form_add")?.style;
-    if (form) form.display = 'none';
-  }
-
-  
-   /* @brief Afficher le formulaire de modification d'un partenaire*/
-   
+   *  @brief Afficher le formulaire de modification d'un partenaire*
+   */ 
   public async showModifPartenaire(id: number, nom: string, logo: string, url: string){
-    console.log(id, nom, logo, url)
     this.formModifPartenaire.setValue({
       id: id,
       nom: nom,
