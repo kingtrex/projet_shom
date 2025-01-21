@@ -95,6 +95,8 @@ async def delete_meta(id: str,
     try:
         db = databaseConnect()
         cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"DELETE FROM obsmar.maregraphe_meta "
+                    f"WHERE id_meta=%s", (id,))
         cur.execute(f"DELETE FROM obsmar.meta \
                     WHERE id=%s", (id,))
         db.commit()
