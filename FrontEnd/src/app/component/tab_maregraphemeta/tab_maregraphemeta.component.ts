@@ -21,7 +21,8 @@ export class TabMaregraphemetaComponent implements OnInit {
   public ville_maregraphe: string = this.route.snapshot.paramMap.get('ville')!;
   public formAddMeta: FormGroup;
   public formModifMeta: FormGroup;
-  public metadonnees: Meta[] = [];
+  public metadonneesForm: Meta[] = [];
+  public allMeta: Meta[] = [];
   public origine: string;
 
   public sortData: {[key: string] : boolean} = {
@@ -83,7 +84,15 @@ export class TabMaregraphemetaComponent implements OnInit {
   public async getMeta(){
     await this.apiMeta.getMetaForm(this.id_maregraphe).then((data: any) => {
       data.forEach((element : any) => {
-        this.metadonnees.push(new Meta(element.id, element.description, element.ordre));
+        this.metadonneesForm.push(new Meta(element.id, element.description, element.ordre));
+      })
+      this.isDataLoaded = true;  
+    }).catch((error: any) => {
+      alert(error)
+    })
+    await this.apiMeta.getData().then((data: any) => {
+      data.forEach((element : any) => {
+        this.allMeta.push(new Meta(element.id, element.description, element.ordre));
       })
       this.isDataLoaded = true;  
     }).catch((error: any) => {
@@ -160,6 +169,14 @@ export class TabMaregraphemetaComponent implements OnInit {
       "id_meta": idMeta,
       "donnee": description
     })
+    for(let i = 0; i < this.allMeta.length; i++){
+      const meta = this.allMeta[i];
+      console.log(meta.id + " " + idMeta)
+      if(meta.id == idMeta){
+        document.getElementsByClassName("description_modif")[0].innerHTML = "Description : " + meta.description;
+        break;
+      }
+    }
     let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'block';
   }
@@ -185,5 +202,16 @@ public async hideForm(){
       this.sortData[col] = !this.sortData[col];
       this.triangleData[col] = this.sortData[col] ? "▼" : "▲";
     })
+  }
+
+  public async changeMeta(event: any){
+    console.log(event.target.value)
+    for (let i = 0; i < this.metadonneesForm.length; i++) {
+      const meta = this.metadonneesForm[i];
+      if (meta.id == event.target.value) {
+        document.getElementsByClassName("description")[0].innerHTML = "Description : " + meta.description;
+        break;
+      }
+    }
   }
 }

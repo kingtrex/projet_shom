@@ -23,10 +23,11 @@
         <h2>Ajouter une métadonnée</h2>
         <form [formGroup]="formAddMeta">
           <label for="id_meta">Identifiant de la métadonnée : </label>
-            <select id="id_meta" formControlName="idMeta">
+            <select id="id_meta" formControlName="idMeta" (change)="changeMeta($event)">
               <option value="" disabled selected>Choisir une métadonnée</option>
-              <option *ngFor="let i of metadonnees">{{i.id}}</option>
+              <option *ngFor="let i of metadonneesForm">{{i.id}}</option>
             </select>
+            <p class="description"></p>
             <label for="valeur">Valeur de la métadonnée : </label>
             <input type="text" id="valeur" name="valeur" formControlName="data"><br><br>
         </form>
@@ -71,7 +72,7 @@
         <form [formGroup]="formModifMeta">
           <label for="idMeta">ID métadonnée : </label>
           <input type="text" id="idMeta" readonly="True" formControlName="id_meta"><br><br>
-    
+          <p class="description_modif"></p>
           <label for="valeur">Valeur de la métadonnée : </label>
           <input type="text" id="valeur" formControlName="donnee"><br><br>
         </form>
