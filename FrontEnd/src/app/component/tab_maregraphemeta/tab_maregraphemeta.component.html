@@ -27,8 +27,8 @@
               <option value="" disabled selected>Choisir une métadonnée</option>
               <option *ngFor="let i of metadonnees">{{i.id}}</option>
             </select>
-            <label for="description">Description de la métadonnée : </label>
-            <input type="description" id="description" name="description" formControlName="data"><br><br>
+            <label for="valeur">Valeur de la métadonnée : </label>
+            <input type="text" id="valeur" name="valeur" formControlName="data"><br><br>
         </form>
         <div class="bouton">
           <button class="ajout_meta"  type="submit" (click)="addMeta()">Créer</button>
@@ -72,8 +72,8 @@
           <label for="idMeta">ID métadonnée : </label>
           <input type="text" id="idMeta" readonly="True" formControlName="id_meta"><br><br>
     
-          <label for="description">Description : </label>
-          <input type="text" id="description" formControlName="donnee"><br><br>
+          <label for="valeur">Valeur de la métadonnée : </label>
+          <input type="text" id="valeur" formControlName="donnee"><br><br>
         </form>
         <div class="bouton">
           <button class="ajout_meta"  type="submit" (click)="updateMetaMare()">Modifier</button>
