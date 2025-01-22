@@ -120,3 +120,22 @@
 a{
     text-decoration: none;
 }
+
+.Supprimer{
+    background-color: red;
+    color: white;
+}
+
+.Editer, .Supprimer{
+    
+    display: inline-block;
+    border-radius: 6px;
+    border-color: #C4C3C3;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    width: 100px;
+    cursor: pointer;
+    margin: 2.5px;
+    border: 2px solid #C4C3C3;
+}

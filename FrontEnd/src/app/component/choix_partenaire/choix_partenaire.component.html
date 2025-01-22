@@ -8,33 +8,33 @@
   Chargement des données ...
 </div>
 <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
-<!-------------------- Formulaire d'aout d'un marégraphe ----------------
-  <button class="Ajouter" id="Ajouter"  type="button" (click)="show_add_maregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
+  <button class="Ajouter" id="Ajouter"  type="button" (click)="showAddPartenaire()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un partenaire</button>
 
   <div class="fond_form" id="hide_form_add">
     <div class="form_add_meta">
-      <span class="close-button" (click)="annuler_add()">&times;</span>
-      <h2>Ajouter un marégraphe</h2>
-      <form [formGroup]="formAddMaregraphe">
-        <label for="ville">Ville : </label>
-        <input type="text" id="ville" formControlName="ville"><br><br>
+      <span class="close-button" (click)="annulerAdd()">&times;</span>
+      <h2>Ajouter un partenaire</h2>
+      <form [formGroup]="formAddPartenaire">
 
-        <label for="id_maregraphe">Identifiant du marégraphe : </label>
-        <input type="text" id="id_maregraphe" formControlName="id_maregraphe"><br><br>
+        <label for="id">Identifiant : </label>
+        <input type="number" id="id" formControlName="id"><br><br>
 
-        <label for="latitude">Latitude : </label>
-        <input type="number" id="latitude" formControlName="latitude"><br><br>
+        <label for="nom">Nom : </label>
+        <input type="text" id="nom" formControlName="nom"><br><br>
 
-        <label for="longitude">Longitude : </label>
-        <input type="number" id="longitude" formControlName="longitude"><br><br>
+        <label for="logo">Nom du logo : </label>
+        <input type="text" id="logo" formControlName="logo"><br><br>
+
+        <label for="url">URL : </label>
+        <input type="text" id="url" formControlName="url"><br><br>
       </form>
       <div class="bouton">
-        <button class="ajout_meta"  type="submit" (click)="addMaregraphe()">Créer</button>
-        <button class="supp_meta" id="supp_meta" type="delete"  (click)="annuler_add()">Annuler</button>
+        <button class="ajout_meta"  type="submit" (click)="addPartenaire()">Créer</button>
+        <button class="supp_meta" id="supp_meta" type="delete"  (click)="annulerAdd()">Annuler</button>
       </div>
     </div>
   </div>
-<!---------------------------------------------------------------------->
+
   <br><br><br>
   <table>    
     <thead>
@@ -59,6 +59,7 @@
           <!-- Formulaire de modification d'un partenaire -->
 
             <button class="editer" type="button" (click)="showModifPartenaire(i.id, i.nom, i.logo, i.url)">Editer</button>
+            <button class="Supprimer" type="button" (click)="deletePartenaire(i.id)">Supprimer</button>
           </div>
 
           

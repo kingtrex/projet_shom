@@ -10,8 +10,9 @@ export class ApiMeta {
   constructor(private http: HttpClient) { }
 
   /**
-   * Obtenir la liste des types de métadonnées dans la BDD
-   * @returns JSON contenant la liste des types de métadonnées
+   * Obtenir la liste des métadonnées
+   * @returns {Promise<any>} - Une promesse qui se résout avec les informations des métadonnées
+   * @throws Lève une erreur si la requête échoue
    */
   public async getData(): Promise<any> {
     try{
@@ -23,11 +24,12 @@ export class ApiMeta {
   }
 
   /**
-   * Appeler l'API pour ajouter la métadonnée dans la BDD
-   * @param id string : identifiant de la méta
-   * @param description string : description de la méta
-   * @param ordre int : ordre de la méta
-   * @returns validation de la requete
+   * Ajouter un nouveaut type de métadonnée
+   * @param {string} id - L'ID de la métadonnée 
+   * @param {string} description - La description de la métadonnée 
+   * @param {number} ordre - L'ordre de la métadonnée 
+   * @returns {Promise<any>} - Une promesse qui se résout avec les informations de l'ajout
+   * @throws Lève une erreur si la requête échoue
    */
   public async addMeta(id: string,
     description: string,
@@ -42,16 +44,17 @@ export class ApiMeta {
   }
 
   /**
-   * Modifier les informations d'une métadonnée dans la BDD
-   * @param idMeta string : id de la métadonnée
-   * @param description string : description de la métadonnée
-   * @param ordre number : ordre de la métadonnée
-   * @returns état de la requête
+   * Modifier une métadonnée
+   * @param {string} idMeta - L'ID de la métadonnée 
+   * @param {string} description - La nouvelle description de la métadonnée 
+   * @param {number} ordre - Le nouvel ordre de la métadonnée 
+   * @returns {Promise<any>} - Une promesse qui se résout avec les informations de la modification 
+   * @throws Lève une erreur si la requête échoue
    */
   public async updateMeta(idMeta: string,
     description: string,
     ordre: number
-  ){
+  ): Promise<any>{
     try{
       const param = "updateMeta/" + idMeta + "&" + description + "&" + ordre
       return await lastValueFrom(this.http.put(this.baseUrl + param, null))
@@ -61,9 +64,10 @@ export class ApiMeta {
   }
 
   /**
-   * Supprimer le type de métadonnée de la BDD
-   * @param id string : l'identifiant du type de la métadonnée
-   * @returns le status de la requête
+   * Supprimer une métadonnée
+   * @param {number} id - L'ID de la métadonnée
+   * @returns {Promise<any>} - Une promesse qui se résout avec les informations de la suppression
+   * @throws Lève une erreur si la requête échoue
    */
   public async deleteMeta(id: string): Promise<any>{
     try{
@@ -75,10 +79,11 @@ export class ApiMeta {
   }
 
   /**
-   * Trier les colonnes
-   * @param col string : nom de la colonne
-   * @param order bool : true => ordre décroissant, false =>  ordre croissant
-   * @returns 
+   * Trier les métadonnées
+   * @param {string} col - La colonne par laquelle trier 
+   * @param {boolean} order - L'ordre de tri (true pour descendant, false pour ascendant) 
+   * @returns {Promise<Object>} - Une promesse qui retourne les métadonnées triées
+   * @throws Lève une erreur si la requête échoue
    */
   public async sortData(col: string, order: boolean): Promise<Object>{
     try{
@@ -88,14 +93,4 @@ export class ApiMeta {
       throw error.error.detail;
     }
   }
-
-  public async getMetaForm(id: number){
-    try{
-      const param = "getMetaForm/" + id
-      return await lastValueFrom(this.http.get(this.baseUrl + param))
-    }catch(error: any){
-      throw error.error.detail;
-    }
-  }
 }
-
