@@ -61,7 +61,7 @@ async def get_partenaire_maregraphe(id: int,
             db.close()
 
 @router.get("/partenaireMaregraphe/sort/{id}&{col}&{order}")
-async def sort_partenaireMaregraphe(id: int, col: str, order: bool,
+async def sort_partenaire_maregraphe(id: int, col: str, order: bool,
                                     token: Annotated[User, Depends(get_current_user)]):
     allow_col = ["id_maregraphe", "libelle"]
     if col not in allow_col:
@@ -78,6 +78,25 @@ async def sort_partenaireMaregraphe(id: int, col: str, order: bool,
             query += f"DESC"
         cur.execute(query, (id,))
         return cur.fetchall()
+    except Exception as e:
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
+
+@router.post("/addPartenaire/{id}&{nom}&{logo}")
+async def add_partenaire(nom: str, logo: str, id: int,
+                         request: Request,
+                         token: Annotated[User, Depends(get_current_user)]):
+    json = await request.json()
+    url = json["url"]
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"INSERT INTO obsmar.partenaire(id, nom, logo, url) \
+                    VALUES (%s, %s, %s, %s)", (id, nom, logo, url))
+        db.commit()
+        return cur.lastrowid
     except Exception as e:
         check_error(e)
     finally:
@@ -121,8 +140,25 @@ async def update_partenaire(id: int, nom: str, logo: str,
         if 'db' in locals() and db:
             db.close()
 
+@router.delete("/deletePartenaire/{idPartenaire}")
+async def delete_partenaire(idPartenaire: int, token: Annotated[User, Depends(get_current_user)]):
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"DELETE FROM obsmar.partenaire_maregraphe\
+        WHERE id_partenaire=%s", (idPartenaire,))
+        cur.execute(f"DELETE FROM obsmar.partenaire \
+                    WHERE id=%s", (idPartenaire,))
+        db.commit()
+        return cur.rowcount
+    except Exception as e:
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
+
 @router.delete("/deleteMare/{idParte}&{idMare}")
-async def delete_meta(idParte: int, idMare: int,
+async def delete_mare(idParte: int, idMare: int,
                       token: Annotated[User, Depends(get_current_user)]):
     try:
         print(f"{idParte} - {idMare}")

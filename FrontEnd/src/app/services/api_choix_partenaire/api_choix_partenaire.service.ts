@@ -27,11 +27,11 @@ export class ApiChoixPartenaireService {
   public async addPartenaire(id: string,
     nom: string,
     logo: number,
-    url: number
+    url: string,
   ): Promise<any>{
     try{
-      const param = "addPartenaire/" + id + "&" + nom + "&" + logo + "&" + url;
-      return await lastValueFrom(this.http.post(this.baseUrl + param, null));
+      const param = "addPartenaire/" + id + "&" + nom + "&" + logo;
+      return await lastValueFrom(this.http.post(this.baseUrl + param, {"url": url}));
     }catch(error: any){
       throw error.error.detail;
     }
@@ -56,6 +56,15 @@ export class ApiChoixPartenaireService {
     try{
       const param = "updatePartenaire/" + id + "&" + nom + "&" + logo 
       return await lastValueFrom(this.http.put(this.baseUrl + param, {"url": url}));
+    }catch(error: any){
+      throw error.error.detail;
+    }
+  }
+
+  public async deletePartenaire(id: number): Promise<any>{
+    try{
+      const param = "deletePartenaire/" + id
+      return await lastValueFrom(this.http.delete(this.baseUrl + param));
     }catch(error: any){
       throw error.error.detail;
     }

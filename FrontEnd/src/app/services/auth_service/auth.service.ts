@@ -30,7 +30,6 @@ export class AuthService {
       localStorage.setItem("token", response.access_token)
       this.router.navigate(["/tabChoixMaregraphe"])
     }catch(error){
-      console.log("error login: " + error);
       return error
     }
   }

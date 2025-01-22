@@ -59,6 +59,7 @@ export class ChoixPartenaireComponent {
     })
     this.donnees = meta;
     this.isDataLoaded = true;
+    console.log(this.isDataLoaded)
   }
 
   /**
@@ -102,5 +103,32 @@ export class ChoixPartenaireComponent {
     }).catch((error: any) => {
       alert(error)
     })
+  }
+
+  public async deletePartenaire(id: number){
+    await this.apiChoixPartenaire.deletePartenaire(id).then(() => {
+      location.reload()
+    }).catch((error: any) => {
+      alert(error)
+    })
+  }
+
+  public async addPartenaire(){
+    const value = this.formAddPartenaire.value
+    await this.apiChoixPartenaire.addPartenaire(value.id, value.nom, value.logo, value.url).then(() => {
+      location.reload()
+    }).catch((error: any) => {
+      alert(error)
+    })
+  }
+
+  public async annulerAdd(){
+    let form = document.getElementById("hide_form_add")?.style;
+    if (form) form.display = 'none';
+  }
+
+  public async showAddPartenaire(){
+    let form = document.getElementById("hide_form_add")?.style;
+    if (form) form.display = 'block';
   }
 }
