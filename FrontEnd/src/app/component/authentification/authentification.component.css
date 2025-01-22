@@ -1,21 +1,24 @@
+/** Couleur du texte d'identifiant ou mot de passe éronnée **/
 #error{
     color: red;
 }
+/*******************************************/
 
-.hide{
-    display: none;
-}
+/** CSS pour formulaire de connexion **/
 .fond_auth{
     display: flex;
     justify-content: center;
     text-align: center;
 }
+/*******************************************/
 
+/** Encart pour le contenu du formulaire de connexion **/
 .form_auth{
     background-color: lightgray;
     padding: 20px;
     border-radius: 5%;
 }
+/*******************************************/
 
 h2{
     margin: 0;
@@ -30,15 +33,21 @@ form{
     padding: 20px;
 }
 
+/*******************************************/
 
+/** zones de saisie de l'identifiant et du mot de passe **/
 .saisie{
-    width: 200px; /* Largeur personnalisée */
-    height: 10px; /* Hauteur personnalisée */
-    font-size: 20px; /* Taille du texte */
-    padding: 10px; /* Espacement interne */
-    border-radius: 5px; /* Coins arrondis pour le style */
-    border: 1px solid #B8B7B7; /* Bordure visible et esthétique */
+    width: 200px;
+    height: 10px;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #B8B7B7;
 }
-.connexion, .annuler{
+/*******************************************/
+
+/** Marge du bouton connexion **/
+.connexion{
     margin: 5px;;
 }
+/*******************************************/

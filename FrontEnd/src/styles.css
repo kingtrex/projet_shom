@@ -1,4 +1,4 @@
-/** Lignesgrise avec le nom de la page **/
+/** Lignes grises avec le nom de la page **/
 .rectangle{
     background-color: #E2DDDD;
     padding-left: 1%;
@@ -7,7 +7,7 @@
     border-radius: 3px;
     font-size: 25px;
 }
-/**************************************/
+/*******************************************/
 
 /** Gère l'affichage des infos à l'écran si chargées ou non **/
 .affiche{
@@ -17,28 +17,30 @@
 .invisible{
     display:none;
 }
-/************************************/
+/*******************************************/
 
 /** Informations du partenaire/marégraphe choisi d'afficher **/
 .infos_page{
     text-align: center;
     font-size: 25px;
 }
-/***************************************/
+/*******************************************/
 
 /** Style des boutons Ajouter**/
 .Ajouter{
     display: flex;
+    position: relative;
     border-radius: 3px;
     border: 2px solid #04acc6;
     background-color: #09c5e1;
     padding: 10px;
     color: white;
     gap: 10px;
+    left: 65%;
 }
-/*************************************/
+/*******************************************/
 
-/** Colorie les lignes paires e gris clair et impaires en blanc **/
+/** Colorie les lignes paires en gris clair et impaires en blanc **/
 .lignes_a_colorer:nth-child(odd) {
     background-color: #F0F0F0; /* Gris clair */
 }
@@ -50,9 +52,9 @@
 .lignes_a_colorer:hover{
     background-color: lightgray;
 }
-/***********************************/
+/*******************************************/
 
-/** CSS pour formulaire d'ajout des infos du marégraphe **/
+/** CSS pour formulaire d'ajout/modification **/
 .fond_form{
     display: none;
     position: fixed;
@@ -64,19 +66,18 @@
     justify-content: center;
     align-items: center;
 }
-/***************************************/
-/** Cacher les formulaires d'ajout et de modif**/
-#hide_form_add{
+/*******************************************/
+
+/** Cacher les formulaires d'ajout et de modification **/
+#hide_form_add, #hide_form_modif{
     display:none;
 }
 
-#hide_form_modif{
-    display:none;
-}
-/*****************************************/
+
+/*******************************************/
 
 /** Encart pour le contenu du formulaire d'ajout/modification **/
-.form{
+.form, .form_add{
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -87,6 +88,15 @@
 }
 /*******************************************/
 
+/* Bouton pour fermer le formulaire via la croix */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+/*******************************************/
 
 .acceder, .editer, .annuler{
     background-color: white;
@@ -105,21 +115,7 @@
 }
 
 
-.bouton_retour{
-    background-color: white;
-    color: black;
-    border-radius: 6px;
-    border-color: #C4C3C3;
-    text-align: center;
-    font-size: 14px;
-    width: 100px;
-    margin: 2.5px;
-    border: 2px solid #C4C3C3;
-    
-    padding: 10px;
-    gap: 10px;
-    position: relative;
-}
+
 
 a{
     text-decoration: none;
