@@ -111,3 +111,20 @@ async def delete_meta(id: int, meta: str,
     finally:
         if 'db' in locals() and db:
             db.close()
+
+@router.get("/getMetaForm/{id}")
+async def get_meta_form(id: int,token: Annotated[User, Depends(get_current_user)]):
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"SELECT * FROM obsmar.meta me \
+                    WHERE NOT EXISTS(\
+                        SELECT * FROM obsmar.maregraphe_meta ma \
+                        WHERE me.id=ma.id_meta AND ma.id_maregraphe=%s\
+                    ) ORDER BY me.id", (id,))
+        return cur.fetchall()
+    except Exception as e:
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
