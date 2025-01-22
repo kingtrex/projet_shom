@@ -97,7 +97,7 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   }
 
   public async showAddMaregraphe(){
-    document.getElementById("hide_form")!.style.display = "block";
+    document.getElementById("hide_form_add")!.style.display = "block";
   }
 
   public async addMaregraphe(){
@@ -109,7 +109,8 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
     })
   }
   public async annuler(){
-    document.getElementById("hide_form")!.style.display = "none";
+    let form = document.getElementById("hide_form_add")?.style;
+    if (form) form.display = 'none';
   }
 
   /**

@@ -1,14 +1,7 @@
-
-
-
-
-#hide_form{
-    display:none;
+.form{
+    margin-top: 7%;
 }
 
-#show_form{
-    display: flex;
-}
 .form_add_meta {
     transform: scale(1.5);
     background-color: #fff;
@@ -19,6 +12,22 @@
     margin-top: 13%;
     margin-left: 35%;
     position: relative;
+}
+
+/* Style ajouté aux zones de saisie des formulaire */
+input, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border: 3px solid #555;
 }
 
 /* Bouton pour fermer le modal */
