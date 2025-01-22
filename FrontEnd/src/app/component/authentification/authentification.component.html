@@ -1,6 +1,6 @@
 <div class="fond_auth">
   <div class="form_auth">
-    <h2>Connexion</h2>
+    <h2>Authentification</h2>
     <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
       
       <label for="id_meta">Identifiant : </label>
@@ -12,7 +12,7 @@
       </div>
       <p id="error" class="hide">Nom d'utilisateur ou mot de passe incorrect</p>        
     </form>
-    <button class="connexion"  (click)="onSubmit()">Se connecter</button>
+    <button class="acceder"  (click)="onSubmit()">Connexion</button>
     <button class="annuler" id="annuler" (click)="this.formLogin.reset()">Annuler</button>
   </div>
 </div>

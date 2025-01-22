@@ -184,7 +184,7 @@ export class TabMaregraphemetaComponent implements OnInit {
 /**
  * @brief fermer le formulaire de modification d'une métadonnée
  */
-public async hideForm(){
+public async close_modif(){
   let form = document.getElementById("hide_form_modif")?.style;
   if (form) form.display = 'none';
 }

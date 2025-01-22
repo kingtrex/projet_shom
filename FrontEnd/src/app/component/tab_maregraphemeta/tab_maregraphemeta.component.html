@@ -66,7 +66,7 @@
               
       <div class="form">
         
-        <span class="close-button">&times;</span>
+        <span class="close-button" (click)="close_modif()">&times;</span>
         <h2>Modifier les informations de la métadonnée</h2>
     
         <form [formGroup]="formModifMeta">
@@ -78,7 +78,7 @@
         </form>
         <div class="bouton">
           <button class="ajout_meta"  type="submit" (click)="updateMetaMare()">Modifier</button>
-          <button class="supp_meta" id="supp_meta" type="delete" (click)="hideForm()">Annuler</button>
+          <button class="supp_meta" id="supp_meta" type="delete" (click)="close_modif()">Annuler</button>
         </div>
     <!---------------------------------------------------------------------------->     
       </div>              
