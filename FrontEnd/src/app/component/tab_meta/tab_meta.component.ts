@@ -45,7 +45,7 @@ export class TabMetaComponent implements OnInit {
   }
 
   /**
-   * @brief Obtenir les différents types de métadonnées existants dans la BDD
+   * Obtenir les métadonnées
    */
   public async getData(){
     await this.apiMeta.getData().then((element: any) => {
@@ -59,7 +59,7 @@ export class TabMetaComponent implements OnInit {
   }
 
   /**
-   * @brief Afficher le formulaire d'ajout d'une metadonnée
+   * Afficher le formulaire d'ajout d'un type de métadonné
    */
   public async showAddMeta(){
     let form = document.getElementById("hide_form_add")?.style;
@@ -91,8 +91,8 @@ export class TabMetaComponent implements OnInit {
   }
 
   /**
-   * Supprimer le type de métadonnée dans la base de donnée
-   * @param meta string : Id du type de la métadonnée
+   * Supprimer un type de métadonné
+   * @param {string} meta - Le type de métadonné à supprimer 
    */
   public async deleteMeta(meta: string){
     if(confirm("Voulez-vous supprimer ce type de métadonné?")){
@@ -105,38 +105,45 @@ export class TabMetaComponent implements OnInit {
   }
 
   /**
-   * @brief Fermer le formulaire d'ajout d'un type de métadonné
+   * Fermer le formulaire d'ajout d'un type de métadonné
    */
   public async annuler(){
     let form = document.getElementById("hide_form_add")?.style;
     if (form) form.display = 'none';
   }
 
-    /**
-   * @brief ajouter une métadonnée au marégraphe
+  /**
+   * Afficher le formulaire de modification d'une métadonnée
+   * @param {string} idMeta - L'ID de la métadonnée 
+   * @param {string} description - La description de la métadonnée 
+   * @param {number} ordre - L'ordre de la métadonnée 
    */
-    public async showModifForm(
-      idMeta: string,
-      description: string,
-      ordre: number,
-    ){
-      this.formModifMeta.setValue({
-        "id": idMeta,
-        "description": description,
-        "ordre": ordre
-      })
-      let form = document.getElementById("hide_form_modif")?.style;
-      if (form) form.display = 'block';
-    }
+  public async showModifForm(
+    idMeta: string,
+    description: string,
+    ordre: number,
+  ){
+    this.formModifMeta.setValue({
+      "id": idMeta,
+      "description": description,
+      "ordre": ordre
+    })
+    let form = document.getElementById("hide_form_modif")?.style;
+    if (form) form.display = 'block';
+  }
 
   /**
-   * @brief fermer le formulaire de modification d'une métadonnée
+   * Cacher le formulaire de modification d'une métadonnée
    */
   public async hideForm(){
     let form = document.getElementById("hide_form_modif")?.style;
     if (form) form.display = 'none';
   }
 
+  /**
+   * Trier le tableau de données en fonction de la colonne
+   * @param {string} col - La colonne par laquelle trier 
+   */
   public async sort(col: string){
     await this.apiMeta.sortData(col, this.sortData[col]).then((element: any) => {
       this.donnees = []
