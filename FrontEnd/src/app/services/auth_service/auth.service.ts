@@ -18,9 +18,11 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   /**
-   * Lancer le Processus d'authentification de l'utilisateur
-   * @param username string : le login de l'utilisateur
-   * @param password string : le mot de passe de l'utilisateur
+   * Lancer une requête pour se connecter
+   * @param {string} username - Le nom d'utilisateur 
+   * @param {string} password - Le mot de passe 
+   * @returns {Promise<any>} - Une promesse qui se résout avec les informations de connexion
+   * @throws Lève une erreur si la requête échoue
    */
   public async login(username: string, password: string): Promise<any>{
     try{
@@ -34,8 +36,9 @@ export class AuthService {
     }
   }
 
+
   /**
-   * déconnecter l'utilisateur
+   * Deconnecter l'utilisateur
    */
   public logout() {
     localStorage.removeItem('token');
@@ -43,8 +46,8 @@ export class AuthService {
   }
 
   /**
-   * Vérifier si l'utilisateur est toujours connecté
-   * @returns bool : si l'utilisateur est toujours connecté 
+   * Vérifier si l'utilisateur est connecté
+   * @returns bool : si l'utilisateur est connecté ou non
    */
   public isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
@@ -53,8 +56,8 @@ export class AuthService {
 
   /**
    * Vérifier si le token a expirer ou non
-   * @param token string : le token de l'utilisateur
-   * @returns bool : si le token a expiré ou non
+   * @param {string} token - Le token à vérifier
+   * @returns {boolean} - Si le token a expiré ou non
    */
   public isTokenExpired(token: string): boolean {
     try {

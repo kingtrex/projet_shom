@@ -12,9 +12,10 @@ export class ApiMaregraphemeta {
   constructor(private http: HttpClient) {}
 
   /**
-   * Obtenir les métadonnées du marégraphe passé en paramètre dans la base de données
-   * @param id number: identifiant du marégraphe
-   * @returns JSON contenant les métadonnées du marégraphe
+   * Obtenir les métadonnées d'un marégraphe
+   * @param {number} id - L'ID du marégraphe 
+   * @returns {Promise<any>} - Une promesse qui se résout avec les informations des métadonnées
+   * @throws Lève une erreur si la requête échoue
    */
   public async getData(id: number): Promise<any> {
     try{
@@ -25,13 +26,14 @@ export class ApiMaregraphemeta {
   }
 
   /**
-   * Ajouter une métadonnée au marégraphe
-   * @param idMare number : id du marégraphe
-   * @param idMeta number : id de la métadonnée
-   * @param meta number | string : data de la métadonnée
-   * @returns 
+   * Ajouter une métadonnée à un marégraphe
+   * @param {number} idMare - L'ID du marégraphe 
+   * @param {string} idMeta - L'ID de la métadonnée 
+   * @param {number | string} meta - La valeur de la métadonnée 
+   * @returns {Promise<any>} - Une promesse qui se résout avec les informations de l'ajout
+   * @throws Lève une erreur si la requête échoue
    */
-  public async addMeta(idMare: number, idMeta: number, meta: number | string): Promise<any>{
+  public async addMeta(idMare: number, idMeta: string, meta: number | string): Promise<any>{
     try{
       const param = "addMeta/" + idMare + "&" + idMeta + "&" + meta;
       return await lastValueFrom(this.http.post(this.baseUrl + param, null))
@@ -41,10 +43,12 @@ export class ApiMaregraphemeta {
   }
 
   /**
-   * Modifier les informations d'une métadonnée de marégraphe
-   * @param idMeta string : id de la métadonnée
-   * @param description string : description de la métadonnée
-   * @returns état de la requête
+   * Modifier une métadonnée d'un marégraphe
+   * @param {number} idMaregraphe - L'ID du marégraphe
+   * @param {string} idMeta - L'ID de la métadonnée
+   * @param {string} description - La nouvelle description de la métadonnée
+   * @returns {Promise<any>} - Une promesse qui se résout avec les informations de la modification
+   * @throws Lève une erreur si la requête échoue
    */
   public async updateMetaMare(idMaregraphe: number,
     idMeta: string,
@@ -60,9 +64,10 @@ export class ApiMaregraphemeta {
 
   /**
    * Supprimer une métadonnée d'un marégraphe
-   * @param idMare int : l'identifiant du marégraphe
-   * @param idMeta string : l'identifiant de la métadonnée
-   * @returns la réponse de l'API
+   * @param {number} idMare - L'ID du marégraphe 
+   * @param {string} idMeta - L'ID de la métadonnée 
+   * @returns {Promise<any>} - Une promesse qui se résout avec les informations de la suppression
+   * @throws Lève une erreur si la requête échoue
    */
   public async deleteMeta(idMare: number, idMeta: string): Promise<any>{
     try{
@@ -74,11 +79,12 @@ export class ApiMaregraphemeta {
   }
 
   /**
-   * Appeler l'API pour réobtenir les données avec un tri
-   * @param id number: id du marégraphe
-   * @param col string : id de la métadonnée
-   * @param order bool : true => ordre décroissant, false =>  ordre croissant
-   * @returns 
+   * Trier les métadonnées d'un marégraphe
+   * @param {number} id - L'ID du marégraphe 
+   * @param {string} col - La colonne à trier
+   * @param {boolean} order - L'ordre du tri: true pour décroissant, false pour croissant 
+   * @returns {Promise<any>} - Une promesse qui se résout avec les informations triées
+   * @throws Lève une erreur si la requête échoue
    */
   public async sortData(id: number, col: string, order: boolean): Promise<any>{
     try{
@@ -89,4 +95,19 @@ export class ApiMaregraphemeta {
     }
   }
 
+  
+  /**
+   * Obtenir les Métadonnées non utilisées par un marégraphe
+   * @param {number} id - L'ID du marégraphe 
+   * @returns {Promise<any>} - Une promesse qui se résout avec les informations des métadonnées non utilisées
+   * @throws Lève une erreur si la requête échoue
+   */
+  public async getMetaForm(id: number): Promise<any>{
+    try{
+      const param = "getMetaForm/" + id
+      return await lastValueFrom(this.http.get(this.baseUrl + param))
+    }catch(error: any){
+      throw error.error.detail;
+    }
+  }
 }
