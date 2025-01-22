@@ -173,3 +173,22 @@ async def delete_mare(idParte: int, idMare: int,
     finally:
         if 'db' in locals() and db:
             db.close()
+
+@router.get("/getMaregrapheForm/{id}")
+async def get_maregraphe_form(id: int,
+                              token: Annotated[User, Depends(get_current_user)]):
+    try:
+        db = databaseConnect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(f"SELECT * from obsmar.maregraphe ma \
+                    WHERE NOT EXISTS( \
+                        SELECT * FROM obsmar.partenaire_maregraphe pa \
+                        WHERE ma.id_tdb=pa.id_maregraphe AND pa.id_partenaire=%s \
+                    ) \
+                    ORDER BY ma.libelle", (id,))
+        return cur.fetchall()
+    except Exception as e:
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()

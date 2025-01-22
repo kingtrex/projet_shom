@@ -31,7 +31,6 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   }
 
   constructor(private ApiPartenaireMaregrapheService: ApiPartenaireMaregrapheService,
-    private ApiMaregrapheService: APIChoixMaregrapheService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private sharedService: SharedServiceService,
@@ -51,7 +50,7 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   }
 
   /**
-   * @biref Obtenir les métadonnées du marégraphe
+   * Obtenir les marégraphes du partenaire
    */
   public async getData(){
     await this.ApiPartenaireMaregrapheService.getData(this.id).then((element: any) => {
@@ -65,11 +64,12 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
 
   }
 
+
   /**
    * Obtenir les marégraphe qui ne sont pas assigné au partenaire
    */
   public async getPotentialMaregraphe(){
-    await this.ApiMaregrapheService.getMaregrapheForm(this.id).then((element: any) => {
+    await this.ApiPartenaireMaregrapheService.getMaregrapheForm(this.id).then((element: any) => {
       element.forEach((maregraphe: any) => {
         this.listMaregraphe.push(new Maregraphe(maregraphe.id_maregraphe, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude))
         this.dictMaregraphe[maregraphe.libelle] = maregraphe.id_tdb;
@@ -81,7 +81,7 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
 
   /**
    * Trier le tableau de données en fonction de la colonne
-   * @param col string : colonne à trier
+   * @param {string} col - La colonne par laquelle trier
    */
   public async sort(col: string){
     await this.ApiPartenaireMaregrapheService.sortData(this.id, col, this.sortData[col]).then((element: any) => {
@@ -96,10 +96,16 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
     })
   }
 
+  /**
+   * Afficher le formulaire d'ajout de marégraphe
+   */
   public async showAddMaregraphe(){
     document.getElementById("hide_form_add")!.style.display = "block";
   }
 
+  /**
+   * Assigner un marégraphe au partenaire
+   */
   public async addMaregraphe(){
     const value = this.formAddMaregraphe.value;
     await this.ApiPartenaireMaregrapheService.addMaregraphe(this.id, this.dictMaregraphe[value.maregraphe], value.ordre).then((element: any) => {
@@ -108,23 +114,28 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
       alert(error)
     })
   }
+
+  /**
+   * Fermer le formulaire d'ajout de marégraphe
+   */
   public async annuler(){
     let form = document.getElementById("hide_form_add")?.style;
     if (form) form.display = 'none';
   }
 
   /**
-   * Supprimer une métadonnée du marégraphe
-   * @param idParte number : identifiant du partenaire
-   * @param idMare number : identifiant du marégraphe
+   * Désassigner le marégraphe du partenaire
+   * @param {number} idParte - L'ID du partenaire 
+   * @param {number} idMare - L'ID du marégraphe 
    * @returns 
    */
   public async deleteMaregraphe(idParte: number, idMare: number){
-    if(!confirm("Voulez-vous vraiment supprimer cette métadonnée?")) return
-    await this.ApiPartenaireMaregrapheService.deleteMaregraphe(idParte, idMare).then(() => {
-      location.reload()
-    }).catch((error: any) => {
-      alert(error)
-    })
+    if(confirm("Voulez-vous vraiment supprimer cette métadonnée?")){
+      await this.ApiPartenaireMaregrapheService.deleteMaregraphe(idParte, idMare).then(() => {
+        location.reload()
+      }).catch((error: any) => {
+        alert(error)
+      })      
+    }
   }
 }

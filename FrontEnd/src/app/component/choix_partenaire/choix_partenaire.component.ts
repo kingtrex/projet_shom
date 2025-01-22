@@ -106,11 +106,13 @@ export class ChoixPartenaireComponent {
   }
 
   public async deletePartenaire(id: number){
-    await this.apiChoixPartenaire.deletePartenaire(id).then(() => {
-      location.reload()
-    }).catch((error: any) => {
-      alert(error)
-    })
+    if(confirm("Voulez-vous supprimer ce partenaire?")){
+      await this.apiChoixPartenaire.deletePartenaire(id).then(() => {
+        location.reload();
+      }).catch((error: any) => {
+        alert(error);
+      })      
+    }
   }
 
   public async addPartenaire(){
