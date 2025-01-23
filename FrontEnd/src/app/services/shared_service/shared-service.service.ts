@@ -10,7 +10,7 @@ export class SharedServiceService {
    * @param {string} key - La clé de la donnée 
    * @param {string} data - La donnée à ajouter 
    */
-  public setData(key: string, data: string): void{
+  public async setData(key: string, data: string): Promise<void>{
     sessionStorage.setItem(key, data);
   }
 
@@ -19,7 +19,7 @@ export class SharedServiceService {
    * @param {string} key - La clé de la donnée 
    * @returns {string | null} - La donnée correspondant à la clé
    */
-  public getData(key: string): string | null{
+  public getData(key: string){
     return sessionStorage.getItem(key) === undefined ? null : sessionStorage.getItem(key);
   }
 
@@ -27,14 +27,14 @@ export class SharedServiceService {
    * Supprimer une valeur du sessionStorage
    * @param {string} key - La clé de la donnée à supprimer 
    */
-  public deleteData(key: string): void{
+  public async deleteData(key: string): Promise<void>{
     sessionStorage.removeItem(key);
   }
 
   /**
    * Afficher les données du sessionStorage
    */
-  public showData(): void{
+  public async showData(): Promise<void>{
     console.log(sessionStorage);
   }
 }

@@ -23,7 +23,7 @@ export class TabMaregraphemetaComponent implements OnInit {
   public formModifMeta: FormGroup;
   public metadonneesForm: Meta[] = [];
   public allMeta: Meta[] = [];
-  public origine: string;
+  public origine: string | null;
 
   public sortData: {[key: string] : boolean} = {
     "id_meta" : true,
@@ -48,7 +48,8 @@ export class TabMaregraphemetaComponent implements OnInit {
       id_meta: "",
       donnee: ""
     })
-    switch(this.sharedService.getData("origine")){
+    this.origine = this.sharedService.getData("origine");
+    switch(this.origine){
       case "choix_maregraphe":
         this.origine = "tabChoixMaregraphe";
         break;
@@ -63,11 +64,11 @@ export class TabMaregraphemetaComponent implements OnInit {
   ngOnInit(): void {
     this.getData();
     this.getMeta();
-
+    this.getOrigine();
   }
 
   /**
-   * @biref Obtenir les métadonnées du marégraphe
+   * Obtenir les métadonnées du marégraphe
    */
   public async getData(){
     await this.apiMaregrapheMeta.getData(this.id_maregraphe).then((data: any) => {
@@ -81,6 +82,9 @@ export class TabMaregraphemetaComponent implements OnInit {
 
   }
 
+  /**
+   * Obtenir les métadonnées qui n'ont pas encore été ajoutées au marégraphe
+   */
   public async getMeta(){
     await this.apiMaregrapheMeta.getMetaForm(this.id_maregraphe).then((data: any) => {
       data.forEach((element : any) => {
@@ -100,7 +104,12 @@ export class TabMaregraphemetaComponent implements OnInit {
     })
   }
 
-
+  /**
+   * Obtenir l'origine de la page
+   */
+  public async getOrigine(){
+    this.origine = this.sharedService.getData("origine")!;
+  }
   /**
    * @brief ajouter une métadonnée au marégraphe
    */
@@ -145,21 +154,23 @@ export class TabMaregraphemetaComponent implements OnInit {
 
   /**
    * Supprimer une métadonnée du marégraphe
-   * @param idMare number : identifiant du marégraphe
-   * @param idMeta string : identifiant de la métadonné
-   * @returns 
+   * @param {number} idMare - Id du marégraphe 
+   * @param {string} idMeta - Id de la métadonnée 
    */
   public async deleteMeta(idMare: number, idMeta: string){
-    if(!confirm("Voulez-vous vraiment supprimer cette métadonnée?")) return
-    await this.apiMaregrapheMeta.deleteMeta(idMare, idMeta).then(() => {
-      location.reload()
-    }).catch((error: any) => {
-      alert(error)
-    })
+    if(confirm("Voulez-vous vraiment supprimer cette métadonnée?")){
+      await this.apiMaregrapheMeta.deleteMeta(idMare, idMeta).then(() => {
+        location.reload()
+      }).catch((error: any) => {
+        alert(error)
+      })      
+    }
   }
 
   /**
-   * @brief modifie une métadonnée du marégraphe
+   * Afficher le formulaire de modification d'une métadonnée
+   * @param {string} idMeta - Id de la métadonnée 
+   * @param {string} description - Description de la métadonnée 
    */
   public async showModifForm(
     idMeta: string,
@@ -181,17 +192,17 @@ export class TabMaregraphemetaComponent implements OnInit {
     if (form) form.display = 'block';
   }
 
-/**
- * @brief fermer le formulaire de modification d'une métadonnée
- */
-public async close_modif(){
-  let form = document.getElementById("hide_form_modif")?.style;
-  if (form) form.display = 'none';
-}
+  /**
+   * Fermer le formulaire de modification d'une métadonnée
+   */
+  public async close_modif(){
+    let form = document.getElementById("hide_form_modif")?.style;
+    if (form) form.display = 'none';
+  }
 
   /**
    * Trier les colonne du tableau
-   * @param col string : nom de la colonne
+   * @param {string} col - nom de la colonne
    */
   public async sort(col: string){
     await this.apiMaregrapheMeta.sortData(this.id_maregraphe, col, this.sortData[col]).then((element: any) => {
@@ -204,8 +215,11 @@ public async close_modif(){
     })
   }
 
+  /**
+   * Changer la description de la métadonnée dans le formulaire de modification
+   * @param event - évènement
+   */
   public async changeMeta(event: any){
-    console.log(event.target.value)
     for (let i = 0; i < this.metadonneesForm.length; i++) {
       const meta = this.metadonneesForm[i];
       if (meta.id == event.target.value) {
