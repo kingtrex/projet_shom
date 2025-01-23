@@ -5,58 +5,6 @@
 /************************************************************/
 
 
-/* Style ajouté aux zones de saisie des formulaire */
-input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 3px solid #ccc;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
-}
-
-input:focus {
-    border: 3px solid #555;
-}
-
-
-.bouton{
-    display: flex;
-    gap: 10px;
-    margin: 10px;
-    padding: 0.5%;
-    border-radius: 3px;
-}
-
-.ajout_meta{
-    background-color: white;
-    color: black;
-}
-
-
-.supp_meta{
-    display: flex;
-    background-color: red;
-    color: white;
-
-    gap: 10px;
-
-}
-
-  
-
-.ajout_meta, .supp_meta{
-    border-radius: 6px;
-    text-align: center;
-    font-size: 14px;
-    padding: 10px;
-    cursor: pointer;
-    margin: 2.5px;
-    border: 2px solid #C4C3C3;
-}
-
 thead{
     text-align: left;
 }
@@ -80,32 +28,3 @@ caption{
     margin-bottom: 30px;
 }
 
-
-/** Boutons Editer et Supprimer **/
-.Actions{
-    text-align: center;
-}
-
-.Editer{
-    background-color: white;
-    color: black;
-}
-.Supprimer{
-    background-color: red;
-    color: white;
-}
-
-.Editer, .Supprimer{
-    
-    display: inline-block;
-    border-radius: 6px;
-    border-color: #C4C3C3;
-    text-align: center;
-    font-size: 14px;
-    padding: 10px;
-    width: 100px;
-    cursor: pointer;
-    margin: 2.5px;
-    border: 2px solid #C4C3C3;
-}
-/*****************************************/

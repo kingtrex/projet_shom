@@ -2,71 +2,6 @@
     margin-top: 5%;
 }
 
-.Supprimer{
-    background-color: red;
-    color: white;
-    display: inline-block;
-    border-radius: 6px;
-    border-color: #C4C3C3;
-    text-align: center;
-    font-size: 14px;
-    padding: 10px;
-    width: 100px;
-    cursor: pointer;
-    margin: 2.5px;
-    border: 2px solid #C4C3C3;
-}
-
-
-.form_modif{
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    margin-top: 5%;
-    margin-left: 35%;
-    position: relative;
-}
-/************************************************************/
-
-
-
-.bouton{
-    display: flex;
-    gap: 10px;
-    margin: 10px;
-    padding: 0.5%;
-    border-radius: 3px;
-}
-
-.ajout_mare{
-    background-color: white;
-    color: black;
-}
-
-
-.supp_mare{
-    display: flex;
-    background-color: red;
-    color: white;
-    gap: 10px;
-
-}
-
-  
-
-.ajout_mare, .supp_mare{
-    border-radius: 6px;
-    text-align: center;
-    font-size: 14px;
-    padding: 10px;
-    cursor: pointer;
-    margin: 2.5px;
-    border: 2px solid #C4C3C3;
-}
-
-
 table{
     border-collapse: collapse;
     margin: auto;
@@ -81,26 +16,3 @@ table, td, th {
     text-align: left;
     
 }
-
-
-
-
-
-
-/******************************************************************/
-
-
-input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 3px solid #ccc;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
-  }
-  
-  input:focus {
-    border: 3px solid #555;
-  }

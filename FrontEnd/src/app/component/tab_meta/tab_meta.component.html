@@ -28,8 +28,8 @@
       <input type="number" id="ordre" formControlName="ordre"><br><br>
     </form>
     <div class="bouton">
-      <button class="ajout_meta"  type="submit" (click)="addMeta()">Créer</button>
-      <button class="supp_meta" id="supp_meta" type="delete"  (click)="annuler()">Annuler</button>
+      <button class="ajout"  type="submit" (click)="addMeta()">Créer</button>
+      <button class="supp" id="supp" type="delete"  (click)="annuler()">Annuler</button>
     </div>
   </div>
 </div>
@@ -62,7 +62,7 @@
               
   <div class="form">
     
-    <span class="close-button">&times;</span>
+    <span class="close-button" (click)="hideForm()">&times;</span>
     <h2>Modifier les informations de la métadonnée</h2>
 
     <form [formGroup]="formModifMeta">
@@ -76,8 +76,8 @@
       <input type="number" id="ordre" formControlName="ordre"><br><br>
     </form>
     <div class="bouton">
-      <button class="ajout_meta"  type="submit" (click)="updateMeta()">Modifier</button>
-      <button class="supp_meta" id="supp_meta" type="delete" (click)="hideForm()">Annuler</button>
+      <button class="ajout"  type="submit" (click)="updateMeta()">Modifier</button>
+      <button class="supp" id="supp" type="delete" (click)="hideForm()">Annuler</button>
     </div>
 <!---------------------------------------------------------------------------->     
   </div>              

@@ -11,7 +11,7 @@
   <button class="Ajouter" id="Ajouter"  type="button" (click)="showAddPartenaire()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un partenaire</button>
 
   <div class="fond_form" id="hide_form_add">
-    <div class="form_add_meta">
+    <div class="form_add">
       <span class="close-button" (click)="annulerAdd()">&times;</span>
       <h2>Ajouter un partenaire</h2>
       <form [formGroup]="formAddPartenaire">
@@ -29,8 +29,8 @@
         <input type="text" id="url" formControlName="url"><br><br>
       </form>
       <div class="bouton">
-        <button class="ajout_meta"  type="submit" (click)="addPartenaire()">Créer</button>
-        <button class="supp_meta" id="supp_meta" type="delete"  (click)="annulerAdd()">Annuler</button>
+        <button class="ajout"  type="submit" (click)="addPartenaire()">Créer</button>
+        <button class="supp" id="supp" type="delete"  (click)="annulerAdd()">Annuler</button>
       </div>
     </div>
   </div>
@@ -65,7 +65,7 @@
           
           <div class="fond_form" id="hide_form_modif">
             
-            <div class="form_modif_partenaire">
+            <div class="form_modif">
               
               <span class="close-button" (click)="annulerModif()">&times;</span>
               <h2>Modifier les informations du partenaire</h2>
@@ -82,8 +82,8 @@
       
               </form>
               <div class="bouton">
-                <button class="maj_partenaire"  type="submit" (click)="modifPartenaire()">Mettre à jour</button>
-                <button class="supp_partenaire" id="supp_partenaire" type="delete"  (click)="annulerModif()">Annuler</button>
+                <button class="ajout"  type="submit" (click)="modifPartenaire()">Mettre à jour</button>
+                <button class="supp" id="supp" type="delete"  (click)="annulerModif()">Annuler</button>
               </div>
             </div>             
           </div>

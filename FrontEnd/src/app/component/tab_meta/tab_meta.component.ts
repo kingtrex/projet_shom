@@ -112,6 +112,8 @@ export class TabMetaComponent implements OnInit {
     if (form) form.display = 'none';
   }
 
+
+
     /**
    * @brief ajouter une métadonnée au marégraphe
    */

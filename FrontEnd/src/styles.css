@@ -77,7 +77,7 @@
 /*******************************************/
 
 /** Encart pour le contenu du formulaire d'ajout/modification **/
-.form, .form_add{
+.form, .form_add, .form_modif{
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -126,6 +126,11 @@ a{
     color: white;
 }
 
+.Editer{
+    background-color: white;
+    color: black;
+}
+
 .Editer, .Supprimer{
     
     display: inline-block;
@@ -139,3 +144,60 @@ a{
     margin: 2.5px;
     border: 2px solid #C4C3C3;
 }
+
+.Actions{
+    text-align: center;
+}
+
+/* Style ajouté aux zones de saisie des formulaire */
+input, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border: 3px solid #555;
+}
+
+/** Balise Div pour les boutons d'édition, sauvegarde et annulation d'ajout/modification **/
+.bouton{
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+    padding: 0.5%;
+    border-radius: 3px;
+}
+/*******************************************/
+
+/** CSS pour les boutons du formulaire **/
+.ajout{
+    background-color: white;
+    color: black;
+}
+
+
+.supp{
+    display: flex;
+    background-color: red;
+    color: white;
+    gap: 10px;
+
+}
+
+
+.ajout, .supp{
+    border-radius: 6px;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+    margin: 2.5px;
+    border: 2px solid #C4C3C3;
+}
+/*******************************************/

@@ -6,38 +6,7 @@
     margin-top: 13%;
 }
 
-
-.bouton{
-    display: flex;
-    gap: 10px;
-    margin: 10px;
-    padding: 0.5%;
-    border-radius: 3px;
-}
-
-.maj_partenaire{
-    background-color: white;
-    color: black;
-}
-
-
-.supp_partenaire{
-    display: flex;
-    background-color: red;
-    color: white;
-    gap: 10px;
-
-}
-
-.maj_partenaire, .supp_partenaire{
-    border-radius: 6px;
-    text-align: center;
-    font-size: 14px;
-    padding: 10px;
-    cursor: pointer;
-    margin: 2.5px;
-    border: 2px solid #C4C3C3;
-}
+/***********************/
 
 
 table{
@@ -56,33 +25,8 @@ table, td, th {
 }
 
 
-/** CSS pour formulaire de modification des infos du marégraphe **/
-
-.fond_form_modif {
-    display: none;
-    position: fixed; /* Positionné par rapport à la fenêtre */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
-    justify-content: center;
-    align-items: center;
-}
-
-#hide_form_modif{
-    display:none;
-}
-
-.form_modif_partenaire {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
+.form_modif{
     margin-top: 13%;
-    margin-left: 35%;
-    position: relative;
 }
 
 .bouton{
