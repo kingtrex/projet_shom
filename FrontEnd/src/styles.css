@@ -1,4 +1,9 @@
-/** Lignes grises avec le nom de la page **/
+/** Enlève le soulignage des liens **/
+a{
+    text-decoration: none;
+}
+
+/** Bandes grises avec le nom de la page **/
 .rectangle{
     background-color: #E2DDDD;
     padding-left: 1%;
@@ -9,7 +14,7 @@
 }
 /*******************************************/
 
-/** Gère l'affichage des infos à l'écran si chargées ou non **/
+/** Gère l'affichage des informations à l'écran si chargées ou non **/
 .affiche{
     display: block;
 }
@@ -26,7 +31,32 @@
 }
 /*******************************************/
 
-/** Style des boutons Ajouter**/
+/** Alignement des boutons Ajout d'une donnée et retour à la page partenaire/marégraphe**/
+.button_header{
+    display: flex;
+    background-color: #555;
+    text-align: center;
+}
+/*******************************************/
+
+/** Style des boutons retour **/
+.bouton_retour{
+    background-color: white;
+    color: black;
+    border-radius: 6px;
+    border-color: #C4C3C3;
+    text-align: center;
+    font-size: 14px;
+    width: 100px;
+    margin: 2.5px;
+    border: 2px solid #C4C3C3;
+    padding: 10px;
+    gap: 10px;
+    align-items: end;
+}
+/*******************************************/
+
+/** Style des boutons Ajouter **/
 .Ajouter{
     display: flex;
     position: relative;
@@ -40,21 +70,8 @@
 }
 /*******************************************/
 
-/** Colorie les lignes paires en gris clair et impaires en blanc **/
-.lignes_a_colorer:nth-child(odd) {
-    background-color: #F0F0F0; /* Gris clair */
-}
+/****** CSS relatif aux formulaires d'ajout/modification de données ******/
 
-.lignes_a_colorer:nth-child(even) {
-    background-color: white; /* Blanc */
-}
-
-.lignes_a_colorer:hover{
-    background-color: lightgray;
-}
-/*******************************************/
-
-/** CSS pour formulaire d'ajout/modification **/
 .fond_form{
     display: none;
     position: fixed;
@@ -66,17 +83,7 @@
     justify-content: center;
     align-items: center;
 }
-/*******************************************/
 
-/** Cacher les formulaires d'ajout et de modification **/
-#hide_form_add, #hide_form_modif{
-    display:none;
-}
-
-
-/*******************************************/
-
-/** Encart pour le contenu du formulaire d'ajout/modification **/
 .form, .form_add, .form_modif{
     background-color: #fff;
     padding: 20px;
@@ -86,7 +93,10 @@
     margin-left: 35%;
     position: relative;
 }
-/*******************************************/
+
+#hide_form_add, #hide_form_modif{
+    display:none;
+}
 
 /* Bouton pour fermer le formulaire via la croix */
 .close-button {
@@ -95,58 +105,6 @@
     right: 10px;
     font-size: 20px;
     cursor: pointer;
-}
-/*******************************************/
-
-.acceder, .editer, .annuler{
-    background-color: white;
-    color: black;
-    display: inline-block;
-    border-radius: 6px;
-    border-color: #C4C3C3;
-    text-align: center;
-    font-size: 14px;
-    padding: 10px;
-    width: 100px;
-    cursor: pointer;
-    margin: 2.5px;
-    border: 2px solid #C4C3C3;
-    text-decoration: none;
-}
-
-
-
-
-a{
-    text-decoration: none;
-}
-
-.Supprimer{
-    background-color: red;
-    color: white;
-}
-
-.Editer{
-    background-color: white;
-    color: black;
-}
-
-.Editer, .Supprimer{
-    
-    display: inline-block;
-    border-radius: 6px;
-    border-color: #C4C3C3;
-    text-align: center;
-    font-size: 14px;
-    padding: 10px;
-    width: 100px;
-    cursor: pointer;
-    margin: 2.5px;
-    border: 2px solid #C4C3C3;
-}
-
-.Actions{
-    text-align: center;
 }
 
 /* Style ajouté aux zones de saisie des formulaire */
@@ -164,8 +122,11 @@ input, select {
 input:focus, select:focus {
     border: 3px solid #555;
 }
+/*************************************************************************/
 
-/** Balise Div pour les boutons d'édition, sauvegarde et annulation d'ajout/modification **/
+
+/** Balise div pour les boutons Accéder/Editer/Supprimer des tables
+et Créer/Modifier/Annuler des formulaires d'ajout/modification **/
 .bouton{
     display: flex;
     gap: 10px;
@@ -173,31 +134,67 @@ input:focus, select:focus {
     padding: 0.5%;
     border-radius: 3px;
 }
-/*******************************************/
 
-/** CSS pour les boutons du formulaire **/
-.ajout{
+.ajout, .editer, .acceder, .bouton_retour, .supp{
+    display: inline-block;
+    border-radius: 6px;
+    border-color: #C4C3C3;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    width: 100px;
+    cursor: pointer;
+    margin: 2.5px;
+    border: 2px solid #C4C3C3;
+    white-space: nowrap;
+}
+
+.ajout, .editer, .acceder, .bouton_retour{
     background-color: white;
     color: black;
 }
 
-
 .supp{
-    display: flex;
     background-color: red;
     color: white;
     gap: 10px;
+}
+/*************************************************************************/
 
+
+/** CSS relatif à l'affichage des tables **/
+
+/** Colorie les lignes paires en gris clair et impaires en blanc **/
+.lignes_a_colorer:nth-child(odd) {
+    background-color: #F0F0F0; /* Gris clair */
 }
 
-
-.ajout, .supp{
-    border-radius: 6px;
-    text-align: center;
-    font-size: 14px;
-    padding: 10px;
-    cursor: pointer;
-    margin: 2.5px;
-    border: 2px solid #C4C3C3;
+.lignes_a_colorer:nth-child(even) {
+    background-color: white; /* Blanc */
 }
-/*******************************************/
+
+.lignes_a_colorer:hover{
+    background-color: lightgray;
+}
+
+/** Affichage des tableaux de données **/
+thead{
+    text-align: left;
+}
+
+table{
+    border-collapse: collapse;
+    margin: auto;
+}
+
+table, td, th {
+    border: 1px solid;
+    border: none; /* Supprime les bordures */
+    border-bottom: 1px solid #C4C3C3; /* Ajoute uniquement des lignes horizontales */
+    padding: 8px;
+    padding: 0px 20px;
+}
+
+caption{
+    margin-bottom: 30px;
+}

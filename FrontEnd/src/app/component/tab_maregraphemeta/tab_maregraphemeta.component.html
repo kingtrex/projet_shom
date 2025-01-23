@@ -33,7 +33,7 @@
         </form>
         <div class="bouton">
           <button class="ajout"  type="submit" (click)="addMeta()">Créer</button>
-          <button class="supp" id="supp_meta" type="delete"  (click)="annuler()">Annuler</button>
+          <button class="supp" id="supp" type="delete"  (click)="annuler()">Annuler</button>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
           <th (click)="sort('id_meta')">ID Métadonnées {{triangleData['id_meta']}}</th>
           <th>Données</th>
           <th (click)="sort('date_donnee')">Date de création/update données {{triangleData['date_donnee']}}</th>
-          <th class="Actions">Actions</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -55,8 +55,8 @@
           <td>{{i.date_donnee}}</td>
           <td>
             <div class="bouton">
-              <button class="Editer"  type="button" (click)="showModifForm(i.id_meta, i.donnee)">Editer</button>
-              <button class="Supprimer" type="button" (click)="deleteMeta(i.id_maregraphe,i.id_meta)">Supprimer</button>
+              <button class="editer"  type="button" (click)="showModifForm(i.id_meta, i.donnee)">Editer</button>
+              <button class="supp" type="button" (click)="deleteMeta(i.id_maregraphe,i.id_meta)">Supprimer</button>
             </div>
           </td>
         </tr>

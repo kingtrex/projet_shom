@@ -1,18 +1,3 @@
 .form{
     margin-top: 5%;
 }
-
-table{
-    border-collapse: collapse;
-    margin: auto;
-}
-
-table, td, th {
-    border: 1px solid;
-    border: none; /* Supprime les bordures */
-    border-bottom: 1px solid #C4C3C3; /* Ajoute uniquement des lignes horizontales */
-    padding: 8px; /* Optionnel, pour espacer le contenu */
-    padding: 0px 20px;
-    text-align: left;
-    
-}

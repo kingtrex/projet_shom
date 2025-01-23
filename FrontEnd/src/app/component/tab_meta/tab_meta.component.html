@@ -42,7 +42,7 @@
     <tr>
       <th (click)="sort('id')">ID Métadonnées {{triangleData['id']}}</th>
       <th>Description</th>
-      <th class="Actions">Actions</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -51,8 +51,8 @@
       <td>{{i.description}}</td>
       <td>
         <div class="bouton">
-          <button class="Editer"  type="button" (click)="showModifForm(i.id, i.description, i.ordre)">Editer</button>
-          <button class="Supprimer" type="button" (click)="deleteMeta(i.id)">Supprimer</button>
+          <button class="editer"  type="button" (click)="showModifForm(i.id, i.description, i.ordre)">Editer</button>
+          <button class="supp" type="button" (click)="deleteMeta(i.id)">Supprimer</button>
         </div>
       </td>
     </tr>

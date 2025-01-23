@@ -6,6 +6,8 @@
 
 /** CSS pour formulaire de connexion **/
 .fond_auth{
+    padding-top: 9%;
+    transform: scale(1);
     display: flex;
     justify-content: center;
     text-align: center;
@@ -37,8 +39,8 @@ form{
 
 /** zones de saisie de l'identifiant et du mot de passe **/
 .saisie{
-    width: 200px;
-    height: 10px;
+    width: 250px;
+    height: 30px;
     font-size: 20px;
     padding: 10px;
     border-radius: 5px;
