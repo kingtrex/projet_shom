@@ -23,7 +23,7 @@ export class TabMaregraphemetaComponent implements OnInit {
   public formModifMeta: FormGroup;
   public metadonneesForm: Meta[] = [];
   public allMeta: Meta[] = [];
-  public origine: string | null;
+  public origine: string;
 
   public sortData: {[key: string] : boolean} = {
     "id_meta" : true,
@@ -48,8 +48,8 @@ export class TabMaregraphemetaComponent implements OnInit {
       id_meta: "",
       donnee: ""
     })
-    this.origine = this.sharedService.getData("origine");
-    switch(this.origine){
+
+    switch(this.sharedService.getData("origine")){
       case "choix_maregraphe":
         this.origine = "tabChoixMaregraphe";
         break;
@@ -59,12 +59,12 @@ export class TabMaregraphemetaComponent implements OnInit {
       default:
         this.origine = "choix_maregraphe";
     }
+    console.warn(this.origine)
   }
 
   ngOnInit(): void {
     this.getData();
     this.getMeta();
-    this.getOrigine();
   }
 
   /**
@@ -104,12 +104,6 @@ export class TabMaregraphemetaComponent implements OnInit {
     })
   }
 
-  /**
-   * Obtenir l'origine de la page
-   */
-  public async getOrigine(){
-    this.origine = this.sharedService.getData("origine")!;
-  }
   /**
    * @brief ajouter une métadonnée au marégraphe
    */
