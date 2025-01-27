@@ -34,7 +34,6 @@ a{
 /** Alignement des boutons Ajout d'une donnée et retour à la page partenaire/marégraphe**/
 .button_header{
     display: flex;
-    background-color: #555;
     text-align: center;
 }
 /*******************************************/
@@ -67,6 +66,10 @@ a{
     color: white;
     gap: 10px;
     left: 65%;
+}
+
+.Ajouter:hover{
+    background-color: #009DBF;
 }
 /*******************************************/
 
@@ -154,11 +157,19 @@ et Créer/Modifier/Annuler des formulaires d'ajout/modification **/
     color: black;
 }
 
+.ajout:hover, .editer:hover, .acceder:hover, .bouton_retour:hover, .annuler:hover{
+    background-color: #eaeaea;
+}
+
 .supp{
     background-color: red;
     color: white;
     gap: 10px;
 }
+.supp:hover{
+    background-color: #DF1818;
+}
+
 /*************************************************************************/
 
 
