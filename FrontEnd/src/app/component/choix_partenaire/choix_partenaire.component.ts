@@ -3,6 +3,7 @@ import { ApiChoixPartenaireService } from '../../services/api_choix_partenaire/a
 import { Data } from '@angular/router';
 import { Partenaire } from '../../class/Partenaire';
 import { Form, FormBuilder, FormGroup } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth_service/auth.service';
 
 @Component({
   selector: 'app-tab-partenaire',
@@ -11,9 +12,9 @@ import { Form, FormBuilder, FormGroup } from '@angular/forms';
 })
 
 export class ChoixPartenaireComponent {
-  errorMessage: string = '';
-  isDataLoaded : boolean = false;
-  donnees: any;
+  public errorMessage: string = '';
+  public isDataLoaded : boolean = false;
+  public donnees: any;
 
   public formAddPartenaire: FormGroup;
   public formModifPartenaire: FormGroup;
@@ -27,8 +28,11 @@ export class ChoixPartenaireComponent {
     "nom" : "▼",
   }
 
+  public isAdmin: boolean = this.authService.isAdmin(localStorage.getItem("token")!);
+
   constructor(private apiChoixPartenaire: ApiChoixPartenaireService,
     private formBuilder: FormBuilder,
+    private authService: AuthService,
   ) {
     this.formAddPartenaire = this.formBuilder.group({
       id: "",

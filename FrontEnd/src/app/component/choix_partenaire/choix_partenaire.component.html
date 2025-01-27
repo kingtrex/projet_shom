@@ -8,32 +8,59 @@
   Chargement des données ...
 </div>
 <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
-  <button class="Ajouter" id="Ajouter"  type="button" (click)="showAddPartenaire()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un partenaire</button>
 
-  <div class="fond_form" id="hide_form_add">
-    <div class="form_add">
-      <span class="close-button" (click)="annulerAdd()">&times;</span>
-      <h2>Ajouter un partenaire</h2>
-      <form [formGroup]="formAddPartenaire">
-
-        <label for="id">Identifiant : </label>
-        <input type="number" id="id" formControlName="id"><br><br>
-
-        <label for="nom">Nom : </label>
-        <input type="text" id="nom" formControlName="nom"><br><br>
-
-        <label for="logo">Nom du logo : </label>
-        <input type="text" id="logo" formControlName="logo"><br><br>
-
-        <label for="url">URL : </label>
-        <input type="text" id="url" formControlName="url"><br><br>
-      </form>
-      <div class="bouton">
-        <button class="ajout"  type="submit" (click)="addPartenaire()">Créer</button>
-        <button class="supp" id="supp" type="delete"  (click)="annulerAdd()">Annuler</button>
+  <div *ngIf="isAdmin">
+    <button class="Ajouter" id="Ajouter"  type="button" (click)="showAddPartenaire()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un partenaire</button>
+    <!-- Formulaire d'ajout d'un partenaire -->
+    <div class="fond_form" id="hide_form_add">
+      <div class="form_add">
+        <span class="close-button" (click)="annulerAdd()">&times;</span>
+        <h2>Ajouter un partenaire</h2>
+        <form [formGroup]="formAddPartenaire">
+  
+          <label for="id">Identifiant : </label>
+          <input type="number" id="id" formControlName="id"><br><br>
+  
+          <label for="nom">Nom : </label>
+          <input type="text" id="nom" formControlName="nom"><br><br>
+  
+          <label for="logo">Nom du logo : </label>
+          <input type="text" id="logo" formControlName="logo"><br><br>
+  
+          <label for="url">URL : </label>
+          <input type="text" id="url" formControlName="url"><br><br>
+        </form>
+        <div class="bouton">
+          <button class="ajout"  type="submit" (click)="addPartenaire()">Créer</button>
+          <button class="supp" id="supp" type="delete"  (click)="annulerAdd()">Annuler</button>
+        </div>
       </div>
     </div>
+    <!-- Formulaire de modification d'un partenaire -->
+    <div class="fond_form" id="hide_form_modif">      
+      <div class="form_modif">
+        <span class="close-button" (click)="annulerModif()">&times;</span>
+        <h2>Modifier les informations du partenaire</h2>
+  
+        <form [formGroup]="formModifPartenaire">
+          <label for="nom">Nom du partenaire : </label>
+          <input type="text" id="nom" name="nom" formControlName="nom"><br><br>
+
+          <label for="logo">url du logo du partenaire : </label>
+          <input type="text" id="logo" name="logo" formControlName="logo"><br><br>
+
+          <label for="site">url du site internet partenaire : </label>
+          <input type="text" id="site" name="site" formControlName="url"><br><br>
+
+        </form>
+        <div class="bouton">
+          <button class="ajout"  type="submit" (click)="modifPartenaire()">Mettre à jour</button>
+          <button class="supp" id="supp" type="delete"  (click)="annulerModif()">Annuler</button>
+        </div>
+      </div>             
+    </div>
   </div>
+
 
   <br><br><br>
   <table>    
@@ -56,37 +83,12 @@
           <div class="bouton">
             <a href="tabPartenaireMaregraphe/{{i.id}}/{{i.nom}}"><button class="acceder" type="button">Accéder</button></a>
 
-          <!-- Formulaire de modification d'un partenaire -->
-
-            <button class="editer" type="button" (click)="showModifPartenaire(i.id, i.nom, i.logo, i.url)">Editer</button>
-            <button class="supp" type="button" (click)="deletePartenaire(i.id)">Supprimer</button>
+            <button *ngIf="isAdmin" class="editer" type="button" (click)="showModifPartenaire(i.id, i.nom, i.logo, i.url)">Editer</button>
+            <button *ngIf="isAdmin" class="supp" type="button" (click)="deletePartenaire(i.id)">Supprimer</button>
           </div>
 
           
-          <div class="fond_form" id="hide_form_modif">
-            
-            <div class="form_modif">
-              
-              <span class="close-button" (click)="annulerModif()">&times;</span>
-              <h2>Modifier les informations du partenaire</h2>
-        
-              <form [formGroup]="formModifPartenaire">
-                <label for="nom">Nom du partenaire : </label>
-                <input type="text" id="nom" name="nom" formControlName="nom"><br><br>
-      
-                <label for="logo">url du logo du partenaire : </label>
-                <input type="text" id="logo" name="logo" formControlName="logo"><br><br>
-      
-                <label for="site">url du site internet partenaire : </label>
-                <input type="text" id="site" name="site" formControlName="url"><br><br>
-      
-              </form>
-              <div class="bouton">
-                <button class="ajout"  type="submit" (click)="modifPartenaire()">Mettre à jour</button>
-                <button class="supp" id="supp" type="delete"  (click)="annulerModif()">Annuler</button>
-              </div>
-            </div>             
-          </div>
+
         </td>
       </tr>
     </tbody>
