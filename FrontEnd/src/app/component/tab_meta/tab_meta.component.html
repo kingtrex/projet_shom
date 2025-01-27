@@ -10,29 +10,59 @@
 <div [class.affiche]="isDataLoaded" [class.invisible]="!isDataLoaded" >
   
 <br>
-<button class="Ajouter" id="Ajouter"  type="button" (click)="showAddMeta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
 
+<div *ngIf="isAdmin">
+  <button class="Ajouter" id="Ajouter"  type="button" (click)="showAddMeta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
 
-<div class="fond_form" id="hide_form_add">
-  <div class="form">
-    <span class="close-button" (click)="annuler()">&times;</span>
-    <h2>Ajouter une métadonnée</h2>
-    <form [formGroup]="formAddMeta">
-      <label for="id_meta">Identifiant de la métadonnée : </label>
-      <input type="text" id="id_meta" formControlName="id"><br><br>
-
-      <label for="description">Description de la métadonnée : </label>
-      <input type="text" id="description" name="description" formControlName="description"><br><br>
-      
-      <label for="ordre">Ordre de la métadonnée : </label>
-      <input type="number" id="ordre" formControlName="ordre"><br><br>
-    </form>
-    <div class="bouton">
-      <button class="ajout"  type="submit" (click)="addMeta()">Créer</button>
-      <button class="supp" id="supp" type="delete"  (click)="annuler()">Annuler</button>
+  <div class="fond_form" id="hide_form_add">
+    <div class="form">
+      <span class="close-button" (click)="annuler()">&times;</span>
+      <h2>Ajouter une métadonnée</h2>
+      <form [formGroup]="formAddMeta">
+        <label for="id_meta">Identifiant de la métadonnée : </label>
+        <input type="text" id="id_meta" formControlName="id"><br><br>
+  
+        <label for="description">Description de la métadonnée : </label>
+        <input type="text" id="description" name="description" formControlName="description"><br><br>
+        
+        <label for="ordre">Ordre de la métadonnée : </label>
+        <input type="number" id="ordre" formControlName="ordre"><br><br>
+      </form>
+      <div class="bouton">
+        <button class="ajout"  type="submit" (click)="addMeta()">Créer</button>
+        <button class="supp" id="supp" type="delete"  (click)="annuler()">Annuler</button>
+      </div>
     </div>
   </div>
+
+  <div class="fond_form" id="hide_form_modif">
+              
+    <div class="form">
+      
+      <span class="close-button" (click)="hideForm()">&times;</span>
+      <h2>Modifier les informations de la métadonnée</h2>
+  
+      <form [formGroup]="formModifMeta">
+        <label for="idMeta">ID métadonnée : </label>
+        <input type="text" id="idMeta" readonly="True" formControlName="id"><br><br>
+  
+        <label for="description">Description : </label>
+        <input type="text" id="description" formControlName="description"><br><br>
+  
+        <label for="ordre">Ordre : </label>
+        <input type="number" id="ordre" formControlName="ordre"><br><br>
+      </form>
+      <div class="bouton">
+        <button class="ajout"  type="submit" (click)="updateMeta()">Modifier</button>
+        <button class="supp" id="supp" type="delete" (click)="hideForm()">Annuler</button>
+      </div>
+  <!---------------------------------------------------------------------------->     
+    </div>              
+  </div>
 </div>
+
+
+
   
 
 
@@ -50,7 +80,7 @@
       <td>{{i.id}}</td>
       <td>{{i.description}}</td>
       <td>
-        <div class="bouton">
+        <div *ngIf="isAdmin" class="bouton">
           <button class="editer"  type="button" (click)="showModifForm(i.id, i.description, i.ordre)">Editer</button>
           <button class="supp" type="button" (click)="deleteMeta(i.id)">Supprimer</button>
         </div>
@@ -58,27 +88,3 @@
     </tr>
   </tbody>
 </table>
-<div class="fond_form" id="hide_form_modif">
-              
-  <div class="form">
-    
-    <span class="close-button" (click)="hideForm()">&times;</span>
-    <h2>Modifier les informations de la métadonnée</h2>
-
-    <form [formGroup]="formModifMeta">
-      <label for="idMeta">ID métadonnée : </label>
-      <input type="text" id="idMeta" readonly="True" formControlName="id"><br><br>
-
-      <label for="description">Description : </label>
-      <input type="text" id="description" formControlName="description"><br><br>
-
-      <label for="ordre">Ordre : </label>
-      <input type="number" id="ordre" formControlName="ordre"><br><br>
-    </form>
-    <div class="bouton">
-      <button class="ajout"  type="submit" (click)="updateMeta()">Modifier</button>
-      <button class="supp" id="supp" type="delete" (click)="hideForm()">Annuler</button>
-    </div>
-<!---------------------------------------------------------------------------->     
-  </div>              
-</div>

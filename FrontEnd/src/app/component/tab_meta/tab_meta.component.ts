@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiMeta } from '../../services/api_meta/api_meta.service';
 import { Meta } from '../../class/Meta';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth_service/auth.service';
 
 @Component({
   selector: 'app-tab-meta',
@@ -25,8 +26,11 @@ export class TabMetaComponent implements OnInit {
     "id" : "▼",
   }
 
+  public isAdmin: boolean = this.authService.isAdmin(localStorage.getItem("token")!);
+
   constructor(private apiMeta: ApiMeta,
     private formBuilder: FormBuilder,
+    private authService: AuthService,
   ) {
     this.formAddMeta = this.formBuilder.group({
       id: "",
