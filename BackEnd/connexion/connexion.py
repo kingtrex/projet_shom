@@ -129,20 +129,23 @@ async def login_for_access_token(
 @router.post("/newUser/{user}&{password}&{fullName}&{mail}&{admin}")
 async def add_user(user: str, password: str, full_name: str, mail: str, admin: bool,
                    token: Annotated[User, Depends(get_current_user)], ):
-    config = configparser.ConfigParser()
-    config.read("connexion/exemple.ini")
-    hashed_password = pwd_context.hash(password)
-    newJson = {
-        "username": user,
-        "full_name": full_name,
-        "email": mail,
-        "hashed_password": hashed_password,
-        "disabled": "False",
-        "admin": admin,
-    }
-    config.set("USERS", user, json.dumps(newJson))
-    with open("connexion/exemple.ini", "w") as f:
-        config.write(f)
+    if token.admin:
+        config = configparser.ConfigParser()
+        config.read("connexion/exemple.ini")
+        hashed_password = pwd_context.hash(password)
+        newJson = {
+            "username": user,
+            "full_name": full_name,
+            "email": mail,
+            "hashed_password": hashed_password,
+            "disabled": "False",
+            "admin": admin,
+        }
+        config.set("USERS", user, json.dumps(newJson))
+        with open("connexion/exemple.ini", "w") as f:
+            config.write(f)
+    else:
+        raise HTTPException(status_code=403, detail="Accès non autorise")
 
 @router.post("/debug")
 async def login_for_debug(
