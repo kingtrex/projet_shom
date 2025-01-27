@@ -5,6 +5,7 @@ import { ActivatedRoute, Data } from '@angular/router';
 import { Maregraphe } from '../../class/Maregraphe';
 import { Form, FormBuilder, FormGroup } from '@angular/forms';
 import { SharedServiceService } from 'src/app/services/shared_service/shared-service.service';
+import { AuthService } from 'src/app/services/auth_service/auth.service';
 
 @Component({
   selector: 'app-tab-partenairemaregraphe',
@@ -30,10 +31,13 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
     "libelle" : "▼",
   }
 
+  public isAdmin: boolean = this.authService.isAdmin(localStorage.getItem("token")!);
+
   constructor(private ApiPartenaireMaregrapheService: ApiPartenaireMaregrapheService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private sharedService: SharedServiceService,
+    private authService: AuthService,
   ) {
     this.formAddMaregraphe = this.formBuilder.group({
       maregraphe : "",

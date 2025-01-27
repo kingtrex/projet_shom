@@ -13,30 +13,32 @@
       <p class="infos_page">Partenaire : {{partenaire}}</p>
       <div class="button_header">
         <a href="tabChoixPartenaire"><button class="bouton_retour">Retour</button></a>
-        <button class="Ajouter" id="Ajouter"  type="button" (click)="showAddMaregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
+        <button *ngIf="isAdmin" class="Ajouter" id="Ajouter"  type="button" (click)="showAddMaregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
       </div>
     </div>
   
-
-    <div class="fond_form" id="hide_form_add">
-      <div class="form">
-        <span class="close-button" (click)="annuler()">&times;</span>
-        <h2>Ajouter un marégraphe</h2>
-        <form [formGroup]="formAddMaregraphe">
-          <label for="maregraphe">Identifiant du marégraphe : </label>
-          <select formControlName="maregraphe">
-            <option value="" disabled selected>Choisir un marégraphe</option>
-            <option formGroupName="maregraphe" *ngFor="let i of listMaregraphe">{{i.libelle}}</option>
-          </select><br><br>
-          <label for="ordre">Ordre : </label>
-          <input id="ordre" type="number" formControlName="ordre"><br><br>
-        </form>
-        <div class="bouton">
-          <button class="ajout"  type="submit" (click)="addMaregraphe()">Créer</button>
-          <button class="supp" id="supp" type="delete"  (click)="annuler()">Annuler</button>
+    <div *ngIf="isAdmin">
+      <div class="fond_form" id="hide_form_add">
+        <div class="form">
+          <span class="close-button" (click)="annuler()">&times;</span>
+          <h2>Ajouter un marégraphe</h2>
+          <form [formGroup]="formAddMaregraphe">
+            <label for="maregraphe">Identifiant du marégraphe : </label>
+            <select formControlName="maregraphe">
+              <option value="" disabled selected>Choisir un marégraphe</option>
+              <option formGroupName="maregraphe" *ngFor="let i of listMaregraphe">{{i.libelle}}</option>
+            </select><br><br>
+            <label for="ordre">Ordre : </label>
+            <input id="ordre" type="number" formControlName="ordre"><br><br>
+          </form>
+          <div class="bouton">
+            <button class="ajout"  type="submit" (click)="addMaregraphe()">Créer</button>
+            <button class="supp" id="supp" type="delete"  (click)="annuler()">Annuler</button>
+          </div>
         </div>
       </div>
     </div>
+
     <br><br><br>
     <table>    
       <thead>
@@ -45,7 +47,7 @@
             <th (click)="sort('libelle')">Ville {{triangleData["libelle"]}}</th>   
             <th>Latitude</th>
             <th>Longitude</th>
-            <th></th>
+            <th *ngIf="isAdmin"></th>
         </tr>
       </thead>
       <tbody>
@@ -54,7 +56,7 @@
             <td>{{i.libelle}}</td>
             <td>{{i.latitude}}</td>
             <td>{{i.longitude}}</td>
-            <td>
+            <td *ngIf="isAdmin">
               <div class="bouton">
                 <a href="tabMaregrapheMeta/{{i.id_tdb}}/{{i.libelle}}"><button class="acceder" type="button">Accéder</button></a>
                 <button class="supp" type="button" (click)="deleteMaregraphe(id,i.id_tdb)">Supprimer</button>
