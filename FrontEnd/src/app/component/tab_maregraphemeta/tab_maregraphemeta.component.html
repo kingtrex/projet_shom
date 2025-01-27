@@ -13,31 +13,54 @@
       <p class="infos_page">Ville : {{ville_maregraphe}}</p>
       <div class="button_header">
         <a href="{{origine}}"><button class="bouton_retour">Retour</button></a>
-        <button class="Ajouter" id="Ajouter"  type="button" (click)="showAddMeta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
+        <button *ngIf="isAdmin" class="Ajouter" id="Ajouter"  type="button" (click)="showAddMeta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
       </div>
-
     </div>
-    <div class="fond_form" id="hide_form_add">
-      <div class="form">
-        <span class="close-button" (click)="annuler()">&times;</span>
-        <h2>Ajouter une métadonnée</h2>
-        <form [formGroup]="formAddMeta">
-          <label for="id_meta">Identifiant de la métadonnée : </label>
-            <select id="id_meta" formControlName="idMeta" (change)="changeMeta($event)">
-              <option value="" disabled selected>Choisir une métadonnée</option>
-              <option *ngFor="let i of metadonneesForm">{{i.id}}</option>
-            </select>
-            <p class="description"></p>
-            <label for="valeur">Valeur de la métadonnée : </label>
-            <input type="text" id="valeur" name="valeur" formControlName="data"><br><br>
-        </form>
-        <div class="bouton">
-          <button class="ajout"  type="submit" (click)="addMeta()">Créer</button>
-          <button class="supp" id="supp" type="delete"  (click)="annuler()">Annuler</button>
+
+    <div *ngIf="isAdmin">
+      <div class="fond_form" id="hide_form_add">
+        <div class="form">
+          <span class="close-button" (click)="annuler()">&times;</span>
+          <h2>Ajouter une métadonnée</h2>
+          <form [formGroup]="formAddMeta">
+            <label for="id_meta">Identifiant de la métadonnée : </label>
+              <select id="id_meta" formControlName="idMeta" (change)="changeMeta($event)">
+                <option value="" disabled selected>Choisir une métadonnée</option>
+                <option *ngFor="let i of metadonneesForm">{{i.id}}</option>
+              </select>
+              <p class="description"></p>
+              <label for="valeur">Valeur de la métadonnée : </label>
+              <input type="text" id="valeur" name="valeur" formControlName="data"><br><br>
+          </form>
+          <div class="bouton">
+            <button class="ajout"  type="submit" (click)="addMeta()">Créer</button>
+            <button class="supp" id="supp" type="delete"  (click)="annuler()">Annuler</button>
+          </div>
         </div>
       </div>
+      
+      <div class="fond_form" id="hide_form_modif">
+              
+        <div class="form">
+          
+          <span class="close-button" (click)="close_modif()">&times;</span>
+          <h2>Modifier les informations de la métadonnée</h2>
+      
+          <form [formGroup]="formModifMeta">
+            <label for="idMeta">ID métadonnée : </label>
+            <input type="text" id="idMeta" readonly="True" formControlName="id_meta"><br><br>
+            <p class="description_modif"></p>
+            <label for="valeur">Valeur de la métadonnée : </label>
+            <input type="text" id="valeur" formControlName="donnee"><br><br>
+          </form>
+          <div class="bouton">
+            <button class="ajout"  type="submit" (click)="updateMetaMare()">Modifier</button>
+            <button class="supp" id="supp" type="delete" (click)="close_modif()">Annuler</button>
+          </div>
+        </div>              
+      </div>
     </div>
-    
+
     <br><br><br>
     <table>    
       <thead>
@@ -54,7 +77,7 @@
           <td>{{i.donnee}}</td>
           <td>{{i.date_donnee}}</td>
           <td>
-            <div class="bouton">
+            <div *ngIf="isAdmin" class="bouton">
               <button class="editer"  type="button" (click)="showModifForm(i.id_meta, i.donnee)">Editer</button>
               <button class="supp" type="button" (click)="deleteMeta(i.id_maregraphe,i.id_meta)">Supprimer</button>
             </div>
@@ -62,26 +85,5 @@
         </tr>
       </tbody>
     </table>
-    <div class="fond_form" id="hide_form_modif">
-              
-      <div class="form">
-        
-        <span class="close-button" (click)="close_modif()">&times;</span>
-        <h2>Modifier les informations de la métadonnée</h2>
-    
-        <form [formGroup]="formModifMeta">
-          <label for="idMeta">ID métadonnée : </label>
-          <input type="text" id="idMeta" readonly="True" formControlName="id_meta"><br><br>
-          <p class="description_modif"></p>
-          <label for="valeur">Valeur de la métadonnée : </label>
-          <input type="text" id="valeur" formControlName="donnee"><br><br>
-        </form>
-        <div class="bouton">
-          <button class="ajout"  type="submit" (click)="updateMetaMare()">Modifier</button>
-          <button class="supp" id="supp" type="delete" (click)="close_modif()">Annuler</button>
-        </div>
-    <!---------------------------------------------------------------------------->     
-      </div>              
-    </div>
    </div>
 

@@ -6,6 +6,7 @@ import { MaregrapheMeta } from 'src/app/class/Maregraphemeta';
 import { Meta } from 'src/app/class/Meta';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SharedServiceService } from 'src/app/services/shared_service/shared-service.service';
+import { AuthService } from 'src/app/services/auth_service/auth.service';
 
 @Component({
   selector: 'app-tab-maregraphemeta',
@@ -34,11 +35,15 @@ export class TabMaregraphemetaComponent implements OnInit {
     "id_meta" : "▼",
     "date_donnee" : "▼"
   } 
+
+  public isAdmin: boolean = this.authService.isAdmin(localStorage.getItem("token")!);
+
   constructor(private apiMaregrapheMeta: ApiMaregraphemeta,
     private apiMeta: ApiMeta,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private sharedService: SharedServiceService,
+    private authService: AuthService,
   ) {
     this.formAddMeta = this.formBuilder.group({
       idMeta: "",
