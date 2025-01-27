@@ -135,7 +135,7 @@ et Créer/Modifier/Annuler des formulaires d'ajout/modification **/
     border-radius: 3px;
 }
 
-.ajout, .editer, .acceder, .bouton_retour, .supp{
+.ajout, .editer, .acceder, .bouton_retour, .supp, .annuler{
     display: inline-block;
     border-radius: 6px;
     border-color: #C4C3C3;
@@ -149,7 +149,7 @@ et Créer/Modifier/Annuler des formulaires d'ajout/modification **/
     white-space: nowrap;
 }
 
-.ajout, .editer, .acceder, .bouton_retour{
+.ajout, .editer, .acceder, .bouton_retour, .annuler{
     background-color: white;
     color: black;
 }
