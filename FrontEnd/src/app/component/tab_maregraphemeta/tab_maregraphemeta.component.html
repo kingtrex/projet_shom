@@ -12,8 +12,9 @@
       <p class="infos_page">Identifiant du marégraphe : {{id_maregraphe}}</p>
       <p class="infos_page">Ville : {{ville_maregraphe}}</p>
       <div class="button_header">
-        <a href="{{origine}}"><button class="bouton_retour">Retour</button></a>
         <button *ngIf="isAdmin" class="Ajouter" id="Ajouter"  type="button" (click)="showAddMeta()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter une métadonnée</button>
+        <a href="{{origine}}"><button class="bouton_retour">Retour</button></a>
+        <button class="export" id="export" type="button"> <img src="assets\telechargement2.png" height="18" width="18"> Télécharger l'export SML du marégraphe</button>  
       </div>
     </div>
 

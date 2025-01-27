@@ -3,6 +3,7 @@ a{
     text-decoration: none;
 }
 
+
 /** Bandes grises avec le nom de la page **/
 .rectangle{
     background-color: #E2DDDD;
@@ -38,6 +39,11 @@ a{
 }
 /*******************************************/
 
+
+/** Style du bouton export SML **/
+.export
+/*******************************************/
+
 /** Style des boutons retour **/
 .bouton_retour{
     background-color: white;
@@ -56,7 +62,7 @@ a{
 /*******************************************/
 
 /** Style des boutons Ajouter **/
-.Ajouter{
+.Ajouter, .export{
     display: flex;
     position: relative;
     border-radius: 3px;
@@ -68,7 +74,7 @@ a{
     left: 65%;
 }
 
-.Ajouter:hover{
+.Ajouter:hover, .export:hover{
     background-color: #009DBF;
 }
 /*******************************************/
@@ -156,6 +162,7 @@ et Créer/Modifier/Annuler des formulaires d'ajout/modification **/
     background-color: white;
     color: black;
 }
+
 
 .ajout:hover, .editer:hover, .acceder:hover, .bouton_retour:hover, .annuler:hover{
     background-color: #eaeaea;
