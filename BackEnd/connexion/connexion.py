@@ -35,6 +35,7 @@ class User(BaseModel):
     email: str | None = None
     full_name: str | None = None
     disabled: bool | None = None
+    admin: bool = False
 
 class UserInDB(User):
     hashed_password: str
@@ -121,12 +122,12 @@ async def login_for_access_token(
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data={"sub": user.username, "admin": user.admin}, expires_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")
 
-@router.post("/newUser/{user}&{password}&{fullName}&{mail}")
-async def add_user(user: str, password: str, full_name: str, mail: str,
+@router.post("/newUser/{user}&{password}&{fullName}&{mail}&{admin}")
+async def add_user(user: str, password: str, full_name: str, mail: str, admin: bool,
                    token: Annotated[User, Depends(get_current_user)], ):
     config = configparser.ConfigParser()
     config.read("connexion/exemple.ini")
@@ -137,6 +138,7 @@ async def add_user(user: str, password: str, full_name: str, mail: str,
         "email": mail,
         "hashed_password": hashed_password,
         "disabled": "False",
+        "admin": admin,
     }
     config.set("USERS", user, json.dumps(newJson))
     with open("connexion/exemple.ini", "w") as f:

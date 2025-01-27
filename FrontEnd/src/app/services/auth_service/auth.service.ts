@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 interface TokenPayload {
   exp: number; // Timestamp UNIX
   sub: string;
+  admin: boolean;
 }
 
 @Injectable({
@@ -69,5 +70,14 @@ export class AuthService {
       return true;
     }
   }
-  
+
+  public isAdmin(token: string): boolean {
+    try {
+      const data = jwtDecode<TokenPayload>(token);
+      console.log(data.admin)
+      return data.admin
+    } catch (error) {
+      throw error
+    }
+  }
 }
