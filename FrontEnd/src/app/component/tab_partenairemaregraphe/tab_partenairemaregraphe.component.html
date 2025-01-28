@@ -12,9 +12,9 @@
       <p class="infos_page">Identifiant du partenaire : {{id}}</p>
       <p class="infos_page">Partenaire : {{partenaire}}</p>
       <div class="button_header">
-        <button *ngIf="isAdmin" class="Ajouter" id="Ajouter"  type="button" (click)="showAddMaregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button>
-        <a href="tabChoixPartenaire"><button class="bouton_retour">Retour</button></a>
-        <button class="export" id="export" type="button"> <img src="assets\telechargement2.png" height="18" width="18"> Télécharger l'export SML du partenaire</button>
+        <div class="retour"><a href="tabChoixPartenaire"><button class="bouton_retour">Retour</button></a></div>
+        <div class="part_export"><button class="export" id="export" type="button"> <img src="assets\telechargement.png" height="18" width="18"> Télécharger l'export SML</button></div>
+        <div class="part_ajout"><button *ngIf="isAdmin" class="Ajouter" id="Ajouter"  type="button" (click)="showAddMaregraphe()"> <img src="assets\fleche.png" height="17" width="17"> Ajouter un marégraphe</button></div>
       </div>
     </div>
   

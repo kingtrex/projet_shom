@@ -36,12 +36,19 @@ a{
 .button_header{
     display: flex;
     text-align: center;
+    flex-direction: line;
 }
 /*******************************************/
 
 
-/** Style du bouton export SML **/
-.export
+/** Positionnement des boutons export SML et ajout donnée **/
+.retour{
+    padding-left: 50px;
+}
+
+.part_export, .part_ajout {
+    padding-left: 20%;
+}
 /*******************************************/
 
 /** Style des boutons retour **/
