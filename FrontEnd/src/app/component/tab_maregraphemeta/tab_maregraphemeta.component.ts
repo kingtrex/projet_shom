@@ -7,6 +7,7 @@ import { Meta } from 'src/app/class/Meta';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SharedServiceService } from 'src/app/services/shared_service/shared-service.service';
 import { AuthService } from 'src/app/services/auth_service/auth.service';
+import { SMLExportService } from 'src/app/services/sml-export/sml-export.service';
 
 @Component({
   selector: 'app-tab-maregraphemeta',
@@ -44,6 +45,7 @@ export class TabMaregraphemetaComponent implements OnInit {
     private formBuilder: FormBuilder,
     private sharedService: SharedServiceService,
     private authService: AuthService,
+    private exportService: SMLExportService,
   ) {
     this.formAddMeta = this.formBuilder.group({
       idMeta: "",
@@ -226,5 +228,13 @@ export class TabMaregraphemetaComponent implements OnInit {
         break;
       }
     }
+  }
+
+  public async exportMeta(){
+    await this.exportService.exportMeta(this.id_maregraphe, this.ville_maregraphe).then((data: any) => {
+      console.log(data)
+    }).catch((error: any) => {
+      alert(error)
+    })
   }
 }

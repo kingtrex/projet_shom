@@ -5,6 +5,9 @@ from typing import Annotated
 from psycopg2.extras import RealDictCursor
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
+
+from starlette.responses import FileResponse
+
 from connexion.connexion import User, get_current_user
 from databaseConnect import database_connect
 
@@ -80,7 +83,7 @@ def create_sml(data: [], maregraphe: str, id_maregraphe: int):
 
     return root
 
-@router.get("/exportMeta/{id_maregraphe}&{nom_maregraphe}")
+@router.get("/exportMeta/{id_maregraphe}&{nom_maregraphe}", response_class=FileResponse)
 async def export_sml(id_maregraphe: int,
                      nom_maregraphe: str,
                      request: Request,
@@ -101,7 +104,7 @@ async def export_sml(id_maregraphe: int,
     ET.indent(root, space="  ")
     tree = ET.ElementTree(root)
     tree.write("api/test.sml", xml_declaration=True, encoding="utf-8")
-    return meta
+    return FileResponse("api/test.sml", media_type="text/xml", filename="test.sml")
 
 
 
