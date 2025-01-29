@@ -4,7 +4,7 @@ from fastapi import HTTPException
 
 
 # noinspection SpellCheckingInspection
-def databaseConnect():
+def database_connect():
     # noinspection SpellCheckingInspection
     db = psy.connect(
         dbname = "postgres",

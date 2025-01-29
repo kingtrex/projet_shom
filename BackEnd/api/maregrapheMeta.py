@@ -1,4 +1,4 @@
-from databaseConnect import databaseConnect, check_error
+from databaseConnect import database_connect, check_error
 from psycopg2.extras import RealDictCursor
 from typing import Annotated
 
@@ -14,7 +14,7 @@ router = APIRouter()
 async def get_maregraphe_meta(id: int,
                token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"SELECT * FROM obsmar.maregraphe_meta \
                     WHERE id_maregraphe = %s \
@@ -32,7 +32,7 @@ async def sort_maregraphe_meta(id: int, col: str, order: bool, token: Annotated[
     if col not in allowed_col:
         raise HTTPException(status_code=500, detail="Nom de colonne invalide")
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         query = f"SELECT * FROM obsmar.maregraphe_meta WHERE id_maregraphe=%s ORDER BY {col} "
         if order:
@@ -51,7 +51,7 @@ async def sort_maregraphe_meta(id: int, col: str, order: bool, token: Annotated[
 async def add_meta(id: int, meta: str, data: str,
                    token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"INSERT INTO obsmar.maregraphe_meta \
                     VALUES (%s, %s, %s, %s)", (id, meta, data, datetime.now()))
@@ -67,7 +67,7 @@ async def add_meta(id: int, meta: str, data: str,
 async def update_meta(id: int, meta: str, data: str,
                       token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"UPDATE obsmar.maregraphe_meta SET donnee = %s \
                     WHERE id_maregraphe = %s AND id_meta = %s", (data, id, meta))
@@ -83,7 +83,7 @@ async def update_meta(id: int, meta: str, data: str,
 async def delete_meta(id: int,
                      token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"DELETE FROM obsmar.maregraphe_meta \
                     WHERE id_maregraphe = %s", (id,))
@@ -100,7 +100,7 @@ async def delete_meta(id: int, meta: str,
                       token: Annotated[User, Depends(get_current_user)]):
     try:
         print(f"{id} - {meta}")
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"DELETE FROM obsmar.maregraphe_meta \
                     WHERE id_maregraphe = %s AND id_meta = %s", (id, meta))
@@ -115,7 +115,7 @@ async def delete_meta(id: int, meta: str,
 @router.get("/getMetaForm/{id}")
 async def get_meta_form(id: int,token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"SELECT * FROM obsmar.meta me \
                     WHERE NOT EXISTS(\

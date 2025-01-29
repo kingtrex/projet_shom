@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 
 from connexion.connexion import User, get_current_user
-from databaseConnect import databaseConnect, check_error
+from databaseConnect import database_connect, check_error
 from psycopg2.extras import RealDictCursor
 
 router = APIRouter()
@@ -11,7 +11,7 @@ router = APIRouter()
 @router.get("/getMaregraphe")
 async def get_maregraphe(token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute("SELECT * FROM obsmar.maregraphe \
                     ORDER BY id_tdb")
@@ -26,7 +26,7 @@ async def get_maregraphe(token: Annotated[User, Depends(get_current_user)]):
 async def update_maregraphe(id: int, ville: str, latitude: str, longitude: str,
                             token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"UPDATE obsmar.maregraphe \
         SET libelle=%s, latitude=%s, longitude=%s \
@@ -45,7 +45,7 @@ async def sort_maregraphe(col: str, order: bool, token: Annotated[User, Depends(
     if col not in allowed_col:
         raise HTTPException(status_code=500, detail="Nom de colonne invalide")
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         query = f"SELECT * FROM obsmar.maregraphe ORDER BY {col} "
         if order:
@@ -62,7 +62,7 @@ async def sort_maregraphe(col: str, order: bool, token: Annotated[User, Depends(
 async def add_maregraphe(id: int, libelle: str, lat: float, long: float,
                          token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"INSERT INTO obsmar.maregraphe \
                     VALUES (%s, %s, %s, %s)", (id, libelle, lat, long))
@@ -77,7 +77,7 @@ async def add_maregraphe(id: int, libelle: str, lat: float, long: float,
 @router.delete("/deleteMaregraphe/{id}")
 async def delete_maregraphe(id: int, token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         #supprimer les relations
         cur.execute(f"DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe=%s",(id,))

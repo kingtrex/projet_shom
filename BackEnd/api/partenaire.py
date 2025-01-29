@@ -1,7 +1,7 @@
 from os.path import defpath
 
 from fastapi import APIRouter, Depends, HTTPException, Request
-from databaseConnect import databaseConnect, check_error
+from databaseConnect import database_connect, check_error
 from connexion.connexion import User, get_current_user
 from psycopg2.extras import RealDictCursor
 from typing import Annotated
@@ -11,7 +11,7 @@ router = APIRouter()
 @router.get("/getPartenaire")
 async def get_partenaire(token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"SELECT * FROM obsmar.partenaire \
                     ORDER BY id")
@@ -28,7 +28,7 @@ async def sort_partenaire(col: str, order: bool, token: Annotated[User, Depends(
     if col not in allow_col:
         raise HTTPException(status_code=500, detail="Nom de colonne invalide")
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         query = f"SELECT * FROM obsmar.partenaire ORDER BY {col} "
         if order:
@@ -46,7 +46,7 @@ async def sort_partenaire(col: str, order: bool, token: Annotated[User, Depends(
 async def get_partenaire_maregraphe(id: int,
                                     token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"SELECT p.id_partenaire, p.id_maregraphe, m.libelle, m.latitude, m.longitude \
                     FROM obsmar.partenaire_maregraphe p\
@@ -67,7 +67,7 @@ async def sort_partenaire_maregraphe(id: int, col: str, order: bool,
     if col not in allow_col:
         raise HTTPException(status_code=500, detail="Nom de colonne invalide")
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         query = f"SELECT p.id_partenaire, p.id_maregraphe, m.libelle, m.latitude, m.longitude \
                     FROM obsmar.partenaire_maregraphe p\
@@ -91,7 +91,7 @@ async def add_partenaire(nom: str, logo: str, id: int,
     json = await request.json()
     url = json["url"]
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"INSERT INTO obsmar.partenaire(id, nom, logo, url) \
                     VALUES (%s, %s, %s, %s)", (id, nom, logo, url))
@@ -107,7 +107,7 @@ async def add_partenaire(nom: str, logo: str, id: int,
 async def add_maregraphe_partenaire(id_partenaire: int, id_maregraphe: int, ordre:int,
                                     token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"INSERT INTO obsmar.partenaire_maregraphe \
                     VALUES (%s, %s, %s)", (id_partenaire, id_maregraphe, ordre))
@@ -126,8 +126,7 @@ async def update_partenaire(id: int, nom: str, logo: str,
     json = await request.json()
     url = json["url"]
     try:
-        print(f"{id} {nom} {logo}")
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"UPDATE obsmar.partenaire \
                     SET nom=%s, logo=%s, url=%s \
@@ -143,7 +142,7 @@ async def update_partenaire(id: int, nom: str, logo: str,
 @router.delete("/deletePartenaire/{idPartenaire}")
 async def delete_partenaire(idPartenaire: int, token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"DELETE FROM obsmar.partenaire_maregraphe\
         WHERE id_partenaire=%s", (idPartenaire,))
@@ -162,7 +161,7 @@ async def delete_mare(idParte: int, idMare: int,
                       token: Annotated[User, Depends(get_current_user)]):
     try:
         print(f"{idParte} - {idMare}")
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"DELETE FROM obsmar.partenaire_maregraphe \
                     WHERE id_partenaire = %s AND id_maregraphe = %s", (idParte, idMare))
@@ -178,7 +177,7 @@ async def delete_mare(idParte: int, idMare: int,
 async def get_maregraphe_form(id: int,
                               token: Annotated[User, Depends(get_current_user)]):
     try:
-        db = databaseConnect()
+        db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(f"SELECT * from obsmar.maregraphe ma \
                     WHERE NOT EXISTS( \
