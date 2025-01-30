@@ -1,5 +1,4 @@
-from databaseConnect import database_connect, check_error, execute_query
-from psycopg2.extras import RealDictCursor
+from databaseConnect import execute_query
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException

@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Request
-from databaseConnect import database_connect, check_error, execute_query
+from databaseConnect import execute_query
 from connexion.connexion import User, get_current_user
-from psycopg2.extras import RealDictCursor
 from typing import Annotated
 
 router = APIRouter()
