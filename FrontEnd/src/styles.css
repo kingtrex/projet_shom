@@ -32,7 +32,7 @@ a{
 }
 /*******************************************/
 
-/** Alignement des boutons Ajout d'une donnée et retour à la page partenaire/marégraphe**/
+/** Alignement des boutons Ajout d'une donnée, export en SML et retour à la page partenaire/marégraphe**/
 .button_header{
     display: flex;
     text-align: center;
@@ -47,7 +47,7 @@ a{
 }
 
 .part_export, .part_ajout {
-    padding-left: 20%;
+    padding-left: 25%;
 }
 /*******************************************/
 
