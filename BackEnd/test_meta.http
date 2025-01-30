@@ -16,12 +16,6 @@ Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/meta/getMetaForm/3
-Authorization: Bearer {{token}}
-Accept: application/json
-
-###
-
 GET http://127.0.0.1:8000/meta/sort/id&true
 Authorization: Bearer {{token}}
 Accept: application/json
