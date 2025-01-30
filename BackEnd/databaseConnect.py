@@ -18,8 +18,6 @@ def database_connect():
 
 async def execute_query(query: str, get_query: bool, param: tuple | str = ()):
     try:
-        print(query)
-        print(param)
         db = database_connect()
         cur = db.cursor(cursor_factory=RealDictCursor)
         cur.execute(query, param)

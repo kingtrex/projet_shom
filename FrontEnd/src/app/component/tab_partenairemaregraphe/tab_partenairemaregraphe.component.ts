@@ -134,7 +134,7 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
    * @returns 
    */
   public async deleteMaregraphe(idParte: number, idMare: number){
-    if(confirm("Voulez-vous vraiment supprimer cette métadonnée?")){
+    if(confirm("Voulez-vous vraiment supprimer ce marégraphe du partenaire?")){
       await this.ApiPartenaireMaregrapheService.deleteMaregraphe(idParte, idMare).then(() => {
         location.reload()
       }).catch((error: any) => {
