@@ -1,6 +1,7 @@
 
 import psycopg2 as psy
 from fastapi import HTTPException
+from psycopg2.extras import RealDictCursor
 
 
 # noinspection SpellCheckingInspection
@@ -14,6 +15,21 @@ def database_connect():
         port = "5432",
     )
     return db
+
+async def execute_query(query: str, get_query: bool, param: tuple | str = ()):
+    try:
+        print(query)
+        print(param)
+        db = database_connect()
+        cur = db.cursor(cursor_factory=RealDictCursor)
+        cur.execute(query, param)
+        db.commit()
+        return cur.fetchall() if get_query else cur.lastrowid
+    except Exception as e:
+        check_error(e)
+    finally:
+        if 'db' in locals() and db:
+            db.close()
 
 SQLSTATE_MESSAGES = {
     "23503": "Impossible de supprimer : la ressource est référencée ailleurs (clé étrangère).",
