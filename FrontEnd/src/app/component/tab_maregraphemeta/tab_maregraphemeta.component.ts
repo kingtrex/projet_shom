@@ -66,7 +66,6 @@ export class TabMaregraphemetaComponent implements OnInit {
       default:
         this.origine = "choix_maregraphe";
     }
-    console.warn(this.origine)
   }
 
   ngOnInit(): void {
@@ -231,9 +230,7 @@ export class TabMaregraphemetaComponent implements OnInit {
   }
 
   public async exportMeta(){
-    await this.exportService.exportMeta(this.id_maregraphe, this.ville_maregraphe).then((data: any) => {
-      console.log(data)
-    }).catch((error: any) => {
+    await this.exportService.exportMeta(this.id_maregraphe, this.ville_maregraphe).catch((error: any) => {
       alert(error)
     })
   }

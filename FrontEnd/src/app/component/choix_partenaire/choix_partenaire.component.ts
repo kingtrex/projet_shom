@@ -63,7 +63,6 @@ export class ChoixPartenaireComponent {
     })
     this.donnees = meta;
     this.isDataLoaded = true;
-    console.log(this.isDataLoaded)
   }
 
   /**

@@ -36,12 +36,5 @@ export class SharedServiceService {
   public async deleteData(key: string): Promise<void>{
     sessionStorage.removeItem(key);
   }
-
-  /**
-   * Afficher les données du sessionStorage
-   */
-  public async showData(): Promise<void>{
-    console.log(sessionStorage);
-  }
 }
 

@@ -6,7 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 
 interface TokenPayload {
   exp: number; // Timestamp UNIX
-  sub: string;
+  username: string;
   admin: boolean;
 }
 
@@ -74,7 +74,6 @@ export class AuthService {
   public isAdmin(token: string): boolean {
     try {
       const data = jwtDecode<TokenPayload>(token);
-      console.log(data.admin)
       return data.admin
     } catch (error) {
       throw error

@@ -19,8 +19,11 @@ import ast
 SECRET_KEY = "292eceaf7266e55b10d28c87659f6bc16f8366d62cf687bf929d92c1e31c4a4c"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 300
-
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="connexion/debug")
+
+CONF_FILE_PATH = "./connexion/exemple.ini"
+FILE_SECTION = "USERS"
+
 router = APIRouter()
 
 class Token(BaseModel):
@@ -29,6 +32,8 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: str | None = None
+    admin: bool = False
+    exp: timedelta | None = None
 
 class User(BaseModel):
     username: str
@@ -39,6 +44,14 @@ class User(BaseModel):
 
 class UserInDB(User):
     hashed_password: str
+
+class UserConf(BaseModel):
+    username: str
+    full_name: str
+    email: str
+    hashed_password: str
+    disabled: bool
+    admin: bool
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -71,6 +84,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     else:
         expire = datetime.now(timezone.utc) + timedelta(minutes=1)
     to_encode.update({"exp": expire})
+    print(to_encode)
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
@@ -82,10 +96,10 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     )
     file_conf = configparser.ConfigParser()
     file_conf.sections()
-    file_conf.read("connexion/exemple.ini")
+    file_conf.read(CONF_FILE_PATH)
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
+        username: str = payload.get("username")
         if username is None:
             raise credentials_exception
         token_data = TokenData(username=username)
@@ -109,7 +123,7 @@ async def login_for_access_token(
 ) -> Token:
     file_conf = configparser.ConfigParser()
     file_conf.sections()
-    file_conf.read("./connexion/exemple.ini")
+    file_conf.read(CONF_FILE_PATH)
     if not file_conf.has_option("USERS", form_data["username"]):
         raise HTTPException(status_code=400, detail="Incorrect username or password")
 
@@ -121,8 +135,9 @@ async def login_for_access_token(
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    token_data = TokenData(username=user.username, admin = user.admin)
     access_token = create_access_token(
-        data={"sub": user.username, "admin": user.admin}, expires_delta=access_token_expires
+        data=token_data.__dict__, expires_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")
 
@@ -131,18 +146,17 @@ async def add_user(user: str, password: str, full_name: str, mail: str, admin: b
                    token: Annotated[User, Depends(get_current_user)], ):
     if token.admin:
         config = configparser.ConfigParser()
-        config.read("connexion/exemple.ini")
+        config.read(CONF_FILE_PATH)
         hashed_password = pwd_context.hash(password)
-        newJson = {
-            "username": user,
-            "full_name": full_name,
-            "email": mail,
-            "hashed_password": hashed_password,
-            "disabled": "False",
-            "admin": admin,
-        }
-        config.set("USERS", user, json.dumps(newJson))
-        with open("connexion/exemple.ini", "w") as f:
+        data_user = UserConf(username = user,
+                             full_name = full_name,
+                             email = mail,
+                             disabled = False,
+                             hashed_password = hashed_password,
+                             admin = admin
+                             )
+        config.set(FILE_SECTION, user, json.dumps(data_user))
+        with open(CONF_FILE_PATH, "w") as f:
             config.write(f)
     else:
         raise HTTPException(status_code=403, detail="Accès non autorise")
@@ -153,8 +167,8 @@ async def login_for_debug(
 ) -> Token:
     file_conf = configparser.ConfigParser()
     file_conf.sections()
-    file_conf.read("./connexion/exemple.ini")
-    if not file_conf.has_option("USERS", form_data.username):
+    file_conf.read(CONF_FILE_PATH)
+    if not file_conf.has_option(FILE_SECTION, form_data.username):
         raise HTTPException(status_code=400, detail="Incorrect username or password")
 
     user = authenticate_user(file_conf, form_data.username, form_data.password)
@@ -165,7 +179,8 @@ async def login_for_debug(
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    token_data = TokenData(username=user.username, admin = user.admin)
     access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data=token_data.__dict__, expires_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")

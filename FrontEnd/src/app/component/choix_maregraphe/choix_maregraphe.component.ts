@@ -48,7 +48,6 @@ export class ChoixMaregrapheComponent implements OnInit {
       longitude: "",
     });
     this.sharedService.setData("origine", "choix_maregraphe");
-    this.sharedService.showData();
   }
 
   ngOnInit(): void {

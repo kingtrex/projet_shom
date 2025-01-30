@@ -13,6 +13,8 @@ from databaseConnect import database_connect
 
 router = APIRouter()
 
+SML_FILE_NAME = "test.sml"
+PATH_SML_FILE = "api/" + SML_FILE_NAME
 
 class Identifier:
     def __init__(self, name, definition, value):
@@ -40,15 +42,14 @@ def header_sml(member, id_maregraphe: int, maregraphe: str):
 
     return system
 
-def maregraphe_sml(capabilities, data: []):
+def maregraphe_sml(capabilities, data):
     for d in data:
         field = ET.SubElement(capabilities, "swe:field")
         field.set("name", d["id_meta"])
         text = ET.SubElement(field, "swe:Text")
-        text.set("definition", f"http://shom.fr/maregraphie/{d["id_meta"]}")
+        text.set("definition", f"http://shom.fr/maregraphie/{d['id_meta']}")
         value = ET.SubElement(text, "swe:value")
         value.text = d["donnee"]
-    return capabilities
 
 def legal_contraints(system):
     legal_constraint = ET.SubElement(system, "sml:legalConstraint")
@@ -57,16 +58,9 @@ def legal_contraints(system):
     document = ET.SubElement(documentation, "sml:Document")
     description = ET.SubElement(document, "sml:description")
     description.text = "Voir les conditions générales d'utilisation sur l'espace de diffusion."
-    return legal_constraint
 
-def create_sml(data: [], maregraphe: str, id_maregraphe: int):
+def create_sml(data, maregraphe: str, id_maregraphe: int):
 
-
-    for m in data:
-        print(m)
-    """
-    Crée une structure SML basique.
-    """
     root = ET.Element("SensorML", attrib={"xmlns": "http://www.opengis.net/sensorML/1.0.1"})
 
     member = ET.SubElement(root, "sml:member")
@@ -75,11 +69,9 @@ def create_sml(data: [], maregraphe: str, id_maregraphe: int):
 
     capabilities = ET.SubElement(system, "sml:capabilities")
     capabilities.set("name", "characterics")
+    maregraphe_sml(capabilities, data)
 
-    data_record = maregraphe_sml(capabilities, data)
-
-    legal_constraint = legal_contraints(system)
-
+    legal_contraints(system)
 
     return root
 
@@ -92,8 +84,6 @@ async def export_sml(id_maregraphe: int,
     Exporte la structure SML dans un fichier XML avec mise en forme.
     """
     db = database_connect()
-    data = request.query_params
-    print(data.get("test"))
     cur = db.cursor(cursor_factory=RealDictCursor)
     cur.execute(f"SELECT * from obsmar.maregraphe_meta\
                    WHERE id_maregraphe = %s;", (id_maregraphe,))
@@ -103,9 +93,7 @@ async def export_sml(id_maregraphe: int,
     root = create_sml(data, nom_maregraphe, id_maregraphe)
     ET.indent(root, space="  ")
     tree = ET.ElementTree(root)
-    tree.write("api/test.sml", xml_declaration=True, encoding="utf-8")
-    return FileResponse("api/test.sml", media_type="text/xml", filename="test.sml")
-
-
+    tree.write(PATH_SML_FILE, xml_declaration=True, encoding="utf-8")
+    return FileResponse(PATH_SML_FILE, media_type="text/xml", filename=SML_FILE_NAME)
 
 if __name__ == "__main__": export_sml("test.sml")
