@@ -50,7 +50,7 @@ async def add_maregraphe(id: int, libelle: str, lat: float, long: float,
 @router.delete("/deleteMaregraphe/{id}")
 async def delete_maregraphe(id: int, token: Annotated[User, Depends(get_current_user)]):
 
-    query = "DELETE FROM obsmar.maregraphe WHERE id_tdb=%s"
+    query = "DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe=%s"
     await execute_query(query, False, (id,))
     query = "DELETE FROM obsmar.partenaire_maregraphe WHERE id_maregraphe=%s"
     await execute_query(query, False, (id,))

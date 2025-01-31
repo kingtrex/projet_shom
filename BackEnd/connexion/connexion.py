@@ -15,14 +15,14 @@ from jwt.exceptions import InvalidTokenError
 from passlib.context import CryptContext
 
 import ast
+#chemin du fichier .conf
+CONF_FILE_PATH = "./connexion/exemple.conf"
+FILE_SECTION = "USERS"
 
 SECRET_KEY = "292eceaf7266e55b10d28c87659f6bc16f8366d62cf687bf929d92c1e31c4a4c"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 300
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="connexion/debug")
-
-CONF_FILE_PATH = "./connexion/exemple.ini"
-FILE_SECTION = "USERS"
 
 router = APIRouter()
 

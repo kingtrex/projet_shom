@@ -53,7 +53,7 @@ export class ApiMaregraphemeta {
   public async updateMetaMare(idMaregraphe: number,
     idMeta: string,
     description: string
-  ){
+  ): Promise<any>{
     try{
       const param = "updateMeta/" + idMaregraphe + "&" + idMeta + "&" + description
       return await lastValueFrom(this.http.put(this.baseUrl + param, null))

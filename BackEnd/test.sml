@@ -1,2 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<SensorML xmlns="http://www.opengis.net/sensorML/1.0.1"><sml:member><sml:System><sml:identification><IdentifierList /></sml:identification></sml:System></sml:member></SensorML>
