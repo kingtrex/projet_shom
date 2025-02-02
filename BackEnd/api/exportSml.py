@@ -80,9 +80,6 @@ async def export_sml(id_maregraphe: int,
                      nom_maregraphe: str,
                      request: Request,
                      token: Annotated[User, Depends(get_current_user)]):
-    """
-    Exporte la structure SML dans un fichier XML avec mise en forme.
-    """
     db = database_connect()
     cur = db.cursor(cursor_factory=RealDictCursor)
     cur.execute(f"SELECT * from obsmar.maregraphe_meta\

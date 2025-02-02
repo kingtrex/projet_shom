@@ -88,7 +88,6 @@ export class APIChoixMaregrapheService {
   public async deleteMaregraphe(id: number): Promise<any> {
     try {
       const param = "deleteMaregraphe/" + id;
-      await lastValueFrom(this.http.delete("http://localhost:8000/maregrapheMeta/deleteAllMeta/" + id));
       return await lastValueFrom(this.http.delete(this.baseUrl + param));
     } catch (error: any) {
       throw error.error.details;
