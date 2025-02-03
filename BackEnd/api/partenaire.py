@@ -94,8 +94,8 @@ async def update_partenaire(id: int, nom: str, logo: str,
     result = await execute_query(query, False, param)
     return result
 
-@router.delete("/deletePartenaire/{id_partenaire}")
-async def delete_partenaire(id_partenaire: int,
+@router.delete("/deletePartenaire/{id}")
+async def delete_partenaire(id: int,
                             token: Annotated[User, Depends(get_current_user)]):
     """"
     Supprime un partenaire
@@ -109,12 +109,12 @@ async def delete_partenaire(id_partenaire: int,
     #Supprimer la relation entre le partenaire et tous ses marégraphes
     query = "DELETE FROM obsmar.partenaire_maregraphe\
             WHERE id_partenaire=%s"
-    param = (id_partenaire,)
+    param = (id,)
     await execute_query(query, False, param)
     #supprimer le marégraphe
     query = "DELETE FROM obsmar.partenaire \
             WHERE id=%s"
-    param = (id_partenaire,)
+    param = (id,)
     result = await execute_query(query, False, param)
     return result
 
