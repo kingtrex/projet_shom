@@ -9,12 +9,12 @@ Content-Type: application/json
 
 ###
 
-GET http://127.0.0.1:8000/partenaire/getPartenaireMaregraphe/50
+GET http://127.0.0.1:8000/partenaireMaregrape/getPartenaireMaregraphe/50
 Authorization: Bearer {{token}}
 Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/partenaire/partenaireMaregraphe/sort/50&libelle&true
+GET http://127.0.0.1:8000/partenaireMaregrape/sort/50&libelle&true
 Authorization: Bearer {{token}}
 Accept: application/json

@@ -1,3 +1,5 @@
+from sys import prefix
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -8,6 +10,7 @@ from api import(
     maregrapheMeta,
     meta,
     partenaire,
+    partenaireMaregraphe,
     exportSml,
 )
 
@@ -32,6 +35,7 @@ app.include_router(maregrapheMeta.router, prefix="/maregrapheMeta", tags=["mareg
 app.include_router(meta.router, prefix="/meta", tags=["meta"])
 app.include_router(connexion.router, prefix="/connexion", tags=["connexion"])
 app.include_router(partenaire.router, prefix="/partenaire", tags=["partenaire"])
+app.include_router(partenaireMaregraphe.router, prefix="partenaireMaregrape", tags=["partenaireMaregrape"])
 app.include_router(exportSml.router, prefix="/exportSml", tags=["exportSml"])
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
