@@ -70,7 +70,7 @@ async def sort_maregraphe(col: str, order: bool, token: Annotated[User, Depends(
     if order:
         query += f"DESC"
 
-    result = await execute_query(query, True, col)
+    result = await execute_query(query, True)
     return result
 
 @router.post("/addMaregraphe/{id}&{libelle}&{lat}&{long}")
