@@ -18,3 +18,15 @@ Accept: application/json
 GET http://127.0.0.1:8000/partenaireMaregrape/sort/50&libelle&true
 Authorization: Bearer {{token}}
 Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/partenaireMaregraphe/addMaregraphe/50&6257&-1
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+DELETE http://127.0.0.1:8000/partenaireMaregraphe/deleteMare/50&6257
+Authorization: Bearer {{token}}
+Accept: application/json

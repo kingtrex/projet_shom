@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from typing import Annotated
 from connexion.connexion import User, get_current_user
-from databaseConnect import execute_query
+from databaseConnect import db
 router = APIRouter()
 
 @router.get("/getMaregraphe/{id}")
@@ -19,10 +19,10 @@ async def get_partenaire_maregraphe(id: int,
     query = "SELECT p.id_partenaire, p.id_maregraphe, m.libelle, m.latitude, m.longitude \
             FROM obsmar.partenaire_maregraphe p\
             JOIN obsmar.maregraphe m ON m.id_tdb=p.id_maregraphe\
-            WHERE p.id_partenaire=%s \
+            WHERE p.id_partenaire=$1 \
             ORDER BY p.id_maregraphe"
     param = (id,)
-    result = await execute_query(query, True, param)
+    result = await db.fetch_all(query, param)
     return result
 
 
@@ -46,13 +46,13 @@ async def sort_partenaire_maregraphe(id: int, col: str, order: bool,
     query = f"SELECT p.id_partenaire, p.id_maregraphe, m.libelle, m.latitude, m.longitude \
             FROM obsmar.partenaire_maregraphe p\
             JOIN obsmar.maregraphe m ON m.id_tdb=p.id_maregraphe\
-            WHERE p.id_partenaire=%s \
+            WHERE p.id_partenaire=$1 \
             ORDER BY {col} "
     if order:
         query += f"DESC"
 
     param = (id,)
-    result = await execute_query(query, True, param)
+    result = await db.fetch_all(query, param)
     return result
 
 @router.post("/addMaregraphe/{id_partenaire}&{id_maregraphe}&{ordre}")
@@ -69,9 +69,9 @@ async def add_maregraphe(id_partenaire: int, id_maregraphe: int, ordre:int,
         dict: Le résultat de l'insertion
     """
     query = "INSERT INTO obsmar.partenaire_maregraphe \
-            VALUES (%s, %s, %s)"
+            VALUES ($1, $2, $3)"
     param = (id_partenaire, id_maregraphe, ordre)
-    result = await execute_query(query, False, param)
+    result = await db.execute(query, param)
     return result
 
 @router.delete("/deleteMare/{id_parte}&{id_mare}")
@@ -88,9 +88,9 @@ async def delete_mare(id_parte: int, id_mare: int,
     """
 
     query = "DELETE FROM obsmar.partenaire_maregraphe \
-            WHERE id_partenaire = %s AND id_maregraphe = %s"
+            WHERE id_partenaire = $1 AND id_maregraphe = $2"
     param = (id_parte, id_mare)
-    result = await execute_query(query, False, param)
+    result = await db.execute(query, param)
     return result
 
 @router.get("/getMaregrapheForm/{id}")
@@ -108,9 +108,9 @@ async def get_maregraphe_form(id: int,
     query = "SELECT * from obsmar.maregraphe ma \
             WHERE NOT EXISTS( \
                 SELECT * FROM obsmar.partenaire_maregraphe pa \
-                WHERE ma.id_tdb=pa.id_maregraphe AND pa.id_partenaire=%s \
+                WHERE ma.id_tdb=pa.id_maregraphe AND pa.id_partenaire=$1 \
             ) \
             ORDER BY ma.libelle"
     param = (id,)
-    result = await execute_query(query, True, param)
+    result = await db.fetch_all(query, param)
     return result

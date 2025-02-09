@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, Request
-from databaseConnect import execute_query
+from databaseConnect import db
 from connexion.connexion import User, get_current_user
 from typing import Annotated
 
@@ -18,7 +18,7 @@ async def get_partenaire(token: Annotated[User, Depends(get_current_user)]):
 
     query = "SELECT * FROM obsmar.partenaire \
             ORDER BY id"
-    result = await execute_query(query, True)
+    result = await db.fetch_all(query)
     return result
 
 @router.get("/sort/{col}&{order}")
@@ -40,10 +40,8 @@ async def sort_partenaire(col: str, order: bool, token: Annotated[User, Depends(
     query = f"SELECT * FROM obsmar.partenaire ORDER BY {col} "
     if order:
         query += f"DESC"
-    result = await execute_query(query, True)
+    result = await db.fetch_all(query)
     return result
-
-
 
 @router.post("/addPartenaire/{id}&{nom}&{logo}")
 async def add_partenaire(nom: str, logo: str, id: int,
@@ -64,11 +62,10 @@ async def add_partenaire(nom: str, logo: str, id: int,
     url = json["url"]
 
     query = "INSERT INTO obsmar.partenaire(id, nom, logo, url) \
-            VALUES (%s, %s, %s, %s)"
+            VALUES ($1, $2, $3, $4)"
     param = (id, nom, logo, url)
-    result = await execute_query(query, False, param)
+    result = await db.execute(query, param)
     return result
-
 
 @router.put("/updatePartenaire/{id}&{nom}&{logo}")
 async def update_partenaire(id: int, nom: str, logo: str,
@@ -88,10 +85,10 @@ async def update_partenaire(id: int, nom: str, logo: str,
     json = await request.json()
     url = json["url"]
     query = "UPDATE obsmar.partenaire \
-            SET nom=%s, logo=%s, url=%s \
-            WHERE id=%s"
+            SET nom=$1, logo=$2, url=$3 \
+            WHERE id=$4"
     param = (nom, logo, url, id)
-    result = await execute_query(query, False, param)
+    result = await db.execute(query, param)
     return result
 
 @router.delete("/deletePartenaire/{id}")
@@ -108,14 +105,14 @@ async def delete_partenaire(id: int,
 
     #Supprimer la relation entre le partenaire et tous ses marégraphes
     query = "DELETE FROM obsmar.partenaire_maregraphe\
-            WHERE id_partenaire=%s"
+            WHERE id_partenaire=$1"
     param = (id,)
-    await execute_query(query, False, param)
+    await db.execute(query, param)
     #supprimer le marégraphe
     query = "DELETE FROM obsmar.partenaire \
-            WHERE id=%s"
+            WHERE id=$1"
     param = (id,)
-    result = await execute_query(query, False, param)
+    result = await db.execute(query, param)
     return result
 
 

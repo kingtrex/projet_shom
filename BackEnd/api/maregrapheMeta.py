@@ -1,4 +1,4 @@
-from databaseConnect import execute_query
+from databaseConnect import db
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -23,8 +23,8 @@ async def get_maregraphe_meta(id: int,
         list: Une liste de métadonnées du marégraphe.
     """
 
-    query = "SELECT * FROM obsmar.maregraphe_meta WHERE id_maregraphe=%s ORDER BY id_meta"
-    result = await execute_query(query, True, (id,))
+    query = "SELECT * FROM obsmar.maregraphe_meta WHERE id_maregraphe=$1 ORDER BY id_meta"
+    result = await db.fetch_all(query, (id,))
     return result
 
 
@@ -47,11 +47,11 @@ async def sort_maregraphe_meta(id: int, col: str, order: bool, token: Annotated[
     if col not in allowed_col:
         raise HTTPException(status_code=500, detail="Nom de colonne invalide")
 
-    query = f"SELECT * FROM obsmar.maregraphe_meta WHERE id_maregraphe=%s ORDER BY {col} "
+    query = f"SELECT * FROM obsmar.maregraphe_meta WHERE id_maregraphe=$1 ORDER BY {col} "
     if order:
         query += f"DESC"
 
-    result = await execute_query(query, True, (id,))
+    result = await db.fetch_all(query, (id,))
     return result
 
 @router.post("/addMeta/{id}&{meta}&{data}")
@@ -71,9 +71,9 @@ async def add_meta(id: int, meta: str, data: str,
     """
 
     query = "INSERT INTO obsmar.maregraphe_meta \
-            VALUES (%s, %s, %s, %s)"
+            VALUES ($1, $2, $3, $4)"
     param = (id, meta, data, datetime.now())
-    result = await execute_query(query, False, param)
+    result = await db.execute(query, param)
     return result
 
 @router.put("/updateMeta/{id}&{meta}&{data}")
@@ -91,10 +91,10 @@ async def update_meta(id: int, meta: str, data: str,
         dict: Le résultat de la mise à jour.
     """
 
-    query = f"UPDATE obsmar.maregraphe_meta SET donnee = %s \
-            WHERE id_maregraphe = %s AND id_meta = %s"
+    query = f"UPDATE obsmar.maregraphe_meta SET donnee = $1 \
+            WHERE id_maregraphe = $2 AND id_meta = $3"
     param = (data, id, meta)
-    result = await execute_query(query, False, param)
+    result = await db.execute(query, param)
     return result
 
 @router.delete("/deleteMeta/{id}&{meta}")
@@ -113,9 +113,9 @@ async def delete_meta(id: int, meta: str,
     """
 
     query = "DELETE FROM obsmar.maregraphe_meta \
-            WHERE id_maregraphe = %s AND id_meta = %s"
+            WHERE id_maregraphe = $1 AND id_meta = $2"
     param = (id, meta)
-    result = await execute_query(query, False, param)
+    result = await db.execute(query, param)
     return result
 
 @router.get("/getMetaForm/{id}")
@@ -134,8 +134,8 @@ async def get_meta_form(id: int,token: Annotated[User, Depends(get_current_user)
     query = "SELECT * FROM obsmar.meta me \
             WHERE NOT EXISTS(\
                 SELECT * FROM obsmar.maregraphe_meta ma \
-                WHERE me.id=ma.id_meta AND ma.id_maregraphe=%s\
+                WHERE me.id=ma.id_meta AND ma.id_maregraphe=$1\
             ) ORDER BY me.id"
     param = (id,)
-    result = await execute_query(query, True, param)
+    result = await db.execute(query, param)
     return result

@@ -2,13 +2,15 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
 
+import databaseConnect
 from connexion.connexion import User, get_current_user
-from databaseConnect import execute_query
+from databaseConnect import db
 
 router = APIRouter()
 
 @router.get("/getMaregraphe")
-async def get_maregraphe(token: Annotated[User, Depends(get_current_user)]):
+async def get_maregraphe(token: Annotated[User, Depends(get_current_user)],
+                         ):
     """
     Récupère les données des marégraphes.
 
@@ -20,7 +22,7 @@ async def get_maregraphe(token: Annotated[User, Depends(get_current_user)]):
     """
     query = "SELECT * FROM obsmar.maregraphe \
             ORDER BY id_tdb"
-    result = await execute_query(query, True)
+    result = await db.fetch_all(query)
     return result
 
 
@@ -41,9 +43,9 @@ async def update_maregraphe(id: int, ville: str, latitude: str, longitude: str,
         dict: Le résultat de la mise à jour.
     """
     query = f"UPDATE obsmar.maregraphe \
-            SET libelle=%s, latitude=%s, longitude=%s \
-            WHERE id_tdb=%s"
-    result = await execute_query(query, False, (ville, latitude, longitude, id))
+            SET libelle=$1, latitude=$2, longitude=$3 \
+            WHERE id_tdb=$4"
+    result = await db.execute(query, (ville, latitude, longitude, id))
     return result
 
 @router.get("/sort/{col}&{order}")
@@ -70,7 +72,7 @@ async def sort_maregraphe(col: str, order: bool, token: Annotated[User, Depends(
     if order:
         query += f"DESC"
 
-    result = await execute_query(query, True)
+    result = await db.fetch_all(query)
     return result
 
 @router.post("/addMaregraphe/{id}&{libelle}&{lat}&{long}")
@@ -90,8 +92,8 @@ async def add_maregraphe(id: int, libelle: str, lat: float, long: float,
         dict: Le résultat de l'insertion.
     """
     query = "INSERT INTO obsmar.maregraphe \
-            VALUES (%s, %s, %s, %s)"
-    result = await execute_query(query, False, (id, libelle, lat, long))
+            VALUES ($1, $2, $3, $4)"
+    result = await db.execute(query, (id, libelle, lat, long))
     return result
 
 @router.delete("/deleteMaregraphe/{id}")
@@ -105,11 +107,11 @@ async def delete_maregraphe(id: int, token: Annotated[User, Depends(get_current_
         
     Returns:
         dict: Le résultat de la suppression."""
-    query = "DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe=%s"
-    await execute_query(query, False, (id,))
-    query = "DELETE FROM obsmar.partenaire_maregraphe WHERE id_maregraphe=%s"
-    await execute_query(query, False, (id,))
-    query = "DELETE FROM obsmar.maregraphe WHERE id_tdb=%s"
-    result = await execute_query(query, False, (id,))
+    query = "DELETE FROM obsmar.maregraphe_meta WHERE id_maregraphe=$1"
+    await db.execute(query, (id,))
+    query = "DELETE FROM obsmar.partenaire_maregraphe WHERE id_maregraphe=$1"
+    await db.execute(query, (id,))
+    query = "DELETE FROM obsmar.maregraphe WHERE id_tdb=$1"
+    result = await db.execute(query, (id,))
 
     return result

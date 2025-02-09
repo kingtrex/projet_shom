@@ -1,4 +1,4 @@
-from databaseConnect import execute_query
+from databaseConnect import db
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 
@@ -21,7 +21,7 @@ async def get_meta_id(token: Annotated[User, Depends(get_current_user)]):
 
     query = "SELECT * FROM obsmar.meta \
             ORDER BY id"
-    result = await execute_query(query, True)
+    result = await db.fetch_all(query)
     return result
 
 @router.get("/sort/{col}&{order}")
@@ -46,7 +46,7 @@ async def sort_meta(col: str, order: bool, token: Annotated[User, Depends(get_cu
     if order:
         query += "DESC"
     print(query)
-    result = await execute_query(query, True)
+    result = await db.fetch_all(query)
     return result
 
 @router.post("/addMeta/{id}&{desc}&{ordre}")
@@ -64,9 +64,9 @@ async def add_meta(id: str, desc: str, ordre: int,
     Returns:
         dict: Le résultat de l'ajout
     """
-    query = "INSERT INTO obsmar.meta VALUES (%s, %s, %s)"
+    query = "INSERT INTO obsmar.meta VALUES ($1, $2, $3)"
     param = (id, desc, ordre)
-    result = await execute_query(query, False, param)
+    result = await db.execute(query, param)
     return result
 
 @router.put("/updateMeta/{id}&{desc}&{ordre}")
@@ -86,10 +86,10 @@ async def update_meta(id: str, desc: str, ordre: int,
     """
 
     query = "UPDATE obsmar.meta \
-            SET description=%s, ordre=%s \
-            WHERE id=%s"
+            SET description=$1, ordre=$2 \
+            WHERE id=$3"
     param = (desc, ordre, id)
-    result = await execute_query(query, False, param)
+    result = await db.execute(query, param)
     return result
 
 @router.delete("/deleteMeta/{id}")
@@ -106,11 +106,11 @@ async def delete_meta(id: str,
         dict: Le résultat de la suppression
     """
     #delete meta in all marégraphe
-    query = "DELETE FROM obsmar.maregraphe_meta WHERE id_meta=%s"
+    query = "DELETE FROM obsmar.maregraphe_meta WHERE id_meta=$1"
     param = (id,)
-    await execute_query(query, False, param)
+    await db.execute(query, param)
     #delete meta
-    query = "DELETE FROM obsmar.meta WHERE id=%s"
+    query = "DELETE FROM obsmar.meta WHERE id=$1"
     param = (id,)
-    result = await execute_query(query, False, param)
+    result = await db.execute(query, param)
     return result
