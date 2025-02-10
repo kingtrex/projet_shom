@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { SharedService } from '../shared_service/shared-service.service';
 
 interface TokenPayload {
   exp: number; // Timestamp UNIX
@@ -14,9 +15,9 @@ interface TokenPayload {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiURL = "http://localhost:8000/";
+  private apiURL = this.sharedService.getApiURL() + "connexion";
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private sharedService: SharedService) { }
 
   /**
    * Lancer une requête pour se connecter
@@ -28,7 +29,7 @@ export class AuthService {
   public async login(username: string, password: string): Promise<any>{
     try{
       const response = await lastValueFrom(
-        this.http.post<{access_token: string}>(this.apiURL + "connexion/token", {username: username, password: password})
+        this.http.post<{access_token: string}>(this.apiURL + "/token", {username: username, password: password})
       );
       localStorage.setItem("token", response.access_token)
       this.router.navigate(["/tabChoixMaregraphe"])

@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Observable } from 'rxjs';
+import { SharedService } from '../shared_service/shared-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ApiMaregraphemeta {
-  private baseUrl = 'http://localhost:8000/maregrapheMeta/'; 
+  private baseUrl = this.sharedService.getApiURL() + 'maregrapheMeta/'; 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private sharedService: SharedService
+  ) {}
 
   /**
    * Obtenir les métadonnées d'un marégraphe

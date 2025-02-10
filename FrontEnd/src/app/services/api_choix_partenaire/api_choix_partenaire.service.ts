@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Observable } from 'rxjs';
+import { SharedService } from '../shared_service/shared-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiChoixPartenaireService {
-  private baseUrl = 'http://localhost:8000/partenaire/'; 
-  constructor(private http: HttpClient) { }
+  private baseUrl = this.sharedService.getApiURL() + 'partenaire/'; 
+
+  constructor(private http: HttpClient,
+    private sharedService: SharedService,
+  ) { }
 
   /**
    * Obtenir les informations des partenaires

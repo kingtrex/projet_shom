@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '../auth_service/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SharedServiceService {
+export class SharedService {
 
+  private apiURL: string = "http://localhost:8000/";
 
-  constructor(private authService: AuthService) { }
+  constructor() { }
+
+  public getApiURL(): string{
+    return this.apiURL;
+  }
   /**
    * Ajouter une valeur dans le sessionStorage
    * @param {string} key - La clé de la donnée 
@@ -22,11 +26,7 @@ export class SharedServiceService {
    * @returns {string | null} - La donnée correspondant à la clé
    */
   public getData(key: string): string{
-    if(this.authService.isLoggedIn()){
-      return sessionStorage.getItem(key) === null ? "" : sessionStorage.getItem(key)!;
-    }else{
-      return "";
-    }
+    return sessionStorage.getItem(key) === null ? "" : sessionStorage.getItem(key)!;
   }
 
   /**

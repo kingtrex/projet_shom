@@ -4,7 +4,7 @@ import { APIChoixMaregrapheService } from '../../services/api_choix_maregraphe/a
 import { ActivatedRoute, Data } from '@angular/router';
 import { Maregraphe } from '../../class/Maregraphe';
 import { Form, FormBuilder, FormGroup } from '@angular/forms';
-import { SharedServiceService } from 'src/app/services/shared_service/shared-service.service';
+import { SharedService } from 'src/app/services/shared_service/shared-service.service';
 import { AuthService } from 'src/app/services/auth_service/auth.service';
 
 @Component({
@@ -36,7 +36,7 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   constructor(private ApiPartenaireMaregrapheService: ApiPartenaireMaregrapheService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private sharedService: SharedServiceService,
+    private sharedService: SharedService,
     private authService: AuthService,
   ) {
     this.formAddMaregraphe = this.formBuilder.group({

@@ -1,14 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Maregraphe } from 'src/app/class/Maregraphe';
+import { SharedService } from '../shared_service/shared-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIChoixMaregrapheService {
-  private baseUrl = 'http://localhost:8000/maregraphe/'; 
-  constructor(private http: HttpClient) {}
+  private baseUrl = this.sharedService.getApiURL() + 'maregraphe/'; 
+
+  constructor(private http: HttpClient,
+    private sharedService: SharedService
+  ) {}
 
   /**
    * Obtenir la liste des marégraphes dans la BDD.

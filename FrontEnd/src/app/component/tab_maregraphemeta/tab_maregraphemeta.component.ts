@@ -5,7 +5,7 @@ import { ActivatedRoute, Data } from '@angular/router';
 import { MaregrapheMeta } from 'src/app/class/Maregraphemeta';
 import { Meta } from 'src/app/class/Meta';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SharedServiceService } from 'src/app/services/shared_service/shared-service.service';
+import { SharedService } from 'src/app/services/shared_service/shared-service.service';
 import { AuthService } from 'src/app/services/auth_service/auth.service';
 import { SMLExportService } from 'src/app/services/sml-export/sml-export.service';
 
@@ -43,7 +43,7 @@ export class TabMaregraphemetaComponent implements OnInit {
     private apiMeta: ApiMeta,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private sharedService: SharedServiceService,
+    private sharedService: SharedService,
     private authService: AuthService,
     private exportService: SMLExportService,
   ) {

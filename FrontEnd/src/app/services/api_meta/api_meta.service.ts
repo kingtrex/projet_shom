@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Observable } from 'rxjs';
+import { SharedService } from '../shared_service/shared-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiMeta {
-  private baseUrl = 'http://localhost:8000/meta/'; 
-  constructor(private http: HttpClient) { }
+  private baseUrl = this.sharedService.getApiURL() + 'meta/'; 
+
+  constructor(private http: HttpClient, 
+    private sharedService: SharedService,
+  ) { }
 
   /**
    * Obtenir la liste des métadonnées

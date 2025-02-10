@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth_service/auth.service';
 
 
@@ -29,6 +29,8 @@ export class AuthentificationComponent {
     await this.authService.login(value.login, value.password).then(() => {
       const element = document.getElementById("error")
       element?.classList.remove("hide")
+    }).catch((error: any) => {
+      alert(error)
     })
   }
 }
