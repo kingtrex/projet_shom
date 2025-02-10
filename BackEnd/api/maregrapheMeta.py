@@ -137,5 +137,5 @@ async def get_meta_form(id: int,token: Annotated[User, Depends(get_current_user)
                 WHERE me.id=ma.id_meta AND ma.id_maregraphe=$1\
             ) ORDER BY me.id"
     param = (id,)
-    result = await db.execute(query, param)
+    result = await db.fetch_all(query, param)
     return result
