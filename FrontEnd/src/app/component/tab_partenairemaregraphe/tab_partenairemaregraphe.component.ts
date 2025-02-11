@@ -8,9 +8,10 @@ import { SharedService } from 'src/app/services/shared_service/shared-service.se
 import { AuthService } from 'src/app/services/auth_service/auth.service';
 
 @Component({
-  selector: 'app-tab-partenairemaregraphe',
-  templateUrl: './tab_partenairemaregraphe.component.html',
-  styleUrls: ['./tab_partenairemaregraphe.component.css']
+    selector: 'app-tab-partenairemaregraphe',
+    templateUrl: './tab_partenairemaregraphe.component.html',
+    styleUrls: ['./tab_partenairemaregraphe.component.css'],
+    standalone: false
 })
 export class TabPartenaireMaregrapheComponent implements OnInit{
 

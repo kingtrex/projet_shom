@@ -4,9 +4,10 @@ import { AuthService } from 'src/app/services/auth_service/auth.service';
 
 
 @Component({
-  selector: 'app-authentification',
-  templateUrl: './authentification.component.html',
-  styleUrls: ['./authentification.component.css']
+    selector: 'app-authentification',
+    templateUrl: './authentification.component.html',
+    styleUrls: ['./authentification.component.css'],
+    standalone: false
 })
 export class AuthentificationComponent {
 
