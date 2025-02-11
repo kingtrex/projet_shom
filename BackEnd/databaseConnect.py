@@ -5,13 +5,6 @@ from fastapi import HTTPException
 from psycopg2.extras import RealDictCursor
 import asyncpg
 
-SQLSTATE_MESSAGES = {
-    "23503": "Impossible de supprimer : la ressource est référencée ailleurs (clé étrangère).",
-    "23505": "Violation de contrainte unique.",
-    "UndefinedTableError": "La table demandée n'existe pas.",
-    "22P02": "Identifiant mal formaté.",
-}
-
 def check_error(e):
     if isinstance(e, UndefinedTableError):
         raise HTTPException(status_code=500, detail="La table demandée n'existe pas.")
