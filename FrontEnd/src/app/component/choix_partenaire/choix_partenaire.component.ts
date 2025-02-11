@@ -6,9 +6,10 @@ import { Form, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth_service/auth.service';
 
 @Component({
-  selector: 'app-tab-partenaire',
-  templateUrl: './choix_partenaire.component.html',
-  styleUrls: ['./choix_partenaire.component.css']
+    selector: 'app-tab-partenaire',
+    templateUrl: './choix_partenaire.component.html',
+    styleUrls: ['./choix_partenaire.component.css'],
+    standalone: false
 })
 
 export class ChoixPartenaireComponent {

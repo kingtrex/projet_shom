@@ -7,9 +7,10 @@ import { SharedService } from 'src/app/services/shared_service/shared-service.se
 import { AuthService } from 'src/app/services/auth_service/auth.service';
 
 @Component({
-  selector: 'app-choix-maregraphe',
-  templateUrl: './choix_maregraphe.component.html',
-  styleUrls: ['./choix_maregraphe.component.css']
+    selector: 'app-choix-maregraphe',
+    templateUrl: './choix_maregraphe.component.html',
+    styleUrls: ['./choix_maregraphe.component.css'],
+    standalone: false
 })
 
 export class ChoixMaregrapheComponent implements OnInit {

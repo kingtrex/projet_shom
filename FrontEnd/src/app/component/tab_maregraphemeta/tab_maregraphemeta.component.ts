@@ -10,9 +10,10 @@ import { AuthService } from 'src/app/services/auth_service/auth.service';
 import { SMLExportService } from 'src/app/services/sml-export/sml-export.service';
 
 @Component({
-  selector: 'app-tab-maregraphemeta',
-  templateUrl: './tab_maregraphemeta.component.html',
-  styleUrls: ['./tab_maregraphemeta.component.css']
+    selector: 'app-tab-maregraphemeta',
+    templateUrl: './tab_maregraphemeta.component.html',
+    styleUrls: ['./tab_maregraphemeta.component.css'],
+    standalone: false
 })
 
 export class TabMaregraphemetaComponent implements OnInit {
