@@ -1,8 +1,5 @@
-
-import psycopg2 as psy
 from asyncpg import UndefinedTableError, UndefinedColumnError, ForeignKeyViolationError, UniqueViolationError
 from fastapi import HTTPException
-from psycopg2.extras import RealDictCursor
 import asyncpg
 
 def check_error(e):
