@@ -44,6 +44,7 @@ class User(BaseModel):
     hashed_password: str
 
 async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]) -> User:
+    print("nuoc")
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Le token a expiré, veuillez-vous reconnecter",
@@ -137,6 +138,7 @@ async def add_user(user: str, password: str, full_name: str, admin: bool,
 async def login_for_debug(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 ) -> Token:
+    print("nioc")
     file_conf = configparser.ConfigParser()
     file_conf.sections()
     file_conf.read(CONF_FILE_PATH)

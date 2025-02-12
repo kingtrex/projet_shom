@@ -78,7 +78,7 @@ export class APIChoixMaregrapheService {
       const param = "updateMaregraphe/" + id + "&" + nom + "&" + latitude + "&" + longitude;
       return await lastValueFrom(this.http.put(this.baseUrl + param, {}));
     } catch (error: any) {
-      throw error.error.details;
+      throw error.error.detail;
     }
   }
 
@@ -93,7 +93,8 @@ export class APIChoixMaregrapheService {
       const param = "deleteMaregraphe/" + id;
       return await lastValueFrom(this.http.delete(this.baseUrl + param));
     } catch (error: any) {
-      throw error.error.details;
+      console.log(error)
+      throw error.error.detail;
     }
   }
 

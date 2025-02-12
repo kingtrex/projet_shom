@@ -22,7 +22,7 @@ export class ApiChoixPartenaireService {
     try{
       return await lastValueFrom(this.http.get(this.baseUrl + "getPartenaire"));
     }catch(error: any){
-      throw error.error.details;
+      throw error.error.detail;
     }
   }
 
