@@ -22,7 +22,7 @@ export class APIChoixMaregrapheService {
     try {
       return await lastValueFrom(this.http.get(this.baseUrl + "getMaregraphe"));
     } catch (error: any) {
-      throw error.error.details;
+      throw error.error.detail;
     }
   }
 
@@ -38,7 +38,7 @@ export class APIChoixMaregrapheService {
       const param = "sort/" + col + "&" + order;
       return await lastValueFrom(this.http.get(this.baseUrl + param));
     } catch (error: any) {
-      throw error.error.details;
+      throw error.error.detail;
     }
   }
 

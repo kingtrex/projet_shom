@@ -45,6 +45,7 @@
       <thead>
         <tr>
             <th (click)="sort('id_maregraphe')">Identifiant {{triangleData["id_maregraphe"]}}</th>
+            <th (click)="sort('ordre')">Ordre {{triangleData["ordre"]}}</th>
             <th (click)="sort('libelle')">Ville {{triangleData["libelle"]}}</th>   
             <th>Latitude</th>
             <th>Longitude</th>
@@ -54,6 +55,7 @@
       <tbody>
         <tr class="lignes_a_colorer" *ngFor="let i of donnees">
             <td>{{i.id_tdb}}</td>
+            <td>{{i.ordre}}</td>
             <td>{{i.libelle}}</td>
             <td>{{i.latitude}}</td>
             <td>{{i.longitude}}</td>

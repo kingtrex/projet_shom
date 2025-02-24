@@ -24,11 +24,13 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   public listMaregraphe: Maregraphe[] = [];
 
   public sortData: {[key: string] : boolean} = {
-    "id_maregraphe": true,
+    "id_maregraphe": false,
+    "ordre": true,
     "libelle" : false,
   };
   public triangleData: {[key: string] : string} = {
     "id_maregraphe": "▼",
+    "ordre": "▼",
     "libelle" : "▼",
   }
 
@@ -60,7 +62,7 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   public async getData(){
     await this.ApiPartenaireMaregrapheService.getData(this.id).then((element: any) => {
       element.forEach((maregraphe: any) => {
-        this.donnees.push(new Maregraphe(maregraphe.id_maregraphe, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude))
+        this.donnees.push(new Maregraphe(maregraphe.id_maregraphe, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude, maregraphe.ordre))
       })
       this.isDataLoaded = true;      
     }).catch((error: any) => {
@@ -76,7 +78,7 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   public async getPotentialMaregraphe(){
     await this.ApiPartenaireMaregrapheService.getMaregrapheForm(this.id).then((element: any) => {
       element.forEach((maregraphe: any) => {
-        this.listMaregraphe.push(new Maregraphe(maregraphe.id_maregraphe, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude))
+        this.listMaregraphe.push(new Maregraphe(maregraphe.id_maregraphe, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude, maregraphe.ordre))
         this.dictMaregraphe[maregraphe.libelle] = maregraphe.id_tdb;
       })
     }).catch((error: any) => {
@@ -91,8 +93,9 @@ export class TabPartenaireMaregrapheComponent implements OnInit{
   public async sort(col: string){
     await this.ApiPartenaireMaregrapheService.sortData(this.id, col, this.sortData[col]).then((element: any) => {
       this.donnees = []
+      console.table(element)
       element.forEach((maregraphe: any) => {
-        this.donnees.push(new Maregraphe(maregraphe.id_maregraphe, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude))
+        this.donnees.push(new Maregraphe(maregraphe.id_maregraphe, maregraphe.libelle, maregraphe.latitude, maregraphe.longitude, maregraphe.ordre))
       })
       this.sortData[col] = !this.sortData[col];
       this.triangleData[col] = this.sortData[col] ? "▼" : "▲";

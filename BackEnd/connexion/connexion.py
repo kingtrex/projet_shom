@@ -44,7 +44,6 @@ class User(BaseModel):
     hashed_password: str
 
 async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]) -> User:
-    print("nuoc")
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Le token a expiré, veuillez-vous reconnecter",

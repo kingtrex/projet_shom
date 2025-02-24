@@ -16,11 +16,11 @@ async def get_partenaire_maregraphe(id: int,
     Returns:
         list: Une liste de marégraphes associés au partenaire
     """
-    query = "SELECT p.id_partenaire, p.id_maregraphe, m.libelle, m.latitude, m.longitude \
+    query = "SELECT p.id_partenaire, p.id_maregraphe, m.libelle, m.latitude, m.longitude, p.ordre \
             FROM obsmar.partenaire_maregraphe p\
             JOIN obsmar.maregraphe m ON m.id_tdb=p.id_maregraphe\
             WHERE p.id_partenaire=$1 \
-            ORDER BY p.id_maregraphe"
+            ORDER BY p.ordre"
     param = (id,)
     result = await db.fetch_all(query, param)
     return result
@@ -39,11 +39,14 @@ async def sort_partenaire_maregraphe(id: int, col: str, order: bool,
     Returns:
         list: Les marégraphes associés au partenaire triés
     """
-    allow_col = ["id_maregraphe", "libelle"]
+    print(col)
+    allow_col = ["id_maregraphe", "libelle", "ordre"]
+    print(allow_col)
     if col not in allow_col:
+        print("aaa")
         raise HTTPException(status_code=500, detail="Nom de colonne invalide")
 
-    query = f"SELECT p.id_partenaire, p.id_maregraphe, m.libelle, m.latitude, m.longitude \
+    query = f"SELECT p.id_partenaire, p.id_maregraphe, m.libelle, m.latitude, m.longitude, p.ordre \
             FROM obsmar.partenaire_maregraphe p\
             JOIN obsmar.maregraphe m ON m.id_tdb=p.id_maregraphe\
             WHERE p.id_partenaire=$1 \
@@ -52,6 +55,7 @@ async def sort_partenaire_maregraphe(id: int, col: str, order: bool,
         query += f"DESC"
 
     param = (id,)
+    print(query)
     result = await db.fetch_all(query, param)
     return result
 
