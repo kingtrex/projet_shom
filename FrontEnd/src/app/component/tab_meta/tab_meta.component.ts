@@ -5,9 +5,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth_service/auth.service';
 
 @Component({
-  selector: 'app-tab-meta',
-  templateUrl: './tab_meta.component.html',
-  styleUrls: ['./tab_meta.component.css']
+    selector: 'app-tab-meta',
+    templateUrl: './tab_meta.component.html',
+    styleUrls: ['./tab_meta.component.css'],
+    standalone: false
 })
 
 

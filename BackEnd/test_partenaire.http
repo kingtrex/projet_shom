@@ -15,18 +15,32 @@ Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/partenaire/getPartenaireMaregraphe/50
+GET http://127.0.0.1:8000/partenaire/sort/nom&True
 Authorization: Bearer {{token}}
 Accept: application/json
 
 ###
 
-PUT http://127.0.0.1:8000/partenaire/updatePartenaire/50&shom2&logo_SHOM2.png
+POST http://127.0.0.1:8000/partenaire/addPartenaire/-1&isen&logo_SHOM.png
 Authorization: Bearer {{token}}
 Accept: application/json
 
 {
-"url" : "https://www.shom2.fr/"
+"url": "https://isen-brest.fr/"
 }
 
 ###
+
+PUT http://127.0.0.1:8000/partenaire/updatePartenaire/-1&isen2&logo_SHOM2.png
+Authorization: Bearer {{token}}
+Accept: application/json
+
+{
+"url" : "https://www.shom.fr/"
+}
+
+###
+
+DELETE http://127.0.0.1:8000/partenaire/deletePartenaire/-1
+Authorization: Bearer {{token}}
+Accept: application/json

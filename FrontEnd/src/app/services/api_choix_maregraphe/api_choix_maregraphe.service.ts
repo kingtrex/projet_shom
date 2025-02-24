@@ -1,14 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Maregraphe } from 'src/app/class/Maregraphe';
+import { SharedService } from '../shared_service/shared-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIChoixMaregrapheService {
-  private baseUrl = 'http://localhost:8000/maregraphe/'; 
-  constructor(private http: HttpClient) {}
+  private baseUrl = this.sharedService.getApiURL() + 'maregraphe/'; 
+
+  constructor(private http: HttpClient,
+    private sharedService: SharedService
+  ) {}
 
   /**
    * Obtenir la liste des marégraphes dans la BDD.
@@ -75,7 +78,7 @@ export class APIChoixMaregrapheService {
       const param = "updateMaregraphe/" + id + "&" + nom + "&" + latitude + "&" + longitude;
       return await lastValueFrom(this.http.put(this.baseUrl + param, {}));
     } catch (error: any) {
-      throw error.error.details;
+      throw error.error.detail;
     }
   }
 
@@ -88,10 +91,10 @@ export class APIChoixMaregrapheService {
   public async deleteMaregraphe(id: number): Promise<any> {
     try {
       const param = "deleteMaregraphe/" + id;
-      await lastValueFrom(this.http.delete("http://localhost:8000/maregrapheMeta/deleteAllMeta/" + id));
       return await lastValueFrom(this.http.delete(this.baseUrl + param));
     } catch (error: any) {
-      throw error.error.details;
+      console.log(error)
+      throw error.error.detail;
     }
   }
 

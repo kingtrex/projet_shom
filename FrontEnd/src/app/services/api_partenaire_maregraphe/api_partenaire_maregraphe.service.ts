@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Observable } from 'rxjs';
+import { SharedService } from '../shared_service/shared-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiPartenaireMaregrapheService {
-  private baseUrl = 'http://localhost:8000/partenaire/'; 
+  private baseUrl = this.sharedService.getApiURL() + 'partenaireMaregraphe/'; 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private sharedService: SharedService,
+  ) {}
 
   /**
    * Obtenir les marégraphe d'un partenaire
@@ -18,7 +21,7 @@ export class ApiPartenaireMaregrapheService {
    */
   public async getData(id: number): Promise<any> {
     try{
-      return await lastValueFrom(this.http.get(this.baseUrl + "getPartenaireMaregraphe/"+ id));
+      return await lastValueFrom(this.http.get(this.baseUrl + "getMaregraphe/"+ id));
     }catch(error: any){
       throw error.error.detail;
     }
@@ -34,7 +37,7 @@ export class ApiPartenaireMaregrapheService {
    */
   public async sortData(id_partenaire: number, col: string, ordre: boolean): Promise<Object> {
       try {
-          const param = "partenaireMaregraphe/sort/" + id_partenaire + "&" + col + "&" + ordre;
+          const param = "sort/" + id_partenaire + "&" + col + "&" + ordre;
           return await lastValueFrom(this.http.get(this.baseUrl + param));
       } catch (error: any) {
           throw error.error.detail;
@@ -51,7 +54,7 @@ export class ApiPartenaireMaregrapheService {
    */
   public async addMaregraphe(id_partenaire: number, id_maregraphe: number, ordre: number): Promise<any>{
     try{
-      let param = "addMaregraphePartenaire/" + id_partenaire + "&" + id_maregraphe + "&" + ordre;
+      let param = "addMaregraphe/" + id_partenaire + "&" + id_maregraphe + "&" + ordre;
       return await lastValueFrom(this.http.post(this.baseUrl + param, null));
     }catch(error: any){
       throw error.error.detail;

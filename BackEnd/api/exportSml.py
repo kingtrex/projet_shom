@@ -9,7 +9,7 @@ from xml.dom import minidom
 from starlette.responses import FileResponse
 
 from connexion.connexion import User, get_current_user
-from databaseConnect import database_connect
+from databaseConnect import db
 
 router = APIRouter()
 
@@ -80,15 +80,10 @@ async def export_sml(id_maregraphe: int,
                      nom_maregraphe: str,
                      request: Request,
                      token: Annotated[User, Depends(get_current_user)]):
-    """
-    Exporte la structure SML dans un fichier XML avec mise en forme.
-    """
-    db = database_connect()
-    cur = db.cursor(cursor_factory=RealDictCursor)
-    cur.execute(f"SELECT * from obsmar.maregraphe_meta\
-                   WHERE id_maregraphe = %s;", (id_maregraphe,))
-
-    meta = cur.fetchall()
+    query = "SELECT * from obsmar.maregraphe_meta\
+                   WHERE id_maregraphe = $1;"
+    param = (id_maregraphe,)
+    meta = db.fetch_all(query, param)
     data = [dict(meta) for meta in meta]
     root = create_sml(data, nom_maregraphe, id_maregraphe)
     ET.indent(root, space="  ")

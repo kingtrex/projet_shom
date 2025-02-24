@@ -3,13 +3,14 @@ import { APIChoixMaregrapheService } from '../../services/api_choix_maregraphe/a
 import { Data } from '@angular/router';
 import { Maregraphe } from '../../class/Maregraphe';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SharedServiceService } from 'src/app/services/shared_service/shared-service.service';
+import { SharedService } from 'src/app/services/shared_service/shared-service.service';
 import { AuthService } from 'src/app/services/auth_service/auth.service';
 
 @Component({
-  selector: 'app-choix-maregraphe',
-  templateUrl: './choix_maregraphe.component.html',
-  styleUrls: ['./choix_maregraphe.component.css']
+    selector: 'app-choix-maregraphe',
+    templateUrl: './choix_maregraphe.component.html',
+    styleUrls: ['./choix_maregraphe.component.css'],
+    standalone: false
 })
 
 export class ChoixMaregrapheComponent implements OnInit {
@@ -32,7 +33,7 @@ export class ChoixMaregrapheComponent implements OnInit {
   public isAdmin: boolean = this.authService.isAdmin(localStorage.getItem("token")!);
   constructor(private apiChoixMaregraphe: APIChoixMaregrapheService,
     private formBuilder: FormBuilder,
-    private sharedService: SharedServiceService,
+    private sharedService: SharedService,
     private authService: AuthService,
   ) {
     this.formAddMaregraphe = this.formBuilder.group({
