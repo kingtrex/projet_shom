@@ -51,6 +51,16 @@ async def update_meta(id: int, meta: str, data: str,
     result = await execute_query(query, False, param)
     return result
 
+@router.delete("/deleteAllMeta/{id}")
+async def delete_meta(id: int,
+                     token: Annotated[User, Depends(get_current_user)]):
+
+    query = "DELETE FROM obsmar.maregraphe_meta \
+            WHERE id_maregraphe = %s"
+    param = (id, )
+    result = await execute_query(query, False, param)
+    return result
+
 @router.delete("/deleteMeta/{id}&{meta}")
 async def delete_meta(id: int, meta: str,
                       token: Annotated[User, Depends(get_current_user)]):
