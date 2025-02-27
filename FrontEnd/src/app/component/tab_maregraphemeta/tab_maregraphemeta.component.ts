@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiMaregraphemeta } from '../../services/api_maregraphemeta/api_maregraphemeta.service';
+import { ApiMaregraphemeta } from '../../services/api_maregraphe_meta/api_maregraphe_meta.service';
 import { ApiMeta } from '../../services/api_meta/api_meta.service';
 import { ActivatedRoute, Data } from '@angular/router';
 import { MaregrapheMeta } from 'src/app/class/Maregraphemeta';

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ApiMaregraphemeta } from './api_maregraphemeta.service';
+import { ApiMaregraphemeta } from './api_maregraphe_meta.service';
 
 describe('ApiService', () => {
   let service: ApiMaregraphemeta;
