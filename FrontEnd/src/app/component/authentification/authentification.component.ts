@@ -27,6 +27,10 @@ export class AuthentificationComponent {
    */
   public async onSubmit(){
     const value = this.formLogin.value;
+    if(value.login === "" || value.password === ""){
+      alert("Veuillez remplir tous les champs");
+      return
+    }
     await this.authService.login(value.login, value.password).then(() => {
       const element = document.getElementById("error")
       element?.classList.remove("hide")
