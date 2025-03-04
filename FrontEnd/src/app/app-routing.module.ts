@@ -15,20 +15,12 @@ import { TabMetaComponent } from './component/tab_meta/tab_meta.component';
 
 const routes: Routes = [
   {path : "", component: AuthentificationComponent},
-
   {path : "tabChoixPartenaire", component: ChoixPartenaireComponent, canActivate: [AuthGuard]},
-
   {path : "tabPartenaireMaregraphe/:id", component: TabPartenaireMaregrapheComponent, canActivate: [AuthGuard]},
   {path : "tabPartenaireMaregraphe/:id/:partenaire", component: TabPartenaireMaregrapheComponent, canActivate: [AuthGuard]},
-
   {path : "tabChoixMaregraphe", component: ChoixMaregrapheComponent, canActivate: [AuthGuard]},
-  
-  {path : "tabMaregrapheMeta/:id", component: TabMaregraphemetaComponent, canActivate: [AuthGuard]},
   {path : "tabMaregrapheMeta/:id/:ville", component: TabMaregraphemetaComponent, canActivate: [AuthGuard]},
-  
   {path : "tabMeta", component: TabMetaComponent, canActivate: [AuthGuard]},
-  
-
 ];
 
 @NgModule({

@@ -1,14 +1,17 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
+import { SharedService } from '../shared_service/shared-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SMLExportService {
 
-  private baseUrl = "http://localhost:8000/exportSml/"; 
-  constructor(private http: HttpClient) { }
+  private baseUrl = this.sharedService.getApiURL() + 'exportSml/'; 
+  constructor(private http: HttpClient,
+    private sharedService: SharedService,
+  ) { }
 
   public async exportMeta(idMare: number, nomMaregraphe: string): Promise<void> {
     try{

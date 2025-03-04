@@ -2,7 +2,6 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
 
-import databaseConnect
 from connexion.connexion import User, get_current_user
 from databaseConnect import db
 

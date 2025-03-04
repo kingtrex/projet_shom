@@ -44,5 +44,6 @@ app.include_router(connexion.router, prefix="/connexion", tags=["connexion"])
 app.include_router(partenaire.router, prefix="/partenaire", tags=["partenaire"])
 app.include_router(partenaireMaregraphe.router, prefix="/partenaireMaregraphe", tags=["partenaireMaregrape"])
 app.include_router(exportSml.router, prefix="/exportSml", tags=["exportSml"])
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
