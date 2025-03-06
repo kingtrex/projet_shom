@@ -83,7 +83,7 @@ async def export_sml(id_maregraphe: int,
     query = "SELECT * from obsmar.maregraphe_meta\
                    WHERE id_maregraphe = $1;"
     param = (id_maregraphe,)
-    meta = db.fetch_all(query, param)
+    meta = await db.fetch_all(query, param)
     data = [dict(meta) for meta in meta]
     root = create_sml(data, nom_maregraphe, id_maregraphe)
     ET.indent(root, space="  ")
